@@ -4,5 +4,6 @@
     <string name="app_name">SupplyAndApply</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="all_jobs">All Jobs</string>
 
 </resources>
