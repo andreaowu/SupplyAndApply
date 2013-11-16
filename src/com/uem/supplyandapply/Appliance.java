@@ -1,0 +1,37 @@
+package com.uem.supplyandapply;
+
+import android.graphics.drawable.Drawable;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: ItsTexter
+ * Date: 11/15/13
+ * Time: 4:16 PM
+ * To change this template use File | Settings | File Templates.
+ */
+public class Appliance {
+
+    private String name;
+    private int drawableResource;
+
+    public Appliance(String name, int drawableResource) {
+        this.name = name;
+        this.drawableResource = drawableResource;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getDrawableResource() {
+        return drawableResource;
+    }
+
+    public void setDrawableResource(int drawableResource) {
+        this.drawableResource = drawableResource;
+    }
+}
