@@ -22,23 +22,27 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="23dp" >
 
-        <LinearLayout
+        <FrameLayout
+            android:id="@android:id/tabcontent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="match_parent" >
 
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </TabWidget>
-
-            <FrameLayout
-                android:id="@android:id/tabcontent"
+            <LinearLayout
+                android:id="@+id/current"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" >
-            </FrameLayout>
-        </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/past"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+            </LinearLayout>
+        </FrameLayout>
+        
+        
     </TabHost>
 
 </RelativeLayout>

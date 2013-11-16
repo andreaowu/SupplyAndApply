@@ -40,7 +40,6 @@ public class JobsListActivity extends Activity {
 	
 	/*
 	 * Sets up the "Current" and "Past" tabs in the all-jobs screen.
-	 * 
 	 */
 	public void setTabs() {
 		// create the TabHost that will contain the Tabs
@@ -53,8 +52,10 @@ public class JobsListActivity extends Activity {
        // Set the Tab name and Activity
        // that will be opened when particular Tab will be selected
         tab1.setIndicator("Current");
+        tab1.setContent(R.id.current);
         
         tab2.setIndicator("Past");
+        tab2.setContent(R.id.past);
         
         /** Add the tabs  to the TabHost to display. */
         tabHost.addTab(tab1);
