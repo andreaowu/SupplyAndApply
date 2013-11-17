@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/input_address"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:text="Click to put Address..."
+        android:background="#FFFFFF"/>
+    
+    <RelativeLayout
+        android:id="@+id/buttons_container"
+        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#ababab"/>
+
+    <ListView
+        android:id="@+id/application_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#666666"
+        android:layout_below="@id/input_address"
+        android:layout_above="@id/buttons_container"/>
+
+</RelativeLayout>

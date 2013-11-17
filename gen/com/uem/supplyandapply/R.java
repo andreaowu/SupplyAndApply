@@ -24,13 +24,26 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080003;
-        public static final int current=0x7f080001;
-        public static final int past=0x7f080002;
-        public static final int textView1=0x7f080000;
+        public static final int action_settings=0x7f08000e;
+        public static final int appliance_count=0x7f080006;
+        public static final int appliance_image=0x7f080003;
+        public static final int application_list=0x7f080002;
+        public static final int buttons_container=0x7f080001;
+        public static final int current=0x7f080008;
+        public static final int currentJobsList=0x7f08000a;
+        public static final int currentList=0x7f080009;
+        public static final int decrement_button=0x7f080005;
+        public static final int increment_button=0x7f080004;
+        public static final int input_address=0x7f080000;
+        public static final int past=0x7f08000b;
+        public static final int pastJobsList=0x7f08000d;
+        public static final int pastList=0x7f08000c;
+        public static final int textView1=0x7f080007;
     }
     public static final class layout {
-        public static final int jobs_list_layout=0x7f030000;
+        public static final int add_job_appliances_layout=0x7f030000;
+        public static final int appliance_list_row=0x7f030001;
+        public static final int jobs_list_layout=0x7f030002;
     }
     public static final class menu {
         public static final int jobs_list=0x7f070000;
