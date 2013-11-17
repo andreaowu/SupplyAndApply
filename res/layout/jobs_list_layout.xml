@@ -12,7 +12,8 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/all_jobs" />
+        android:text="@string/all_jobs"
+        android:layout_marginLeft="120dp" />
 
 	<TabHost
 	    android:id="@android:id/tabhost"
@@ -28,6 +29,7 @@
 	        <TabWidget
 	            android:id="@android:id/tabs"
 	            android:layout_width="fill_parent"
+	            android:layout_marginTop="20dp"
 	            android:layout_height="52dp" >
 	        </TabWidget>
 	
