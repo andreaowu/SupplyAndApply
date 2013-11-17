@@ -14,60 +14,40 @@
         android:layout_height="wrap_content"
         android:text="@string/all_jobs" />
 
-    <TabHost
-        android:id="@android:id/tabhost"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="23dp" >
+	<TabHost
+	    android:id="@android:id/tabhost"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent" >
+	
+	    <LinearLayout
+	        android:layout_width="fill_parent"
+	        android:layout_height="fill_parent"
+	        android:orientation="vertical"
+	        android:padding="5dp" >
 
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-            
-            <TabWidget
-                android:id="@android:id/tabs"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" />
-            
-            <LinearLayout
-                android:id="@+id/current"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-                
-                <ListView
-                    android:id="@+id/currentList"
+	        <TabWidget
+	            android:id="@android:id/tabs"
+	            android:layout_width="fill_parent"
+	            android:layout_height="52dp" >
+	        </TabWidget>
+	
+	        <FrameLayout
+	            android:id="@android:id/tabcontent"
+	            android:layout_width="fill_parent"
+	            android:layout_height="fill_parent"
+	            android:padding="5dp" >
+	            
+	        	<ListView
+                    android:id="@+id/current"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent" />
-
-                <TextView
-                    android:id="@+id/currentJobsList"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/past"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-                
-                <ListView
-                    android:id="@+id/pastList"
+	        	
+	        	<ListView
+                    android:id="@+id/past"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent" />
-
-                <TextView
-                    android:id="@+id/pastJobsList"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"/>
-            </LinearLayout>
-        </FrameLayout>
-        
-        
-    </TabHost>
+            </FrameLayout>
+	    </LinearLayout>
+	</TabHost>
 
 </RelativeLayout>

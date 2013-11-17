@@ -6,6 +6,7 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TabHost;
@@ -20,29 +21,40 @@ public class JobsListActivity extends Activity {
 	private ArrayList<Job> past;
 
 	ListView lv_current;
+	ListView lv_past;
+	View view;
+	
 	TabSpec tab1;
 	TabSpec tab2;
 	TabHost tabHost;
+	
+	ArrayAdapter<String> arrayAdapter_current;
+	ArrayAdapter<String> arrayAdapter_past;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.jobs_list_layout);
 		
-		// For testing purposes only
-		// Create new Customer
-		Customer c = new Customer("Andrea", "2461 Hilgard Ave");
-		Job j = new Job(c, new HashMap<String, ArrayList<String>>(), new HashMap<String, Integer>());
-
 		current = new ArrayList<Job>();
-		current.add(j);
+		// For testing purposes only
+		// Create new Customer and new Job for current
+		Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
+		Job j1 = new Job(c1, new HashMap<String, ArrayList<String>>(), new HashMap<String, Integer>());
+		current.add(j1);
+		
 		past = new ArrayList<Job>();
+		// Create new Customer and new Job for current
+		Customer c2 = new Customer("Carina", "43634 Euclid Dr");
+		Job j2 = new Job(c2, new HashMap<String, ArrayList<String>>(), new HashMap<String, Integer>());
+		past.add(j2);
 		
-		lv_current = (ListView) findViewById(R.id.currentList);
-		
+		lv_current = (ListView) findViewById(R.id.current);
+		lv_past = (ListView) findViewById(R.id.past);
+		view = new View(this);
 		
 		// create the TabHost that will contain the Tabs
-        tabHost = (TabHost)findViewById(android.R.id.tabhost);
+        tabHost = (TabHost) findViewById(android.R.id.tabhost);
         tabHost.setup();
         
         tab1 = tabHost.newTabSpec("Current");
@@ -68,30 +80,27 @@ public class JobsListActivity extends Activity {
 	 */
 	public void setTabs() {
         
-       // Set the Tab name and Activity
-       // that will be opened when particular Tab will be selected
+        // Set the Tab name and Activity
+        // that will be opened when particular Tab will be selected
         tab1.setIndicator("Current");
         
         // Change jobs to strings of name and address to display
         ArrayList<String> currentString = new ArrayList<String>();
-        currentString.add("");
         for (int i = 0; i < current.size(); i++) {
         	currentString.add(current.get(i).getDisplay());
         }
         
-        ArrayAdapter<String> arrayAdapter_current = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, currentString);
+        arrayAdapter_current = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, currentString);
         lv_current.setAdapter(arrayAdapter_current);
         tab1.setContent(R.id.current);
         
         // Change jobs to strings of name and address to display
         ArrayList<String> pastString = new ArrayList<String>();
-        pastString.add("");
         for (int i = 0; i < past.size(); i++) {
         	pastString.add(past.get(i).getDisplay());
         }
         tab2.setIndicator("Past");
-        ListView lv_past = (ListView) findViewById(R.id.pastList);
-        ArrayAdapter<String> arrayAdapter_past = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pastString);
+        arrayAdapter_past = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pastString);
         lv_past.setAdapter(arrayAdapter_past);
         tab2.setContent(R.id.past);
         
@@ -104,34 +113,11 @@ public class JobsListActivity extends Activity {
         	
 			@Override
 			public void onTabChanged(String tabId) {
-				System.out.println("hi");
-				if (tabId.equals("0")) {
-			        // Change jobs to strings of name and address to display
-			        ArrayList<String> currentString = new ArrayList<String>();
-			        currentString.add("");
-			        for (int i = 0; i < current.size(); i++) {
-			        	currentString.add(current.get(i).getDisplay());
-			        }
-			        
-			        ArrayAdapter<String> arrayAdapter_current = new ArrayAdapter<String>(JobsListActivity.this, android.R.layout.simple_list_item_1, currentString);
-			        lv_current.setAdapter(arrayAdapter_current);
-			        tab1.setContent(R.id.current);
-			        tabHost.addTab(tab1);
+				if (tabId.equals("Current")) {
+			        tabHost.setCurrentTab(0);
 				} else {
-			        // Change jobs to strings of name and address to display
-			        ArrayList<String> pastString = new ArrayList<String>();
-			        pastString.add("");
-			        for (int i = 0; i < past.size(); i++) {
-			        	pastString.add(past.get(i).getDisplay());
-			        }
-			        tab2.setIndicator("Past");
-			        ListView lv_past = (ListView) findViewById(R.id.pastList);
-			        ArrayAdapter<String> arrayAdapter_past = new ArrayAdapter<String>(JobsListActivity.this, android.R.layout.simple_list_item_1, pastString);
-			        lv_past.setAdapter(arrayAdapter_past);
-			        tab2.setContent(R.id.past);
-			        tabHost.addTab(tab2);
+			        tabHost.setCurrentTab(1);
 				}
-				tabHost.setCurrentTab(Integer.parseInt(tabId));
 			}
         });
 	}
