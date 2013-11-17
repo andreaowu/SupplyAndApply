@@ -12,7 +12,8 @@
         android:id="@+id/current_job_customer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer" />
+        android:text="Customer" 
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/current_job_address"
@@ -20,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/current_job_customer"
         android:layout_below="@+id/current_job_customer"
-        android:text="Address" />
+        android:text="Address"
+        android:textAppearance="?android:attr/textAppearanceMedium"  />
 
     <TextView
         android:id="@+id/textView1"
@@ -28,7 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/current_job_address"
         android:layout_below="@+id/current_job_address"
-        android:text="Progress" />
+        android:text="Progress"
+        android:textAppearance="?android:attr/textAppearanceMedium"  />
 
     <ProgressBar
         android:id="@+id/progressBar1"
