@@ -44,11 +44,17 @@ public class ApplianceAdapter extends ArrayAdapter<ApplianceStateContainer> {
         imageView.setImageResource(currentContainer.getAppliance().getDrawableResource());
 
         final EditText countText = (EditText) v.findViewById(R.id.appliance_count);
-        countText.setText(currentContainer.getCount());
+        countText.setText(String.valueOf(currentContainer.getCount()));
         countText.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable editable) {
-                currentContainer.setCount(Integer.parseInt(editable.toString()));
+                String string = editable.toString();
+                if (string == null || string.equals("")) {
+                    currentContainer.setCount(0);
+                    countText.setText(String.valueOf(0));
+                } else {
+                    currentContainer.setCount(Integer.parseInt(editable.toString()));
+                }
             }
 
             @Override
@@ -63,8 +69,10 @@ public class ApplianceAdapter extends ArrayAdapter<ApplianceStateContainer> {
             @Override
             public void onClick(View view) {
                 int newCount = currentContainer.getCount() + 1;
-                currentContainer.setCount(newCount);
-                countText.setText(newCount);
+                if (newCount >= 0) {
+                    currentContainer.setCount(newCount);
+                    countText.setText(String.valueOf(newCount));
+                }
             }
         });
 
@@ -73,8 +81,10 @@ public class ApplianceAdapter extends ArrayAdapter<ApplianceStateContainer> {
             @Override
             public void onClick(View view) {
                 int newCount = currentContainer.getCount() - 1;
-                currentContainer.setCount(newCount);
-                countText.setText(newCount);
+                if (newCount >= 0) {
+                    currentContainer.setCount(newCount);
+                    countText.setText(String.valueOf(newCount));
+                }
             }
         });
 
