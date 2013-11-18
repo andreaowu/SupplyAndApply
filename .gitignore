@@ -1,2 +1,5 @@
 /gen/*
 /bin/*
+*/gen/
+*/bin/
+/.idea/workspace.xml
