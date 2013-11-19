@@ -2,6 +2,12 @@ package com.uem.supplyandapply;
 
 import android.graphics.drawable.Drawable;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
  * Created with IntelliJ IDEA.
  * User: ItsTexter
@@ -9,10 +15,11 @@ import android.graphics.drawable.Drawable;
  * Time: 4:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Appliance {
+public class Appliance implements Serializable{
 
     private String name;
     private int drawableResource;
+    private ArrayList<SupplyPart> partsList;
 
     public Appliance(String name, int drawableResource) {
         this.name = name;
@@ -33,5 +40,25 @@ public class Appliance {
 
     public void setDrawableResource(int drawableResource) {
         this.drawableResource = drawableResource;
+    }
+
+    public ArrayList<SupplyPart> getPartsList() {
+        return partsList;
+    }
+
+    public void setPartsList(ArrayList<SupplyPart> partsList) {
+        this.partsList = partsList;
+    }
+
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.writeObject(name);
+        stream.writeInt(drawableResource);
+        stream.writeObject(partsList);
+    }
+
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        name = (String) stream.readObject();
+        drawableResource = stream.readInt();
+        partsList = (ArrayList<SupplyPart>) stream.readObject();
     }
 }

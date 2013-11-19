@@ -9,7 +9,7 @@
         android:id="@+id/appliance_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:background="#000000"
+        android:background="#FFFFFF"
         android:layout_centerInParent="true"
         android:layout_margin="20dp"/>
 

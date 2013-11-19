@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <TextView
+            android:id="@+id/page_title"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="Parts Estimation"
+            android:textSize="25sp"
+            android:background="#999999"/>
+
+    <RelativeLayout
+            android:id="@+id/text_container"
+            android:layout_height="30dp"
+            android:layout_width="match_parent"
+            android:layout_below="@id/page_title"
+            android:background="#CCCCCC">
+
+        <TextView
+                android:id="@+id/parts_number"
+                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:text="#Parts"
+                android:textSize="20sp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:layout_marginRight="10dp"/>
+
+        <TextView
+                android:id="@+id/parts_name"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Part Name"
+                android:textSize="20sp"
+                android:layout_toLeftOf="@id/parts_number"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/buttons_container"
+            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:background="#ababab">
+
+        <Button
+                android:id="@+id/next_button"
+                android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+                android:text="Next"/>
+
+    </RelativeLayout>
+
+    <ListView
+            android:id="@+id/application_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#666666"
+            android:layout_below="@id/text_container"
+            android:layout_above="@id/buttons_container"/>
+
+
+</RelativeLayout>
