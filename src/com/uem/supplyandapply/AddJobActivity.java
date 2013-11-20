@@ -3,8 +3,6 @@ package com.uem.supplyandapply;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import com.uem.supplyandapply.Adapters.ApplianceAdapter;
 

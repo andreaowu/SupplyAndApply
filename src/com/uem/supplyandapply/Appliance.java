@@ -1,7 +1,5 @@
 package com.uem.supplyandapply;
 
-import android.graphics.drawable.Drawable;
-
 /**
  * Created with IntelliJ IDEA.
  * User: ItsTexter
