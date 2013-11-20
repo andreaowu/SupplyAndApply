@@ -23,8 +23,12 @@
             </intent-filter>
         </activity>
         <activity
-                android:name="com.uem.supplyandapply.AddJobActivity"
-                android:label="@string/app_name" >
+            android:name="com.uem.supplyandapply.AddJobActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="com.uem.supplyandapply.ApplianceList"
+            android:label="@string/title_activity_appliance_list" >
         </activity>
     </application>
 
