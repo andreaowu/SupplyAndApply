@@ -1,12 +1,19 @@
 package com.uem.supplyandapply;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+
 /**
  * Created with IntelliJ IDEA.
  * Date: 11/15/13
  * Time: 4:34 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ApplianceStateContainer {
+public class ApplianceStateContainer implements Serializable {
 
     private Appliance appliance;
     private int count;
@@ -31,4 +38,21 @@ public class ApplianceStateContainer {
     public void setCount(int count) {
         this.count = count;
     }
-}
+
+    public ArrayList<SupplyPart> getPartsList() {
+        ArrayList<SupplyPart> partsList = appliance.getPartsList();
+        for (SupplyPart supplyPart : partsList) {
+            supplyPart.setCount(supplyPart.getCount() * count);
+        }
+        return partsList;
+    }
+
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.writeObject(appliance);
+        stream.writeInt(count);
+    }
+
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        appliance = (Appliance) stream.readObject();
+        count = stream.readInt();
+    }}
