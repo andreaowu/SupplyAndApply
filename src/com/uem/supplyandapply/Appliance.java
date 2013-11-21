@@ -1,7 +1,5 @@
 package com.uem.supplyandapply;
 
-<<<<<<< HEAD
-=======
 import android.graphics.drawable.Drawable;
 
 import java.io.IOException;
@@ -10,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
->>>>>>> 46d30c4b4666df67993982d73b79991c57ba66f8
 /**
  * Created with IntelliJ IDEA.
  * User: ItsTexter

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import com.uem.supplyandapply.Adapters.ApplianceAdapter;
 import com.uem.supplyandapply.Adapters.SupplyPartsAdapter;
 
 import java.util.ArrayList;

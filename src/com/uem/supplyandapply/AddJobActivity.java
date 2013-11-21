@@ -4,13 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-<<<<<<< HEAD
-=======
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
->>>>>>> 46d30c4b4666df67993982d73b79991c57ba66f8
 import android.widget.ListView;
 import com.uem.supplyandapply.Adapters.ApplianceAdapter;
 
