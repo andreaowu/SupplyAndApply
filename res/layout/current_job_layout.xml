@@ -58,7 +58,7 @@
         android:layout_height="250dp"
         android:layout_alignLeft="@+id/progress_textview"
         android:layout_below="@+id/viewParts_button"
-        android:numColumns="3" >
+        android:numColumns="2" >
     </GridView>
 
     <Button

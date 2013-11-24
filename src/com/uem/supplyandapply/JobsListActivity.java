@@ -37,7 +37,12 @@ public class JobsListActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.jobs_list_layout);
-
+		
+		//===================Just to test out CurrentJobActivity==========================================
+		Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
+        startActivity(i);
+        //=============================================================================
+		
         Button addJobButton = (Button) findViewById(R.id.addJobButton);
         addJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,13 +56,13 @@ public class JobsListActivity extends Activity {
 		// For testing purposes only
 		// Create new Customer and new Job for current
 		Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
-		Job j1 = new Job(c1, new HashMap<String, ArrayList<String>>(), new HashMap<String, Integer>());
+		Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
 		current.add(j1);
 		
 		past = new ArrayList<Job>();
 		// Create new Customer and new Job for current
 		Customer c2 = new Customer("Carina", "43634 Euclid Dr");
-		Job j2 = new Job(c2, new HashMap<String, ArrayList<String>>(), new HashMap<String, Integer>());
+		Job j2 = new Job(c2, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
 		past.add(j2);
 		
 		lv_current = (ListView) findViewById(R.id.current);

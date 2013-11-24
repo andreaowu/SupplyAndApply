@@ -16,10 +16,12 @@ public class ApplianceStateContainer implements Serializable {
 
     private Appliance appliance;
     private int count;
+    private int notFinished;
 
     public ApplianceStateContainer(Appliance appliance, int count) {
         this.appliance = appliance;
         this.count = count;
+        this.notFinished = 0;
     }
 
     public Appliance getAppliance() {
@@ -36,6 +38,14 @@ public class ApplianceStateContainer implements Serializable {
 
     public void setCount(int count) {
         this.count = count;
+    }
+    
+    public void setNotFinished(int count) {
+        this.notFinished = count;
+    }
+    
+    public int getNotFinished() {
+        return this.notFinished;
     }
 
     public ArrayList<SupplyPart> getPartsList() {

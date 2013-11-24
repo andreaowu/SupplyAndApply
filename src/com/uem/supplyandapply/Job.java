@@ -3,12 +3,17 @@ package com.uem.supplyandapply;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//Notes: David changed the value of hashmap from arraylist of string to 
+//ApplianceStateContainer. Which renders PARTS obsolete since they are
+//cotained in ApplianceStateContainer
+
 public class Job {
 
 	// The customer for which this job is for
 	private Customer c;
 	// Maps the appliance-groups broken to how list of where they are located within the customer site
-	private HashMap<String, ArrayList<String>> broken;
+	private HashMap<String, ApplianceStateContainer> broken;
+
 	// Parts estimation or updates
 	private HashMap<String, Integer> parts;
 	// Status on finishing
@@ -16,9 +21,10 @@ public class Job {
 	// Display a string with name and address on the job page
 	private String display;
 	
-	Job(Customer c, HashMap<String, ArrayList<String>> broken, HashMap<String, Integer> parts) {
+	Job(Customer c, HashMap<String, ApplianceStateContainer> broken, HashMap<String, Integer> parts) {
 		this.c = c;
 		this.broken = broken;
+
 		t = Timeframe.CURRENT;
 		this.parts = parts;
 		this.display = c.getName() + ": " + c.getAddress();
@@ -34,9 +40,11 @@ public class Job {
 	/**
 	 * @return the broken appliances and their locations for this job
 	 */
-	public HashMap<String, ArrayList<String>> getBroken() {
+	public HashMap<String, ApplianceStateContainer> getBroken() {
 		return broken;
 	}
+	
+
 
 	/**
 	 * @return the timeframe for this job
