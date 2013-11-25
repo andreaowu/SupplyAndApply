@@ -64,4 +64,5 @@ public class ApplianceStateContainer implements Serializable {
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
         appliance = (Appliance) stream.readObject();
         count = stream.readInt();
-    }}
+    }
+}

@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
+import android.widget.*;
 import com.uem.supplyandapply.Adapters.ApplianceAdapter;
 
 import java.util.ArrayList;
@@ -23,6 +20,7 @@ public class AddJobActivity extends Activity {
     private ApplianceAdapter adapter;
     private ListView listView;
     private ArrayList<ApplianceStateContainer> applianceList;
+    private EditText addressText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +32,24 @@ public class AddJobActivity extends Activity {
         listView = (ListView) findViewById(R.id.application_list);
         listView.setAdapter(adapter);
 
+        addressText = (EditText) findViewById(R.id.input_address);
+
         Button nextButton = (Button) findViewById(R.id.next_button);
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ArrayList<ApplianceStateContainer> appliances = new ArrayList<ApplianceStateContainer>();
+                for (ApplianceStateContainer appliance : applianceList) {
+                    if (appliance.getCount() != 0) {
+                        appliances.add(appliance);
+                    }
+                }
+
+                String address = addressText.getText().toString();
+
                 Intent i = new Intent(getApplicationContext(), PartsEstimationActivity.class);
-                i.putExtra(Constants.APPLIANCE_LIST, applianceList);
+                i.putExtra(Constants.APPLIANCE_LIST, appliances);
+                i.putExtra(Constants.ADDRESS, address);
                 startActivityForResult(i, 1);
             }
         });
@@ -49,6 +59,10 @@ public class AddJobActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
+                Intent returnIntent = new Intent();
+                Job newJob = (Job) data.getExtras().get(Constants.JOB);
+                returnIntent.putExtra(Constants.JOB, newJob);
+                setResult(RESULT_OK, returnIntent);
                 finish();
             }
         }

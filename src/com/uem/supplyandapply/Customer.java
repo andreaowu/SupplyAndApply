@@ -1,6 +1,11 @@
 package com.uem.supplyandapply;
 
-public class Customer {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Customer implements Serializable {
 
 	// The name of the customer
 	private String name;
@@ -25,5 +30,15 @@ public class Customer {
 	public String getAddress() {
 		return address;
 	}
-	
+
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.writeObject(name);
+        stream.writeObject(address);
+    }
+
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        name = (String) stream.readObject();
+        address = (String) stream.readObject();
+    }
+
 }

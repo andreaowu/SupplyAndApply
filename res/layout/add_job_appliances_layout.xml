@@ -14,7 +14,7 @@
         android:layout_height="50dp"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
-        android:text="Click to put Address..."
+        android:hint="Click to put Address..."
         android:background="#FFFFFF"/>
 
     <RelativeLayout

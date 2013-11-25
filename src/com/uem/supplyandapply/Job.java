@@ -1,5 +1,9 @@
 package com.uem.supplyandapply;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,7 +11,7 @@ import java.util.HashMap;
 //ApplianceStateContainer. Which renders PARTS obsolete since they are
 //cotained in ApplianceStateContainer
 
-public class Job {
+public class Job implements Serializable{
 
 	// The customer for which this job is for
 	private Customer c;
@@ -20,7 +24,7 @@ public class Job {
 	private Timeframe t;
 	// Display a string with name and address on the job page
 	private String display;
-	
+
 	Job(Customer c, HashMap<String, ApplianceStateContainer> broken, HashMap<String, Integer> parts) {
 		this.c = c;
 		this.broken = broken;
@@ -60,4 +64,21 @@ public class Job {
 	public String getDisplay() {
 		return display;
 	}
+
+    private void writeObject(ObjectOutputStream stream) throws IOException {
+        stream.writeObject(c);
+        stream.writeObject(broken);
+        stream.writeObject(parts);
+        stream.writeObject(t);
+        stream.writeObject(display);
+    }
+
+    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+        c = (Customer) stream.readObject();
+        broken = (HashMap<String, ApplianceStateContainer>) stream.readObject();
+        parts = (HashMap<String, Integer>) stream.readObject();
+        t = (Timeframe) stream.readObject();
+        display = (String) stream.readObject();
+    }
+
 }
