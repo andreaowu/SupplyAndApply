@@ -11,7 +11,7 @@ import java.util.HashMap;
 //ApplianceStateContainer. Which renders PARTS obsolete since they are
 //cotained in ApplianceStateContainer
 
-public class Job implements Serializable{
+public class Job implements Serializable {
 
 	// The customer for which this job is for
 	private Customer c;
@@ -47,8 +47,6 @@ public class Job implements Serializable{
 	public HashMap<String, ApplianceStateContainer> getBroken() {
 		return broken;
 	}
-	
-
 
 	/**
 	 * @return the timeframe for this job
@@ -56,8 +54,7 @@ public class Job implements Serializable{
 	public Timeframe getT() {
 		return t;
 	}
-	
-	
+
 	/**
 	 * @return the display name and address for this job
 	 */
@@ -65,20 +62,21 @@ public class Job implements Serializable{
 		return display;
 	}
 
-    private void writeObject(ObjectOutputStream stream) throws IOException {
-        stream.writeObject(c);
-        stream.writeObject(broken);
-        stream.writeObject(parts);
-        stream.writeObject(t);
-        stream.writeObject(display);
-    }
+	private void writeObject(ObjectOutputStream stream) throws IOException {
+		stream.writeObject(c);
+		stream.writeObject(broken);
+		stream.writeObject(parts);
+		stream.writeObject(t);
+		stream.writeObject(display);
+	}
 
-    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-        c = (Customer) stream.readObject();
-        broken = (HashMap<String, ApplianceStateContainer>) stream.readObject();
-        parts = (HashMap<String, Integer>) stream.readObject();
-        t = (Timeframe) stream.readObject();
-        display = (String) stream.readObject();
-    }
+	private void readObject(ObjectInputStream stream) throws IOException,
+			ClassNotFoundException {
+		c = (Customer) stream.readObject();
+		broken = (HashMap<String, ApplianceStateContainer>) stream.readObject();
+		parts = (HashMap<String, Integer>) stream.readObject();
+		t = (Timeframe) stream.readObject();
+		display = (String) stream.readObject();
+	}
 
 }
