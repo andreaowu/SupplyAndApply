@@ -10,11 +10,22 @@
                 android:background="#ababab">
 
     <EditText
-        android:id="@+id/input_address"
-        android:layout_height="50dp"
+        android:id="@+id/input_name"
+        android:layout_marginTop="10dp"
+        android:layout_height="30dp"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
-        android:hint="Click to put Address..."
+        android:hint="Click to put customer name"
+        android:background="#FFFFFF"/>
+    
+    <EditText
+        android:id="@+id/input_address"
+        android:layout_marginTop="50dp"
+        android:layout_height="30dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:hint="Click to put address"
+        android:layout_below="@id/input_name"
         android:background="#FFFFFF"/>
 
     <RelativeLayout
@@ -37,6 +48,7 @@
         android:id="@+id/application_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:background="#ababab"
         android:layout_below="@id/input_address"
         android:layout_above="@id/buttons_container"/>

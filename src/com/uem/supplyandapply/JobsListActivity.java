@@ -52,19 +52,15 @@ public class JobsListActivity extends Activity {
             }
         });
 
-		current = new ArrayList<Job>();
-		// For testing purposes only
-		// Create new Customer and new Job for current
-		Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
-		Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
-		current.add(j1);
-		
-		past = new ArrayList<Job>();
-		// Create new Customer and new Job for current
-		Customer c2 = new Customer("Carina", "43634 Euclid Dr");
-		Job j2 = new Job(c2, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
-		past.add(j2);
-		
+		try {
+			ArrayList<ArrayList<Job>> all = (ArrayList) getLastNonConfigurationInstance();
+			current = all.get(0);
+			past = all.get(1);
+		} catch (NullPointerException e) {
+			current = new ArrayList<Job>();
+			past = new ArrayList<Job>();
+		}
+        
 		lv_current = (ListView) findViewById(R.id.current);
 		lv_past = (ListView) findViewById(R.id.past);
 		view = new View(this);
@@ -77,7 +73,6 @@ public class JobsListActivity extends Activity {
         tab2 = tabHost.newTabSpec("Past");
 
 		setTabs();
-		allJobs();
 	}
 
     @Override
@@ -101,11 +96,6 @@ public class JobsListActivity extends Activity {
 	}
 
     public void updateTabs() {
-
-        // Set the Tab name and Activity
-        // that will be opened when particular Tab will be selected
-        //tab1.setIndicator("Current");
-
         // Change jobs to strings of name and address to display
         ArrayList<String> currentString = new ArrayList<String>();
         for (int i = 0; i < current.size(); i++) {
@@ -126,13 +116,9 @@ public class JobsListActivity extends Activity {
         lv_past.setAdapter(arrayAdapter_past);
         tab2.setContent(R.id.past);
 
-        /** Add the tabs  to the TabHost to display. */
+        // Add the tabs to the TabHost to display.
         tabHost.setCurrentTab(0);
     }
-
-	public void allJobs() {
-		
-	}
 
 	/*
 	 * Sets up the "Current" and "Past" tabs in the all-jobs screen.
@@ -163,7 +149,7 @@ public class JobsListActivity extends Activity {
         lv_past.setAdapter(arrayAdapter_past);
         tab2.setContent(R.id.past);
         
-        /** Add the tabs  to the TabHost to display. */
+        // Add the tabs to the TabHost to display.
         tabHost.addTab(tab1);
         tabHost.addTab(tab2);
         tabHost.setCurrentTab(0);
@@ -180,5 +166,15 @@ public class JobsListActivity extends Activity {
 			}
         });
 	}
+	
+	@Override
+    public Object onRetainNonConfigurationInstance() {
+		// Add the current and past job lists to this new list so upon closing and reopening this application,
+		// we can still get access to the jobs already made
+		ArrayList<ArrayList<Job>> all = new ArrayList<ArrayList<Job>>();
+		all.add(current);
+		all.add(past);
+        return all;
+    }
 
 }

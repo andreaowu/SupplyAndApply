@@ -19,6 +19,7 @@ public class PartsEstimationActivity extends Activity {
     private SupplyPartsAdapter adapter;
     private ListView listView;
     private String address;
+    private String name;
     private ArrayList<ApplianceStateContainer> applianceList;
 
     @Override
@@ -29,6 +30,7 @@ public class PartsEstimationActivity extends Activity {
         Intent i = getIntent();
         applianceList = (ArrayList<ApplianceStateContainer>) i.getExtras().get(Constants.APPLIANCE_LIST);
         address = i.getExtras().getString(Constants.ADDRESS);
+        name = i.getExtras().getString(Constants.NAME);
 
         adapter = new SupplyPartsAdapter(getApplicationContext(), 0, getPartsListFromAppliances(applianceList));
 
@@ -48,7 +50,7 @@ public class PartsEstimationActivity extends Activity {
 
                 HashMap<String, Integer> integerHashMap = new HashMap<String, Integer>();
 
-                Job newJob = new Job(new Customer("Name", address), applianceStateContainerHashMap, integerHashMap);
+                Job newJob = new Job(new Customer(name, address), applianceStateContainerHashMap, integerHashMap);
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra(Constants.JOB, newJob);
@@ -63,7 +65,6 @@ public class PartsEstimationActivity extends Activity {
         for (ApplianceStateContainer stateContainer : applianceList) {
             supplyPartsList.addAll(stateContainer.getPartsList());
         }
-
         return supplyPartsList;
     }
 

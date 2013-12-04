@@ -21,6 +21,7 @@ public class AddJobActivity extends Activity {
     private ListView listView;
     private ArrayList<ApplianceStateContainer> applianceList;
     private EditText addressText;
+    private EditText nameText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,7 @@ public class AddJobActivity extends Activity {
         listView = (ListView) findViewById(R.id.application_list);
         listView.setAdapter(adapter);
 
+        nameText = (EditText) findViewById(R.id.input_name);
         addressText = (EditText) findViewById(R.id.input_address);
 
         Button nextButton = (Button) findViewById(R.id.next_button);
@@ -45,11 +47,13 @@ public class AddJobActivity extends Activity {
                     }
                 }
 
+                String name = nameText.getText().toString();
                 String address = addressText.getText().toString();
 
                 Intent i = new Intent(getApplicationContext(), PartsEstimationActivity.class);
                 i.putExtra(Constants.APPLIANCE_LIST, appliances);
                 i.putExtra(Constants.ADDRESS, address);
+                i.putExtra(Constants.NAME, name);
                 startActivityForResult(i, 1);
             }
         });
