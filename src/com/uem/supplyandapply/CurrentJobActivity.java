@@ -1,7 +1,5 @@
 package com.uem.supplyandapply;
 
-
-
 import java.util.ArrayList;
 
 import com.uem.supplyandapply.Adapters.CurrentJobAdapter;
@@ -35,7 +33,6 @@ public class CurrentJobActivity extends Activity {
 		gridView = (GridView) findViewById(R.id.appliances_gridView);
         gridView.setAdapter(adapter);
         
-		
 	}
 
 	@Override

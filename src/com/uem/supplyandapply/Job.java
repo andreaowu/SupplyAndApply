@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 //Notes: David changed the value of hashmap from arraylist of string to 
 //ApplianceStateContainer. Which renders PARTS obsolete since they are
@@ -15,7 +16,7 @@ public class Job implements Serializable {
 
 	// The customer for which this job is for
 	private Customer c;
-	// Maps the appliance-groups broken to how list of where they are located within the customer site
+	// Maps the appliance-groups broken to a list of where they are located within the customer site
 	private HashMap<String, ApplianceStateContainer> broken;
 
 	// Parts estimation or updates

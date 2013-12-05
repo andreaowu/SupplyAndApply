@@ -1,13 +1,14 @@
 package com.uem.supplyandapply;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -104,8 +105,18 @@ public class JobsListActivity extends Activity {
 
         arrayAdapter_current = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, currentString);
         lv_current.setAdapter(arrayAdapter_current);
-        tab1.setContent(R.id.current);
+        
+        ListView current = (ListView) findViewById(R.id.current);
+        current.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
+                startActivityForResult(i, 1);
+			}
+        });
+        tab1.setContent(R.id.current);
+        
         // Change jobs to strings of name and address to display
         ArrayList<String> pastString = new ArrayList<String>();
         for (int i = 0; i < past.size(); i++) {
@@ -114,10 +125,21 @@ public class JobsListActivity extends Activity {
         tab2.setIndicator("Past");
         arrayAdapter_past = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pastString);
         lv_past.setAdapter(arrayAdapter_past);
+        ListView past = (ListView) findViewById(R.id.past);
+        past.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
+                startActivityForResult(i, 1);
+			}
+        });
         tab2.setContent(R.id.past);
 
         // Add the tabs to the TabHost to display.
         tabHost.setCurrentTab(0);
+        
+        
     }
 
 	/*
@@ -137,6 +159,15 @@ public class JobsListActivity extends Activity {
         
         arrayAdapter_current = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, currentString);
         lv_current.setAdapter(arrayAdapter_current);
+        ListView current = (ListView) findViewById(R.id.current);
+        current.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
+                startActivityForResult(i, 1);
+			}
+        });
         tab1.setContent(R.id.current);
         
         // Change jobs to strings of name and address to display
@@ -147,6 +178,15 @@ public class JobsListActivity extends Activity {
         tab2.setIndicator("Past");
         arrayAdapter_past = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pastString);
         lv_past.setAdapter(arrayAdapter_past);
+        ListView past = (ListView) findViewById(R.id.past);
+        past.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
+                startActivityForResult(i, 1);
+			}
+        });
         tab2.setContent(R.id.past);
         
         // Add the tabs to the TabHost to display.
