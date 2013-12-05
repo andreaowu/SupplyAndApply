@@ -15,7 +15,7 @@ import java.util.Set;
 public class Job implements Serializable {
 
 	// The customer for which this job is for
-	private Customer c;
+	private Customer customer;
 	// Maps the appliance-groups broken to a list of where they are located within the customer site
 	private HashMap<String, ApplianceStateContainer> broken;
 
@@ -27,7 +27,7 @@ public class Job implements Serializable {
 	private String display;
 
 	Job(Customer c, HashMap<String, ApplianceStateContainer> broken, HashMap<String, Integer> parts) {
-		this.c = c;
+		this.customer = c;
 		this.broken = broken;
 
 		t = Timeframe.CURRENT;
@@ -39,7 +39,7 @@ public class Job implements Serializable {
 	 * @return the customer for this job
 	 */
 	public Customer getC() {
-		return c;
+		return customer;
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class Job implements Serializable {
 	}
 
 	private void writeObject(ObjectOutputStream stream) throws IOException {
-		stream.writeObject(c);
+		stream.writeObject(customer);
 		stream.writeObject(broken);
 		stream.writeObject(parts);
 		stream.writeObject(t);
@@ -73,7 +73,7 @@ public class Job implements Serializable {
 
 	private void readObject(ObjectInputStream stream) throws IOException,
 			ClassNotFoundException {
-		c = (Customer) stream.readObject();
+		customer = (Customer) stream.readObject();
 		broken = (HashMap<String, ApplianceStateContainer>) stream.readObject();
 		parts = (HashMap<String, Integer>) stream.readObject();
 		t = (Timeframe) stream.readObject();

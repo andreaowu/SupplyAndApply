@@ -106,13 +106,22 @@ public class JobsListActivity extends Activity {
         arrayAdapter_current = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, currentString);
         lv_current.setAdapter(arrayAdapter_current);
         
-        ListView current = (ListView) findViewById(R.id.current);
-        current.setOnItemClickListener(new OnItemClickListener() {
+        ListView current_lv = (ListView) findViewById(R.id.current);
+        current_lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
-                startActivityForResult(i, 1);
+				Intent intent = new Intent(getApplicationContext(), CurrentJobActivity.class);
+				String displayed = (String) arg0.getItemAtPosition(arg2);
+				String name = displayed.substring(0, displayed.indexOf(":"));
+				String address = displayed.substring(displayed.indexOf(":") + 2);
+				for (int i = 0; i < current.size(); i++) {
+					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
+						intent.putExtra("Job", (Job) current.get(i));
+						break;
+					}
+				}
+                startActivityForResult(intent, 1);
 			}
         });
         tab1.setContent(R.id.current);
@@ -125,21 +134,28 @@ public class JobsListActivity extends Activity {
         tab2.setIndicator("Past");
         arrayAdapter_past = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pastString);
         lv_past.setAdapter(arrayAdapter_past);
-        ListView past = (ListView) findViewById(R.id.past);
-        past.setOnItemClickListener(new OnItemClickListener() {
+        ListView past_lv = (ListView) findViewById(R.id.past);
+        past_lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
-                startActivityForResult(i, 1);
+				Intent intent = new Intent(getApplicationContext(), CurrentJobActivity.class);
+				String displayed = (String) arg0.getItemAtPosition(arg2);
+				String name = displayed.substring(0, displayed.indexOf(":"));
+				String address = displayed.substring(displayed.indexOf(":") + 2);
+				for (int i = 0; i < current.size(); i++) {
+					if (past.get(i).getC().getName().equals(name) && past.get(i).getC().getAddress().equals(address)) {
+						intent.putExtra("Job", (Job) past.get(i));
+						break;
+					}
+				}
+                startActivityForResult(intent, 1);
 			}
         });
         tab2.setContent(R.id.past);
 
         // Add the tabs to the TabHost to display.
         tabHost.setCurrentTab(0);
-        
-        
     }
 
 	/*
@@ -159,13 +175,22 @@ public class JobsListActivity extends Activity {
         
         arrayAdapter_current = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, currentString);
         lv_current.setAdapter(arrayAdapter_current);
-        ListView current = (ListView) findViewById(R.id.current);
-        current.setOnItemClickListener(new OnItemClickListener() {
+        ListView current_lv = (ListView) findViewById(R.id.current);
+        current_lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
-                startActivityForResult(i, 1);
+				Intent intent = new Intent(getApplicationContext(), CurrentJobActivity.class);
+				String displayed = (String) arg0.getItemAtPosition(arg2);
+				String name = displayed.substring(0, displayed.indexOf(":"));
+				String address = displayed.substring(displayed.indexOf(":") + 2);
+				for (int i = 0; i < current.size(); i++) {
+					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
+						intent.putExtra("Job", (Job) current.get(i));
+						break;
+					}
+				}
+                startActivityForResult(intent, 1);
 			}
         });
         tab1.setContent(R.id.current);
@@ -178,13 +203,22 @@ public class JobsListActivity extends Activity {
         tab2.setIndicator("Past");
         arrayAdapter_past = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pastString);
         lv_past.setAdapter(arrayAdapter_past);
-        ListView past = (ListView) findViewById(R.id.past);
-        past.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
+        ListView past_lv = (ListView) findViewById(R.id.past);
+        past_lv.setOnItemClickListener(new OnItemClickListener() {
+			
+        	@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
-                startActivityForResult(i, 1);
+				Intent intent = new Intent(getApplicationContext(), CurrentJobActivity.class);
+				String displayed = (String) arg0.getItemAtPosition(arg2);
+				String name = displayed.substring(0, displayed.indexOf(":"));
+				String address = displayed.substring(displayed.indexOf(":") + 2);
+				for (int i = 0; i < current.size(); i++) {
+					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
+						intent.putExtra("Job", (Job) current.get(i));
+						break;
+					}
+				}
+                startActivityForResult(intent, 1);
 			}
         });
         tab2.setContent(R.id.past);

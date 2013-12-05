@@ -2,14 +2,13 @@ package com.uem.supplyandapply;
 
 import java.util.ArrayList;
 
-import com.uem.supplyandapply.Adapters.CurrentJobAdapter;
-
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.widget.GridView;
-import android.widget.ListView;
+import android.widget.TextView;
+
+import com.uem.supplyandapply.Adapters.CurrentJobAdapter;
 
 public class CurrentJobActivity extends Activity {
 	private CurrentJobAdapter adapter;
@@ -22,9 +21,16 @@ public class CurrentJobActivity extends Activity {
 		System.out.println("Asdasd");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.current_job_layout);
-		//-----------Magic zone of getting job from the bundle-----//
-		//Intent i = getIntent();
-		//job = (Job) i.getExtras().get(Constants.JOB);
+		
+		// Get job from the saved intent
+		Job job = (Job) getIntent().getSerializableExtra("Job");
+
+		// Display correct customer information
+		Customer c = job.getC();
+		TextView name = (TextView) findViewById(R.id.customer_textView); 
+	    name.setText(c.getName());
+	    TextView address = (TextView) findViewById(R.id.address_textview); 
+	    address.setText(c.getAddress());
 		
 		applianceList = getDefaultApplianceList();
 		
