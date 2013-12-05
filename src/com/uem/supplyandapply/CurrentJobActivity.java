@@ -18,7 +18,6 @@ public class CurrentJobActivity extends Activity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		System.out.println("Asdasd");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.current_job_layout);
 		

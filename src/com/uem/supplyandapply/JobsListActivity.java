@@ -1,6 +1,7 @@
 package com.uem.supplyandapply;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -61,6 +62,10 @@ public class JobsListActivity extends Activity {
 			current = new ArrayList<Job>();
 			past = new ArrayList<Job>();
 		}
+		
+		Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
+        Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
+        current.add(j1);
         
 		lv_current = (ListView) findViewById(R.id.current);
 		lv_past = (ListView) findViewById(R.id.past);
