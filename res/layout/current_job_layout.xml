@@ -72,6 +72,9 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/appliances_gridView"
+        android:background = "@color/orange"
+        android:padding="3dp"
+        android:layout_marginLeft="20dp"
         android:text="Add Appliance" />
 
     <Button
@@ -81,7 +84,9 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/addAppliance_button"
         android:layout_toRightOf="@+id/addAppliance_button"
-        android:layout_marginRight="5dp"
+        android:layout_marginLeft="25dp"
+        android:padding="3dp"
+        android:background = "@color/orange"
         android:text="Remove Appliance" />
 
 </RelativeLayout>
