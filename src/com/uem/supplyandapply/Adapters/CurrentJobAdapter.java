@@ -17,7 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
+	
 	private List<ApplianceStateContainer> applianceStateContainers;
+	
 	public CurrentJobAdapter(Context context, int resource, List<ApplianceStateContainer> applianceStateContainers) {
 		super(context, resource, applianceStateContainers);
 		this.applianceStateContainers = applianceStateContainers;

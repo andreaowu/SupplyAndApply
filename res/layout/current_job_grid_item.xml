@@ -7,9 +7,9 @@
         android:id="@+id/appliance_imageButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="20dp"
+        android:adjustViewBounds="true"
+		android:scaleType="centerCrop"
+		android:layout_marginTop="10dp"
         android:background="#FFFFFF" />
 
     <TextView
