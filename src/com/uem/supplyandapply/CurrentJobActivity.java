@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.uem.supplyandapply.Adapters.CurrentJobAdapter;
 
 public class CurrentJobActivity extends Activity {
+	
 	private CurrentJobAdapter adapter;
 	private GridView gridView;
 	private Job job;

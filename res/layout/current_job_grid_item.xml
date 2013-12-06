@@ -18,9 +18,9 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/appliance_imageButton"
         android:layout_alignTop="@+id/appliance_imageButton"
+        android:layout_below="@id/appliance_imageButton"
         android:layout_marginTop="54dp"
-        android:text="notStarted/total"
-        android:textColor="#FFFFFF"
-        android:textSize="15sp" />
+        android:textColor="#000000"
+        android:textSize="15dp" />
 
 </RelativeLayout>

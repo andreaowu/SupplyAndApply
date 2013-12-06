@@ -27,7 +27,6 @@ public class ApplianceListActivity extends Activity {
         setContentView(R.layout.activity_appliance_list);
  
         ApplianceStateContainer app_con = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
-        System.out.println("count: " + app_con.getCount());
         
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
