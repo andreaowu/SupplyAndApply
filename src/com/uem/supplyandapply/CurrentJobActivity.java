@@ -1,6 +1,8 @@
 package com.uem.supplyandapply;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +19,7 @@ public class CurrentJobActivity extends Activity {
 	private GridView gridView;
 	private Job job;
 	private ArrayList<ApplianceStateContainer> applianceList;
+	private HashMap<String, ApplianceStateContainer> broken;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +35,9 @@ public class CurrentJobActivity extends Activity {
 	    name.setText(c.getName());
 	    TextView address = (TextView) findViewById(R.id.address_textview); 
 	    address.setText(c.getAddress());
-		
-		applianceList = getDefaultApplianceList();
+	    broken = job.getBroken();
+	    
+		applianceList = getApplianceList();
 		
 		adapter = new CurrentJobAdapter(getApplicationContext(), 0, applianceList, new Intent(getApplicationContext(), ApplianceListActivity.class));
 		
@@ -48,11 +52,12 @@ public class CurrentJobActivity extends Activity {
 		getMenuInflater().inflate(R.menu.current_job, menu);
 		return true;
 	}
-	private ArrayList<ApplianceStateContainer> getDefaultApplianceList() {
+	private ArrayList<ApplianceStateContainer> getApplianceList() {
         ArrayList<ApplianceStateContainer> appliances = new ArrayList<ApplianceStateContainer>();
-        appliances.add(new ApplianceStateContainer(new Appliance("Shower", R.drawable.showerhead), 5));
-        appliances.add(new ApplianceStateContainer(new Appliance("Toilet", R.drawable.toilet), 6));
-        appliances.add(new ApplianceStateContainer(new Appliance("Sink", R.drawable.sink), 7));
+		for (Map.Entry<String, ApplianceStateContainer> entry : broken.entrySet()) {
+			String key = entry.getKey();
+			appliances.add(new ApplianceStateContainer(new Appliance(key, broken.get(key).getAppliance().getDrawableResource()), broken.get(key).getCount()));
+		}
        
         return appliances;
     }

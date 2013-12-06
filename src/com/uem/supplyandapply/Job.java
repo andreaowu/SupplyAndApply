@@ -18,7 +18,6 @@ public class Job implements Serializable {
 	private Customer customer;
 	// Maps the appliance-groups broken to a list of where they are located within the customer site
 	private HashMap<String, ApplianceStateContainer> broken;
-
 	// Parts estimation or updates
 	private HashMap<String, Integer> parts;
 	// Status on finishing
@@ -29,6 +28,7 @@ public class Job implements Serializable {
 	Job(Customer c, HashMap<String, ApplianceStateContainer> broken, HashMap<String, Integer> parts) {
 		this.customer = c;
 		this.broken = broken;
+		System.out.println("broken in job: " + broken);
 
 		t = Timeframe.CURRENT;
 		this.parts = parts;

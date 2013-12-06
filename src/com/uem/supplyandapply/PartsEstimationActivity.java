@@ -41,11 +41,9 @@ public class PartsEstimationActivity extends Activity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HashMap<String, ApplianceStateContainer> applianceStateContainerHashMap
-                        = new HashMap<String, ApplianceStateContainer>();
+                HashMap<String, ApplianceStateContainer> applianceStateContainerHashMap = new HashMap<String, ApplianceStateContainer>();
                 for (ApplianceStateContainer applianceStateContainer : applianceList) {
-                    applianceStateContainerHashMap.put(
-                            applianceStateContainer.getAppliance().getName(), applianceStateContainer);
+                    applianceStateContainerHashMap.put(applianceStateContainer.getAppliance().getName(), applianceStateContainer);
                 }
 
                 HashMap<String, Integer> integerHashMap = new HashMap<String, Integer>();
