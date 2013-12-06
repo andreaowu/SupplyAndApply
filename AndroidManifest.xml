@@ -27,7 +27,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.uem.supplyandapply.ApplianceList"
+            android:name="com.uem.supplyandapply.ApplianceListActivity"
             android:label="@string/title_activity_appliance_list" >
         </activity>
         <activity

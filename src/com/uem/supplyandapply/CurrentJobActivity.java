@@ -3,6 +3,7 @@ package com.uem.supplyandapply;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.GridView;
@@ -33,7 +34,7 @@ public class CurrentJobActivity extends Activity {
 		
 		applianceList = getDefaultApplianceList();
 		
-		adapter = new CurrentJobAdapter(getApplicationContext(), 0, applianceList);
+		adapter = new CurrentJobAdapter(getApplicationContext(), 0, applianceList, new Intent(getApplicationContext(), ApplianceListActivity.class));
 		
 		gridView = (GridView) findViewById(R.id.appliances_gridView);
         gridView.setAdapter(adapter);

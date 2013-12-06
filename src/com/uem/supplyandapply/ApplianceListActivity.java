@@ -3,6 +3,7 @@ package com.uem.supplyandapply;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
  
-public class ApplianceList extends Activity {
+public class ApplianceListActivity extends Activity {
  
     ApplianceListAdapter listAdapter;
     ExpandableListView expListView;
@@ -25,6 +26,9 @@ public class ApplianceList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appliance_list);
  
+        ApplianceStateContainer app_con = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
+        System.out.println("count: " + app_con.getCount());
+        
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
  

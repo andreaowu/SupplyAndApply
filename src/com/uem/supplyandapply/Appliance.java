@@ -1,5 +1,6 @@
 package com.uem.supplyandapply;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * Time: 4:16 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Appliance implements Serializable{
+public class Appliance implements Serializable {
 
     private String name;
     private int drawableResource;
