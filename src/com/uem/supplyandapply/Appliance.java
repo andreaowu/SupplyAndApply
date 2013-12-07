@@ -27,6 +27,12 @@ public class Appliance implements Serializable {
         this.drawableResource = drawableResource;
     }
 
+    public Appliance(String name, int drawableResource, ArrayList<SupplyPart> partsList) {
+    	this.name = name;
+    	this.drawableResource = drawableResource;
+    	this.partsList = partsList;
+    }
+    
     public String getName() {
         return name;
     }

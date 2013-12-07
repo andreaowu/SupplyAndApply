@@ -14,14 +14,13 @@ import java.util.ArrayList;
  */
 public class ApplianceStateContainer implements Serializable {
 
+	private ArrayList<Appliance> appliances;
     private Appliance appliance;
     private int count;
-    private int notFinished;
-
+    
     public ApplianceStateContainer(Appliance appliance, int count) {
         this.appliance = appliance;
         this.count = count;
-        this.notFinished = 0;
     }
 
     public Appliance getAppliance() {
@@ -39,30 +38,46 @@ public class ApplianceStateContainer implements Serializable {
     public void setCount(int count) {
         this.count = count;
     }
-    
-    public void setNotFinished(int count) {
-        this.notFinished = count;
-    }
-    
-    public int getNotFinished() {
-        return this.notFinished;
-    }
 
-    public ArrayList<SupplyPart> getPartsList() {
+    public int getNotFinished() {
+    	/*
+    	for (Appliance appliance : appliances) {
+    		//TODO-THIS
+    	}
+    	*/
+    	return count;
+    }
+    
+    public ArrayList<SupplyPart> getInitialPartsList() {
         ArrayList<SupplyPart> partsList = appliance.getPartsList();
         for (SupplyPart supplyPart : partsList) {
             supplyPart.setCount(supplyPart.getCount() * count);
         }
         return partsList;
     }
+    
+    public ArrayList<SupplyPart> getPartsList() {
+    	//TODO WRITE THIS
+    	return new ArrayList<SupplyPart>();
+    }
 
+    public void generateAppliances() {
+    	this.appliances = new ArrayList<Appliance>(count);
+    	for (int i = 0; i < count; i++) {
+    		appliances.add(new Appliance(appliance.getName(),
+    				appliance.getDrawableResource(), appliance.getPartsList()));
+    	}
+    }
+    
     private void writeObject(ObjectOutputStream stream) throws IOException {
-        stream.writeObject(appliance);
+        stream.writeObject(appliances);
+    	stream.writeObject(appliance);
         stream.writeInt(count);
     }
 
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
-        appliance = (Appliance) stream.readObject();
+        appliances = (ArrayList<Appliance>) stream.readObject();
+    	appliance = (Appliance) stream.readObject();
         count = stream.readInt();
     }
 }

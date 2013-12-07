@@ -40,10 +40,11 @@ public class AddJobActivity extends Activity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<ApplianceStateContainer> appliances = new ArrayList<ApplianceStateContainer>();
-                for (ApplianceStateContainer appliance : applianceList) {
-                    if (appliance.getCount() != 0) {
-                        appliances.add(appliance);
+                ArrayList<ApplianceStateContainer> applianceStateContainers = new ArrayList<ApplianceStateContainer>();
+                for (ApplianceStateContainer applianceStateContainer : applianceList) {
+                    if (applianceStateContainer.getCount() != 0) {
+                        applianceStateContainer.generateAppliances();
+                    	applianceStateContainers.add(applianceStateContainer);
                     }
                 }
 
@@ -51,7 +52,7 @@ public class AddJobActivity extends Activity {
                 String address = addressText.getText().toString();
 
                 Intent i = new Intent(getApplicationContext(), PartsEstimationActivity.class);
-                i.putExtra(Constants.APPLIANCE_LIST, appliances);
+                i.putExtra(Constants.APPLIANCE_LIST, applianceStateContainers);
                 i.putExtra(Constants.ADDRESS, address);
                 i.putExtra(Constants.NAME, name);
                 startActivityForResult(i, 1);
