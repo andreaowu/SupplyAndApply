@@ -3,7 +3,9 @@ package com.uem.supplyandapply;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class ApplianceDetailActivity extends Activity {
 	Spinner spinner = (Spinner) findViewById(R.id.progress_spinner);
@@ -12,7 +14,19 @@ public class ApplianceDetailActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_appliance_detail);
-		//addListenerOnSpinnerItemSelection();
+		
+		
+		//final Appliance = (Appliance) getIntent().getSerializableExtra(Constants.JOB);
+		
+		//progress dropdown
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+		        R.array.progress_select, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapter);
+		
+		//the name of appliance
+		TextView name = (TextView) findViewById(R.id.name_of_appliance); 
+		//name.setText(c.getName());
 	}
 
 	@Override
@@ -21,19 +35,6 @@ public class ApplianceDetailActivity extends Activity {
 		getMenuInflater().inflate(R.menu.appliance_detail, menu);
 		return true;
 	}
-//	public void addListenerOnSpinnerItemSelection() {
-//		progressSelect = (Spinner) findViewById(R.id.progress_spinner);
-//		progressSelect.setOnItemSelectedListener(new CustomOnItemSelectedListener());
-//	  }
-//	
-//	
-//	// Create an ArrayAdapter using the string array and a default spinner layout
-//	ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//	        R.array.planets_array, android.R.layout.simple_spinner_item);
-//	// Specify the layout to use when the list of choices appears
-//	adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//	// Apply the adapter to the spinner
-//	spinner.setAdapter(adapter);
-//	 
+
 
 }

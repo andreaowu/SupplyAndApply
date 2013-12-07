@@ -51,7 +51,7 @@
             android:layout_height="50dp"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
-            android:background="#ababab">
+            android:background="@color/gray">
 
         <Button
                 android:id="@+id/next_button"
