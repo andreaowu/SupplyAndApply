@@ -61,9 +61,6 @@ public class JobsListActivity extends Activity {
 		} catch (NullPointerException e) {
 			current = new ArrayList<Job>();
 			past = new ArrayList<Job>();
-			Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
-	        Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>());
-	        current.add(j1);
 	        
 	        Customer c2 = new Customer("EUM", "310 Soda Hall");
 	        HashMap<String, ApplianceStateContainer> hash = new HashMap<String, ApplianceStateContainer>();
