@@ -62,7 +62,7 @@ public class JobsListActivity extends Activity {
 			current = new ArrayList<Job>();
 			past = new ArrayList<Job>();
 			Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
-	        Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
+	        Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>());
 	        current.add(j1);
 	        
 	        Customer c2 = new Customer("EUM", "310 Soda Hall");
@@ -70,7 +70,7 @@ public class JobsListActivity extends Activity {
 	        hash.put("Shower", new ApplianceStateContainer(new Appliance("Shower", R.drawable.showerhead), 3));
 	        hash.put("Toilet", new ApplianceStateContainer(new Appliance("Toilet", R.drawable.toilet), 5));
 	        hash.put("Sink", new ApplianceStateContainer(new Appliance("Sink", R.drawable.sink), 1));
-	        Job j2 = new Job(c2, hash, new HashMap<String, Integer>());
+	        Job j2 = new Job(c2, hash);
 	        current.add(j2);
 		}
 		

@@ -21,37 +21,64 @@ public class Appliance implements Serializable {
     private String name;
     private int drawableResource;
     private ArrayList<SupplyPart> partsList;
+    private Progress progress;
 
     public Appliance(String name, int drawableResource) {
         this.name = name;
         this.drawableResource = drawableResource;
+        progress = Progress.NOT_STARTED;
     }
 
-    public String getName() {
-        return name;
-    }
+    /**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public int getDrawableResource() {
-        return drawableResource;
-    }
+	/**
+	 * @return the drawableResource
+	 */
+	public int getDrawableResource() {
+		return drawableResource;
+	}
 
-    public void setDrawableResource(int drawableResource) {
-        this.drawableResource = drawableResource;
-    }
+	/**
+	 * @param drawableResource the drawableResource to set
+	 */
+	public void setDrawableResource(int drawableResource) {
+		this.drawableResource = drawableResource;
+	}
 
-    public ArrayList<SupplyPart> getPartsList() {
-        return partsList;
-    }
+	/**
+	 * @return the partsList
+	 */
+	public ArrayList<SupplyPart> getPartsList() {
+		return partsList;
+	}
 
-    public void setPartsList(ArrayList<SupplyPart> partsList) {
-        this.partsList = partsList;
-    }
+	/**
+	 * @param partsList the partsList to set
+	 */
+	public void setPartsList(ArrayList<SupplyPart> partsList) {
+		this.partsList = partsList;
+	}
 
-    private void writeObject(ObjectOutputStream stream) throws IOException {
+	/**
+	 * @param progress the progress to set
+	 */
+	public void setProgress(Progress progress) {
+		this.progress = progress;
+	}
+
+	private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.writeObject(name);
         stream.writeInt(drawableResource);
         stream.writeObject(partsList);
