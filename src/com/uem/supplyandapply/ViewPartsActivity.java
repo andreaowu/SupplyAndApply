@@ -17,14 +17,13 @@ public class ViewPartsActivity extends Activity {
 		Job job = (Job) getIntent().getSerializableExtra(Constants.JOB);
 		
 		HashMap<String, ApplianceStateContainer> broken = job.getBroken();
-		HashMap<String, Integer> parts = job.getParts();
 		
         for (Map.Entry<String, ApplianceStateContainer> entry : broken.entrySet()) {
                 String key = entry.getKey();
                 TextView partsName = (TextView) findViewById(R.id.parts_name);
                 TextView partsNumber = (TextView) findViewById(R.id.parts_number);
                 partsName.setText(key);
-                partsNumber.setText(parts.get(key));
+                partsNumber.setText(entry.getValue().getPartsList().toString()); // change this
         }
         
 	}

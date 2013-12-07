@@ -30,7 +30,7 @@ public class ApplianceListActivity extends Activity {
         
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
- 
+        
         // preparing list data
         prepareListData();
  
@@ -38,28 +38,26 @@ public class ApplianceListActivity extends Activity {
  
         // setting list adapter
         expListView.setAdapter(listAdapter);
- 
+        expListView.expandGroup(0);
+        expListView.expandGroup(1);
+        expListView.expandGroup(2);
+        
         // Listview Group click listener
         expListView.setOnGroupClickListener(new OnGroupClickListener() {
  
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                     int groupPosition, long id) {
-                // Toast.makeText(getApplicationContext(),
-                // "Group Clicked " + listDataHeader.get(groupPosition),
-                // Toast.LENGTH_SHORT).show();
-                return false;
+               return false;
             }
         });
- 
+        
         // Listview Group expanded listener
         expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
  
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();
+                
             }
         });
  
@@ -68,9 +66,6 @@ public class ApplianceListActivity extends Activity {
  
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Collapsed",
-                        Toast.LENGTH_SHORT).show();
  
             }
         });
@@ -93,6 +88,9 @@ public class ApplianceListActivity extends Activity {
                 return false;
             }
         });
+        
+       
+        
     }
  
     /*
@@ -108,32 +106,18 @@ public class ApplianceListActivity extends Activity {
         listDataHeader.add("Finished");
  
         // Adding child data - we need to pull this from the 
-        List<String> top250 = new ArrayList<String>();
-        top250.add("3rd Floor ");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+        List<String> notStarted = new ArrayList<String>();
+        notStarted.add("3rd Floor Stall 3");
+       
  
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+        List<String> inProgress= new ArrayList<String>();
+        inProgress.add("2nd Floor Stalls 1");
  
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+        List<String> finished = new ArrayList<String>();
+        finished.add("4th Floor Stall 2");
  
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
+        listDataChild.put(listDataHeader.get(0), notStarted); 
+        listDataChild.put(listDataHeader.get(1), inProgress);
+        listDataChild.put(listDataHeader.get(2), finished);
     }
 }

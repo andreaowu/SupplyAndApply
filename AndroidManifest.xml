@@ -42,6 +42,10 @@
             android:name="com.uem.supplyandapply.ViewPartsActivity"
             android:label="Parts View" >
         </activity>
+        <activity
+            android:name="com.uem.supplyandapply.ApplianceDetailActivity"
+            android:label="@string/title_activity_appliance_detail" >
+        </activity>
     </application>
 
 </manifest>

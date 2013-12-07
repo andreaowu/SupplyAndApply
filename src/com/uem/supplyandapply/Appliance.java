@@ -21,11 +21,14 @@ public class Appliance implements Serializable {
     private String name;
     private int drawableResource;
     private ArrayList<SupplyPart> partsList;
+    private Progress progress;
 
     public Appliance(String name, int drawableResource) {
         this.name = name;
         this.drawableResource = drawableResource;
+        progress = Progress.NOT_STARTED;
     }
+
 
     public Appliance(String name, int drawableResource, ArrayList<SupplyPart> partsList) {
     	this.name = name;
@@ -37,27 +40,50 @@ public class Appliance implements Serializable {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public int getDrawableResource() {
-        return drawableResource;
-    }
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDrawableResource(int drawableResource) {
-        this.drawableResource = drawableResource;
-    }
+	/**
+	 * @return the drawableResource
+	 */
+	public int getDrawableResource() {
+		return drawableResource;
+	}
 
-    public ArrayList<SupplyPart> getPartsList() {
-        return partsList;
-    }
+	/**
+	 * @param drawableResource the drawableResource to set
+	 */
+	public void setDrawableResource(int drawableResource) {
+		this.drawableResource = drawableResource;
+	}
 
-    public void setPartsList(ArrayList<SupplyPart> partsList) {
-        this.partsList = partsList;
-    }
+	/**
+	 * @return the partsList
+	 */
+	public ArrayList<SupplyPart> getPartsList() {
+		return partsList;
+	}
 
-    private void writeObject(ObjectOutputStream stream) throws IOException {
+	/**
+	 * @param partsList the partsList to set
+	 */
+	public void setPartsList(ArrayList<SupplyPart> partsList) {
+		this.partsList = partsList;
+	}
+
+	/**
+	 * @param progress the progress to set
+	 */
+	public void setProgress(Progress progress) {
+		this.progress = progress;
+	}
+
+	private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.writeObject(name);
         stream.writeInt(drawableResource);
         stream.writeObject(partsList);
