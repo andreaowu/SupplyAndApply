@@ -15,7 +15,7 @@
         android:layout_height="30dp"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
-        android:hint="Tap to put customer name"
+        android:hint="@string/customer"
         android:background="#FFFFFF"/>
     
     <EditText
@@ -24,7 +24,7 @@
         android:layout_height="30dp"
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
-        android:hint="Tap to put address"
+        android:hint="@string/address"
         android:layout_below="@id/input_name"
         android:background="#FFFFFF"/>
 
