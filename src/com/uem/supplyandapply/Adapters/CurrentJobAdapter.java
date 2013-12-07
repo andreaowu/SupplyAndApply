@@ -41,6 +41,8 @@ public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
         
         ImageButton imageButton = (ImageButton) v.findViewById(R.id.appliance_imageButton);
         imageButton.setImageResource(currentContainer.getAppliance().getDrawableResource());
+        TextView textView = (TextView) v.findViewById(R.id.appliance_name);
+        textView.setText(currentContainer.getAppliance().getName());
         
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
