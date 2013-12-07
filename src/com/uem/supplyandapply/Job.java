@@ -28,8 +28,6 @@ public class Job implements Serializable {
 	Job(Customer c, HashMap<String, ApplianceStateContainer> broken, HashMap<String, Integer> parts) {
 		this.customer = c;
 		this.broken = broken;
-		System.out.println("broken in job: " + broken);
-
 		t = Timeframe.CURRENT;
 		this.parts = parts;
 		this.display = c.getName() + ": " + c.getAddress();

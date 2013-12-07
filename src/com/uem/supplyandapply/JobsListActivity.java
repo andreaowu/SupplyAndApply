@@ -66,7 +66,7 @@ public class JobsListActivity extends Activity {
 		Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
         Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
         current.add(j1);
-        
+
 		lv_current = (ListView) findViewById(R.id.current);
 		lv_past = (ListView) findViewById(R.id.past);
 		view = new View(this);
@@ -79,13 +79,26 @@ public class JobsListActivity extends Activity {
         tab2 = tabHost.newTabSpec("Past");
 
 		setTabs();
+		
+		String delete = (String) getIntent().getSerializableExtra(Constants.DELETE_JOB);
+		if (delete != null) {
+			for (Job j: current) {
+				if (j.getC().getName().equals(delete)) {
+					current.remove(j);
+					updateTabs();
+	                tabHost.setCurrentTab(1);
+	                tabHost.setCurrentTab(0);
+					break;
+				}
+			}
+		}
 	}
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                Job newJob = (Job) data.getExtras().get(Constants.JOB);
+                Job newJob = (Job) data.getExtras().get(Constants.NEW_JOB);
                 current.add(newJob);
                 updateTabs();
                 tabHost.setCurrentTab(1);

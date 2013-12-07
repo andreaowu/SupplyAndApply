@@ -64,8 +64,8 @@ public class AddJobActivity extends Activity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 Intent returnIntent = new Intent();
-                Job newJob = (Job) data.getExtras().get(Constants.JOB);
-                returnIntent.putExtra(Constants.JOB, newJob);
+                Job newJob = (Job) data.getExtras().get(Constants.NEW_JOB);
+                returnIntent.putExtra(Constants.NEW_JOB, newJob);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }

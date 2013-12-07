@@ -51,7 +51,7 @@ public class PartsEstimationActivity extends Activity {
                 Job newJob = new Job(new Customer(name, address), applianceStateContainerHashMap, integerHashMap);
 
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra(Constants.JOB, newJob);
+                returnIntent.putExtra(Constants.NEW_JOB, newJob);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
