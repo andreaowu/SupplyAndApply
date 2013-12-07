@@ -42,6 +42,8 @@ public class ApplianceAdapter extends ArrayAdapter<ApplianceStateContainer> {
 
         ImageView imageView = (ImageView) v.findViewById(R.id.appliance_image);
         imageView.setImageResource(currentContainer.getAppliance().getDrawableResource());
+        TextView textView = (TextView) v.findViewById(R.id.appliance_name);
+        textView.setText(currentContainer.getAppliance().getName());
 
         final EditText countText = (EditText) v.findViewById(R.id.appliance_count);
         countText.setText(String.valueOf(currentContainer.getCount()));

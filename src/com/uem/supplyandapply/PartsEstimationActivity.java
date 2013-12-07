@@ -46,9 +46,7 @@ public class PartsEstimationActivity extends Activity {
                     applianceStateContainerHashMap.put(applianceStateContainer.getAppliance().getName(), applianceStateContainer);
                 }
 
-                HashMap<String, Integer> integerHashMap = new HashMap<String, Integer>();
-
-                Job newJob = new Job(new Customer(name, address), applianceStateContainerHashMap, integerHashMap);
+                Job newJob = new Job(new Customer(name, address), applianceStateContainerHashMap);
 
                 Intent returnIntent = new Intent();
                 returnIntent.putExtra(Constants.NEW_JOB, newJob);

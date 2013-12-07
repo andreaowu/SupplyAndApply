@@ -10,7 +10,7 @@
         android:adjustViewBounds="true"
 		android:scaleType="centerCrop"
 		android:layout_marginTop="10dp"
-        android:background="#FFFFFF" />
+        android:background="@null" />
 
     <TextView
         android:id="@+id/ratio_textView"

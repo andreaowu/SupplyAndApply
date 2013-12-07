@@ -23,7 +23,6 @@ public class CurrentJobActivity extends Activity {
 	
 	private CurrentJobAdapter adapter;
 	private GridView gridView;
-	private Job job;
 	private ArrayList<ApplianceStateContainer> applianceList;
 	private HashMap<String, ApplianceStateContainer> broken;
 	
@@ -51,7 +50,7 @@ public class CurrentJobActivity extends Activity {
 		gridView = (GridView) findViewById(R.id.appliances_gridView);
         gridView.setAdapter(adapter);
         
-        Button removeJob = (Button) findViewById(R.id.removeJob_button);
+        TextView removeJob = (TextView) findViewById(R.id.removeJob);
         removeJob.setOnClickListener(new OnClickListener() {
 
 			@Override
