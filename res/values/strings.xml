@@ -7,5 +7,6 @@
     <string name="all_jobs">All Jobs</string>
     <string name="title_activity_appliance_list">ApplianceList</string>
     <string name="title_activity_current_job">CurrentJobActivity</string>
+    <string name="title_activity_appliance_detail">ApplianceDetailActivity</string>
 
 </resources>
