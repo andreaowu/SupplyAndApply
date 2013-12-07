@@ -30,7 +30,7 @@ public class ApplianceListActivity extends Activity {
         
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
- 
+        
         // preparing list data
         prepareListData();
  
@@ -38,28 +38,26 @@ public class ApplianceListActivity extends Activity {
  
         // setting list adapter
         expListView.setAdapter(listAdapter);
- 
+        expListView.expandGroup(0);
+        expListView.expandGroup(1);
+        expListView.expandGroup(2);
+        
         // Listview Group click listener
         expListView.setOnGroupClickListener(new OnGroupClickListener() {
  
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                     int groupPosition, long id) {
-                // Toast.makeText(getApplicationContext(),
-                // "Group Clicked " + listDataHeader.get(groupPosition),
-                // Toast.LENGTH_SHORT).show();
-                return false;
+               return false;
             }
         });
- 
+        
         // Listview Group expanded listener
         expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
  
             @Override
             public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();
+                
             }
         });
  
@@ -68,9 +66,6 @@ public class ApplianceListActivity extends Activity {
  
             @Override
             public void onGroupCollapse(int groupPosition) {
-                Toast.makeText(getApplicationContext(),
-                        listDataHeader.get(groupPosition) + " Collapsed",
-                        Toast.LENGTH_SHORT).show();
  
             }
         });
@@ -93,6 +88,9 @@ public class ApplianceListActivity extends Activity {
                 return false;
             }
         });
+        
+       
+        
     }
  
     /*

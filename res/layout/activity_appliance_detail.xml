@@ -7,17 +7,98 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ApplianceDetailActivity" >
+    //name of the appliance
 
     <TextView
+        android:id="@+id/name_of_appliance"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         />
-	
+        android:layout_height="wrap_content" />
+	//select progress
+
     <Spinner
         android:id="@+id/progress_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/name_of_appliance"
         android:entries="@array/progress_select"
         android:prompt="@string/progress" />
-    
+    //this part is pulled from the parts estimation
+
+    <RelativeLayout
+        android:id="@+id/text_container"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/progress_spinner"
+        android:background="#CCCCCC" >
+
+        <TextView
+            android:id="@+id/parts_number"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical"
+            android:text="#Parts"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/parts_name"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@id/parts_number"
+            android:gravity="center_vertical"
+            android:text="Part Name"
+            android:textSize="20sp" />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/application_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/text_container"
+        android:layout_below="@id/progress_spinner"
+        android:background="#666666" />
+    //Issues
+
+    <TextView
+        android:id="@+id/issues"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_container"
+        android:text="@string/issues" />
+     //Input Textbox
+     
+    <EditText
+        android:id="@+id/issues_textbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/issues"
+        android:ems="10"
+        android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+     
+     
+     
+     //next button
+
+    <RelativeLayout
+        android:id="@+id/buttons_container"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/gray" >
+
+        <Button
+            android:id="@+id/next_button"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/orange"
+            android:text="Apply" />
+    </RelativeLayout>
+
+  
 </RelativeLayout>
