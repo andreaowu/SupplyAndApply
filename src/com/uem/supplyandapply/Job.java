@@ -46,6 +46,13 @@ public class Job implements Serializable {
 	public HashMap<String, ApplianceStateContainer> getBroken() {
 		return broken;
 	}
+	
+	/**
+	 * @return the parts
+	 */
+	public HashMap<String, Integer> getParts() {
+		return parts;
+	}
 
 	/**
 	 * @return the timeframe for this job

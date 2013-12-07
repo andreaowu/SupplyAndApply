@@ -33,7 +33,7 @@ public class CurrentJobActivity extends Activity {
 		setContentView(R.layout.current_job_layout);
 		
 		// Get job from the saved intent
-		Job job = (Job) getIntent().getSerializableExtra("Job");
+		final Job job = (Job) getIntent().getSerializableExtra(Constants.JOB);
 
 		// Display correct customer information
 		Customer c = job.getC();
@@ -77,6 +77,18 @@ public class CurrentJobActivity extends Activity {
 				alert_box.show();
 			}
 		});
+        
+        Button viewParts = (Button) findViewById(R.id.viewParts_button);
+        viewParts.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), ViewPartsActivity.class);
+                intent.putExtra(Constants.JOB, job);
+                startActivityForResult(intent, 1);
+			}
+        	
+        });
 	}
 
 	@Override

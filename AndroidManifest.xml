@@ -36,7 +36,11 @@
         </activity>
         <activity
             android:name="com.uem.supplyandapply.CurrentJobActivity"
-            android:label="@string/title_activity_current_job" >
+            android:label="Current Job" >
+        </activity>
+        <activity
+            android:name="com.uem.supplyandapply.ViewPartsActivity"
+            android:label="Parts View" >
         </activity>
     </application>
 

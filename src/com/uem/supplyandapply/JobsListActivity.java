@@ -61,12 +61,19 @@ public class JobsListActivity extends Activity {
 		} catch (NullPointerException e) {
 			current = new ArrayList<Job>();
 			past = new ArrayList<Job>();
+			Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
+	        Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
+	        current.add(j1);
+	        
+	        Customer c2 = new Customer("EUM", "310 Soda Hall");
+	        HashMap<String, ApplianceStateContainer> hash = new HashMap<String, ApplianceStateContainer>();
+	        hash.put("Shower", new ApplianceStateContainer(new Appliance("Shower", R.drawable.showerhead), 3));
+	        hash.put("Toilet", new ApplianceStateContainer(new Appliance("Toilet", R.drawable.toilet), 5));
+	        hash.put("Sink", new ApplianceStateContainer(new Appliance("Sink", R.drawable.sink), 1));
+	        Job j2 = new Job(c2, hash, new HashMap<String, Integer>());
+	        current.add(j2);
 		}
 		
-		Customer c1 = new Customer("Andrea", "2461 Hilgard Ave");
-        Job j1 = new Job(c1, new HashMap<String, ApplianceStateContainer>(), new HashMap<String, Integer>());
-        current.add(j1);
-
 		lv_current = (ListView) findViewById(R.id.current);
 		lv_past = (ListView) findViewById(R.id.past);
 		view = new View(this);
@@ -85,6 +92,7 @@ public class JobsListActivity extends Activity {
 			for (Job j: current) {
 				if (j.getC().getName().equals(delete)) {
 					current.remove(j);
+					getIntent().putExtra(Constants.DELETE_JOB, "");
 					updateTabs();
 	                tabHost.setCurrentTab(1);
 	                tabHost.setCurrentTab(0);
@@ -135,7 +143,7 @@ public class JobsListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < current.size(); i++) {
 					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra("Job", (Job) current.get(i));
+						intent.putExtra(Constants.JOB, (Job) current.get(i));
 						break;
 					}
 				}
@@ -163,7 +171,7 @@ public class JobsListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < current.size(); i++) {
 					if (past.get(i).getC().getName().equals(name) && past.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra("Job", (Job) past.get(i));
+						intent.putExtra(Constants.JOB, (Job) past.get(i));
 						break;
 					}
 				}
@@ -204,7 +212,7 @@ public class JobsListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < current.size(); i++) {
 					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra("Job", (Job) current.get(i));
+						intent.putExtra(Constants.JOB, (Job) current.get(i));
 						break;
 					}
 				}
@@ -232,7 +240,7 @@ public class JobsListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < current.size(); i++) {
 					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra("Job", (Job) current.get(i));
+						intent.putExtra(Constants.JOB, (Job) current.get(i));
 						break;
 					}
 				}
