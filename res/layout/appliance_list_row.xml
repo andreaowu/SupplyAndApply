@@ -14,14 +14,14 @@
         android:layout_margin="20dp"/>
 
     <TextView
-            android:id="@+id/appliance_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_above="@id/appliance_image"
-            android:layout_margin="5dp"
-            android:layout_centerHorizontal="true"
-            android:textColor="#FFFFFF"/>
+        android:id="@+id/appliance_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:layout_above="@id/appliance_image"
+        android:layout_margin="5dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"/>
 
     <TextView
         android:id="@+id/increment_button"
