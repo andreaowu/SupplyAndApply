@@ -20,7 +20,8 @@ public class Appliance implements Serializable {
     private ArrayList<SupplyPart> partsList;
     private Progress progress;
     private String issues;
-
+    private ArrayList<String> ApplianceList;
+  
     public Appliance(String name, int drawableResource) {
         this.name = name;
         this.drawableResource = drawableResource;
@@ -38,6 +39,9 @@ public class Appliance implements Serializable {
         return name;
     }
 
+    public ArrayList<String> getAppList(){
+    	return ApplianceList;
+    }
 
 	/**
 	 * @param name the name to set

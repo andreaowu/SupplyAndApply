@@ -127,12 +127,25 @@ public class ApplianceListActivity extends Activity {
         List<String> finished = new ArrayList<String>();
         //finished.add("4th Floor Stall 2");
         
-        ApplianceStateContainer app_con = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
-    	//appList = app_con.generateAppliances();
-        //for (Appliance appliance : app_con.generateAppliances()) {
-    		
-    		//}
         
+        ApplianceStateContainer app_con = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
+    	ArrayList <Appliance> app = app_con.getAppliances();
+    	
+    	for (Appliance a : app){
+    		if (a.getProgress().equals("NOT_STARTED")){
+    			notStarted.add(a.getName());
+    		}
+    		if (a.getProgress().equals("IN_PROGRESS")){
+    			inProgress.add(a.getName());
+    		}
+    		else{
+    			finished.add(a.getName());
+    		}
+    	}
+      
+        
+    	//clicking list items takes them to the ApplianceDetailActivity
+    	
 //        ListView current_lv = (ListView) findViewById(R.id.current);
 //        current_lv.setOnItemClickListener(new OnItemClickListener() {
 //
