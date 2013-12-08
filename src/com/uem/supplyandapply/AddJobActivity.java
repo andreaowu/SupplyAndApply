@@ -92,43 +92,20 @@ public class AddJobActivity extends Activity {
 
 					@Override
 					public void onClick(View v) {
-						setContentView(R.layout.add_part);
-						AlertDialog.Builder builderPart = new AlertDialog.Builder(AddJobActivity.this);
-		                // Get the layout inflater
-		                LayoutInflater inflater = AddJobActivity.this.getLayoutInflater();
-
-		                // Inflate and set the layout for the dialog
-		                // Pass null as the parent view because its going in the dialog layout
-		                builderPart.setView(inflater.inflate(R.layout.add_part, null));
+						EditText addPartName = (EditText) findViewById(R.id.add_part_name);
+						EditText addPartNumber = (EditText) findViewById(R.id.add_part_number);
+		                Button add = (Button) findViewById(R.id.addParts_button);
+		                adapter_parts.setName(addPartName.toString());
+		                adapter_parts.setName(addPartNumber.toString());
 		                
-		                Button ok = (Button) findViewById(R.id.addPart_ok_button);
-		                Button cancel = (Button) findViewById(R.id.addPart_cancel_button);
-		                
-		                final AlertDialog alertDialog = builderPart.create();
-		                
-		                ok.setOnClickListener(new OnClickListener() {
+		                add.setOnClickListener(new OnClickListener() {
 
 							@Override
 							public void onClick(View v) {
-								EditText addPartName = (EditText) findViewById(R.id.part_name);
-				                EditText addPartCount = (EditText) findViewById(R.id.part_number);
-								adapter_parts.setName(addPartName.toString());
-								adapter_parts.setName(addPartCount.toString());
-								
-							}
-							
-		                });
-						
-		                cancel.setOnClickListener(new OnClickListener() {
-
-							@Override
-							public void onClick(View v) {
-								alertDialog.dismiss();
+								((ApplianceAdapter) listView_partsList.getAdapter()).notifyDataSetChanged();
 							}
 		                	
 		                });
-
-		                builderPart.show();
 					}
                 	
                 });
@@ -144,7 +121,8 @@ public class AddJobActivity extends Activity {
 		                final EditText numberBroken = (EditText) findViewById(R.id.count_broken);
 		                Appliance app = new Appliance(partName.toString(), R.drawable.question);
 		                
-						
+		                
+		                alertDialog.dismiss();
 					}
 					
                 });
