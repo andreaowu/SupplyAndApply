@@ -73,9 +73,6 @@ public class AddJobActivity extends Activity {
         addApplianceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            	//listView_partsList = (ListView) findViewById(R.id.parts_list);
-                //listView_partsList.setAdapter(adapter_parts);
-            	
                 setContentView(R.layout.add_new_appliance_dialog);
             	AlertDialog.Builder builder = new AlertDialog.Builder(AddJobActivity.this);
                 // Get the layout inflater
@@ -87,11 +84,15 @@ public class AddJobActivity extends Activity {
                 
                 final AlertDialog alertDialog = builder.create();
                 
+                listView_partsList = (ListView) findViewById(R.id.parts_list);
+                listView_partsList.setAdapter(adapter_parts);
+                
                 Button addParts = (Button) findViewById(R.id.addParts_button);
                 addParts.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
+						setContentView(R.layout.add_part);
 						AlertDialog.Builder builderPart = new AlertDialog.Builder(AddJobActivity.this);
 		                // Get the layout inflater
 		                LayoutInflater inflater = AddJobActivity.this.getLayoutInflater();
@@ -99,16 +100,18 @@ public class AddJobActivity extends Activity {
 		                // Inflate and set the layout for the dialog
 		                // Pass null as the parent view because its going in the dialog layout
 		                builderPart.setView(inflater.inflate(R.layout.add_part, null));
-		                final EditText addPartName = (EditText) findViewById(R.id.part_name);
-		                final EditText addPartCount = (EditText) findViewById(R.id.part_number);
+		                
 		                Button ok = (Button) findViewById(R.id.addPart_ok_button);
 		                Button cancel = (Button) findViewById(R.id.addPart_cancel_button);
 		                
 		                final AlertDialog alertDialog = builderPart.create();
+		                
 		                ok.setOnClickListener(new OnClickListener() {
 
 							@Override
 							public void onClick(View v) {
+								EditText addPartName = (EditText) findViewById(R.id.part_name);
+				                EditText addPartCount = (EditText) findViewById(R.id.part_number);
 								adapter_parts.setName(addPartName.toString());
 								adapter_parts.setName(addPartCount.toString());
 								
