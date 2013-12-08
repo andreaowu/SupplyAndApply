@@ -8,10 +8,14 @@
     <string name="title_activity_appliance_list">ApplianceList</string>
     <string name="title_activity_current_job">CurrentJobActivity</string>
     <string name="title_activity_appliance_detail">ApplianceDetailActivity</string>
-    <string name="customer">Tap to enter Customer Name</string>
-    <string name="address">Tap to enter Customer Address</string>
-    <string name="issues">Issues</string>
-
+	<string name="customer">Tap to enter Customer Name</string>
+	<string name="address">Tap to enter Customer Address</string>
+	<string name="progress">Select Progress</string>
+	<string name="issues">Issues</string>
+    <string name="assigned">Assigned</string>
+    <string name="unassigned">Unassigned</string>
+    <string name="Appliances">Appliances</string>
+    <string name="title_start_activity">Start Job</string>
     <string-array name="progress_select">
         <item>Not Started</item>
         <item>In Progress</item>

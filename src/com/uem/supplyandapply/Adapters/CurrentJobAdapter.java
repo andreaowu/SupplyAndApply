@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uem.supplyandapply.ApplianceStateContainer;
@@ -38,7 +39,7 @@ public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
             v = inflater.inflate(R.layout.current_job_grid_item, null, false);
         }
         
-        ImageButton imageButton = (ImageButton) v.findViewById(R.id.appliance_imageButton);
+        ImageView imageButton = (ImageView) v.findViewById(R.id.appliance_imageButton);
         imageButton.setImageResource(currentContainer.getAppliance().getDrawableResource());
         TextView textView = (TextView) v.findViewById(R.id.appliance_name);
         textView.setText(currentContainer.getAppliance().getName());
