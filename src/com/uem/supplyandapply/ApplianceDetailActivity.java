@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -25,6 +26,9 @@ public class ApplianceDetailActivity extends Activity {
 		spinner.setAdapter(adapter);
 		spinner.setPrompt(appliance.getProgress().toString());
 		
+		//image of appliance
+		ImageView image = (ImageView)findViewById(R.id.image_of_appliance);
+		image.setImageResource(appliance.getDrawableResource());
 		
 		//the name of appliance
 		TextView name = (TextView) findViewById(R.id.name_of_appliance); 

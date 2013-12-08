@@ -36,7 +36,7 @@ public class ApplianceListActivity extends Activity {
         addPartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),AddPartActivity.class);
+                Intent i = new Intent(getApplicationContext(),AddPart.class);
                 startActivityForResult(i, 1);
             }
         });
@@ -147,7 +147,7 @@ public class ApplianceListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < app_con_list.size(); i++) {
 					if (app_con_list.get(i).getAppliance().getName().equals(name) && app_con_list.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra(Constants.APPLIANCE, (Appliance)((ApplianceStateContainer) app_con_list).getAppliance());
+						intent.putExtra(Constants.APPLIANCE, ((ApplianceStateContainer) app_con_list).getAppliance());
 						break;
 					}
 				}

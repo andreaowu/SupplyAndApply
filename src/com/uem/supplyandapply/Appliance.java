@@ -1,8 +1,5 @@
 package com.uem.supplyandapply;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

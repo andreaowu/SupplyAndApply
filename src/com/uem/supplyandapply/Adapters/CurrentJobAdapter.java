@@ -12,7 +12,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.uem.supplyandapply.ApplianceStateContainer;
-import com.uem.supplyandapply.Job;
 import com.uem.supplyandapply.R;
 
 public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
@@ -47,7 +46,7 @@ public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            	intent.putExtra("ApplianceContainer", (ApplianceStateContainer) currentContainer);
+            	intent.putExtra("ApplianceContainer", currentContainer);
                 context.startActivity(intent);
             }
         });

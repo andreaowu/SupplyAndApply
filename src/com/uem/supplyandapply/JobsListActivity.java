@@ -140,7 +140,7 @@ public class JobsListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < current.size(); i++) {
 					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra(Constants.JOB, (Job) current.get(i));
+						intent.putExtra(Constants.JOB, current.get(i));
 						break;
 					}
 				}
@@ -168,7 +168,7 @@ public class JobsListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < current.size(); i++) {
 					if (past.get(i).getC().getName().equals(name) && past.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra(Constants.JOB, (Job) past.get(i));
+						intent.putExtra(Constants.JOB, past.get(i));
 						break;
 					}
 				}
@@ -209,7 +209,7 @@ public class JobsListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < current.size(); i++) {
 					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra(Constants.JOB, (Job) current.get(i));
+						intent.putExtra(Constants.JOB, current.get(i));
 						break;
 					}
 				}
@@ -237,7 +237,7 @@ public class JobsListActivity extends Activity {
 				String address = displayed.substring(displayed.indexOf(":") + 2);
 				for (int i = 0; i < current.size(); i++) {
 					if (current.get(i).getC().getName().equals(name) && current.get(i).getC().getAddress().equals(address)) {
-						intent.putExtra(Constants.JOB, (Job) current.get(i));
+						intent.putExtra(Constants.JOB, current.get(i));
 						break;
 					}
 				}
