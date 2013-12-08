@@ -27,30 +27,14 @@
         android:layout_below="@id/input_name"
         android:background="#FFFFFF"/>
 
-    <RelativeLayout
-        android:id="@+id/buttons_container"
-        android:layout_height="50dp"
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true">
-
-		<Button
-            android:id="@+id/addAppliance_button"
-            android:layout_height="fill_parent"
-            android:layout_width="fill_parent"
-            android:background = "@color/orange"
-            android:text="Add Appliance"/>
-
-        <Button
-            android:id="@+id/next_button"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_below="@id/addAppliance_button"
-            android:background = "@color/orange"
-            android:layout_margin="100dp"
-            android:text="Next"/>
-            
-    </RelativeLayout>
-
+     <Button
+         android:id="@+id/next_button"
+         android:layout_height="wrap_content"
+         android:layout_width="fill_parent"
+         android:background = "@color/orange"
+         android:layout_margin="10dp"
+         android:layout_alignParentBottom="true"
+         android:text="Next"/>
 
     <ListView
         android:id="@+id/application_list"
@@ -58,6 +42,6 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:layout_below="@id/input_address"
-        android:layout_above="@id/buttons_container"/>
+        android:layout_above="@id/next_button"/>
 
 </RelativeLayout>
