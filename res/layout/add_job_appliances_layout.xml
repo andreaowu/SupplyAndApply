@@ -7,7 +7,7 @@
                 android:paddingLeft="@dimen/activity_horizontal_margin"
                 android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_vertical_margin"
-                android:background="#ababab">
+                android:background="@color/gray">
 
     <EditText
         android:id="@+id/input_name"
@@ -32,24 +32,30 @@
         android:id="@+id/buttons_container"
         android:layout_height="50dp"
         android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:background="#ababab">
+        android:layout_alignParentBottom="true">
+
+		<Button
+            android:id="@+id/addAppliance_button"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:background = "@color/orange"
+            android:text="Add Appliance"/>
+
+    </RelativeLayout>
 
         <Button
             android:id="@+id/next_button"
             android:layout_height="fill_parent"
             android:layout_width="fill_parent"
+            android:layout_below="@id/buttons_container"
             android:background = "@color/orange"
             android:text="Next"/>
-
-    </RelativeLayout>
 
     <ListView
         android:id="@+id/application_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:background="#ababab"
         android:layout_below="@id/input_address"
         android:layout_above="@id/buttons_container"/>
 
