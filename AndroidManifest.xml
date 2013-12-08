@@ -50,6 +50,10 @@
             android:name="com.uem.supplyandapply.AddPart"
             android:label="@string/title_activity_add_part" >
         </activity>
+
+        <activity    android:name="com.uem.supplyandapply.StartJobActivity"
+            android:label="@string/title_start_activity" >
+        </activity>
     </application>
 
 </manifest>

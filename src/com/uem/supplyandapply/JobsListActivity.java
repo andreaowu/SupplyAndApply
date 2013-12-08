@@ -64,9 +64,16 @@ public class JobsListActivity extends Activity {
 	        
 	        Customer c2 = new Customer("EUM", "310 Soda Hall");
 	        HashMap<String, ApplianceStateContainer> hash = new HashMap<String, ApplianceStateContainer>();
-	        hash.put("Shower", new ApplianceStateContainer(new Appliance("Shower", R.drawable.showerhead), 3));
-	        hash.put("Toilet", new ApplianceStateContainer(new Appliance("Toilet", R.drawable.toilet), 5));
-	        hash.put("Sink", new ApplianceStateContainer(new Appliance("Sink", R.drawable.sink), 1));
+
+            ApplianceStateContainer shower = new ApplianceStateContainer(new Appliance("Shower", R.drawable.showerhead), 3);
+            shower.generateAppliances();
+	        hash.put("Shower", shower);
+            ApplianceStateContainer toilet = new ApplianceStateContainer(new Appliance("Toilet", R.drawable.toilet), 5);
+            toilet.generateAppliances();
+	        hash.put("Toilet", toilet);
+            ApplianceStateContainer sink = new ApplianceStateContainer(new Appliance("Sink", R.drawable.sink), 1);
+            sink.generateAppliances();
+	        hash.put("Sink", sink);
 	        Job j2 = new Job(c2, hash);
 	        current.add(j2);
 		}

@@ -40,6 +40,14 @@ public class ApplianceStateContainer implements Serializable {
         this.count = count;
     }
 
+    public ArrayList<Appliance> getAppliances() {
+        return appliances;
+    }
+
+    public void setAppliances(ArrayList<Appliance> appliances) {
+        this.appliances = appliances;
+    }
+
     public int getNotFinished() {
     	int notFinished = 0;
     	for (Appliance appliance : appliances) {

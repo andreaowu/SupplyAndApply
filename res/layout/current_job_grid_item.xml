@@ -3,24 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <ImageButton
+    <ImageView
         android:id="@+id/appliance_imageButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:adjustViewBounds="true"
-		android:scaleType="centerCrop"
-		android:layout_marginTop="10dp"
-        android:background="@null" />
+        android:background="@null"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp" />
 
-	<TextView
-        android:id="@+id/appliance_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:layout_centerHorizontal="true"
-        android:layout_above="@id/appliance_imageButton"
-        android:textColor="#000000"/>
-    
+    <TextView
+            android:id="@+id/appliance_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_above="@id/appliance_imageButton"
+            android:layout_margin="10dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFFFFF"/>
+
     <TextView
         android:id="@+id/ratio_textView"
         android:layout_width="wrap_content"

@@ -40,6 +40,20 @@ public class CurrentJobActivity extends Activity {
 		// Get job from the saved intent
 		final Job job = (Job) getIntent().getSerializableExtra(Constants.JOB);
 
+        Button startJob = (Button) findViewById(R.id.startJob_button);
+        if (!job.isJobStarted()) {
+            startJob.setVisibility(View.VISIBLE);
+            startJob.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
+                    intent.putExtra(Constants.JOB, (Job) job);
+                    //Code of 2 is for Start Job
+                    startActivityForResult(intent, 2);
+                }
+            });
+        }
+
 		// Display correct customer information
 		Customer c = job.getC();
 		TextView name = (TextView) findViewById(R.id.customer_textView); 
