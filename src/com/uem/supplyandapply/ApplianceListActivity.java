@@ -5,9 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ListView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
@@ -25,8 +30,16 @@ public class ApplianceListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appliance_list);
- 
-        ApplianceStateContainer app_con = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
+        Button addPartButton = (Button) findViewById(R.id.add_part_btn);
+        
+        //Apply Button
+        addPartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),AddPartActivity.class);
+                startActivityForResult(i, 1);
+            }
+        });
         
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
@@ -99,7 +112,8 @@ public class ApplianceListActivity extends Activity {
     private void prepareListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
- 
+    	final ArrayList<ApplianceStateContainer> app_con_list;
+    	
         // Adding child data
         listDataHeader.add("Not Started");
         listDataHeader.add("In Progress");
@@ -107,17 +121,43 @@ public class ApplianceListActivity extends Activity {
  
         // Adding child data - we need to pull this from the 
         List<String> notStarted = new ArrayList<String>();
-        notStarted.add("3rd Floor Stall 3");
+        //notStarted.add("3rd Floor Stall 3");
        
  
         List<String> inProgress= new ArrayList<String>();
-        inProgress.add("2nd Floor Stalls 1");
+        //inProgress.add("2nd Floor Stalls 1");
  
         List<String> finished = new ArrayList<String>();
-        finished.add("4th Floor Stall 2");
- 
+        //finished.add("4th Floor Stall 2");
+        
+        ApplianceStateContainer app_con = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
+    	appList = app_con.generateAppliances();
+        for (Appliance appliance : app_con.generateAppliances()) {
+    		
+    		}
+        
+        ListView current_lv = (ListView) findViewById(R.id.current);
+        current_lv.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Intent intent = new Intent(getApplicationContext(), CurrentJobActivity.class);
+				String displayed = (String) arg0.getItemAtPosition(arg2);
+				String name = displayed.substring(0, displayed.indexOf(":"));
+				String address = displayed.substring(displayed.indexOf(":") + 2);
+				for (int i = 0; i < app_con_list.size(); i++) {
+					if (app_con_list.get(i).getAppliance().getName().equals(name) && app_con_list.get(i).getC().getAddress().equals(address)) {
+						intent.putExtra(Constants.APPLIANCE, (Appliance)((ApplianceStateContainer) app_con_list).getAppliance());
+						break;
+					}
+				}
+                startActivityForResult(intent, 1);
+			}
+        });
         listDataChild.put(listDataHeader.get(0), notStarted); 
         listDataChild.put(listDataHeader.get(1), inProgress);
         listDataChild.put(listDataHeader.get(2), finished);
     }
+    
+     
 }

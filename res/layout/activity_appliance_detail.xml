@@ -9,10 +9,11 @@
     tools:context=".ApplianceDetailActivity" >
     //name of the appliance
 
-    <TextView
+	<EditText
         android:id="@+id/name_of_appliance"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:ems="10" />
 	//select progress
 
     <Spinner
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name_of_appliance"
         android:entries="@array/progress_select"
-        android:prompt="@string/progress" />
+        />
     //this part is pulled from the parts estimation
 
     <RelativeLayout
@@ -99,6 +100,7 @@
             android:background="@color/orange"
             android:text="Apply" />
     </RelativeLayout>
+
 
   
 </RelativeLayout>

@@ -15,18 +15,27 @@ public class ApplianceDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_appliance_detail);
 		
-		
-		//final Appliance = (Appliance) getIntent().getSerializableExtra(Constants.JOB);
+	
+		final Appliance appliance = (Appliance) getIntent().getSerializableExtra(Constants.APPLIANCE);
 		
 		//progress dropdown
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 		        R.array.progress_select, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
+		spinner.setPrompt(appliance.getProgress().toString());
+		
 		
 		//the name of appliance
 		TextView name = (TextView) findViewById(R.id.name_of_appliance); 
-		//name.setText(c.getName());
+		name.setText(appliance.getName());
+		
+		//putting in the parts estimation
+		
+		//issue
+		TextView issues = (TextView) findViewById(R.id.issues_textbox); 
+		name.setText(appliance.getIssues());
+		
 	}
 
 	@Override

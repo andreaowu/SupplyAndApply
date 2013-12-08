@@ -22,6 +22,7 @@ public class Appliance implements Serializable {
     private int drawableResource;
     private ArrayList<SupplyPart> partsList;
     private Progress progress;
+    private String issues;
 
     public Appliance(String name, int drawableResource) {
         this.name = name;
@@ -101,4 +102,9 @@ public class Appliance implements Serializable {
         drawableResource = stream.readInt();
         partsList = (ArrayList<SupplyPart>) stream.readObject();
     }
+
+
+	public CharSequence getIssues() {
+		return issues;
+	}
 }
