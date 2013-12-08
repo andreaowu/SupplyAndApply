@@ -8,11 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uem.supplyandapply.ApplianceStateContainer;
-import com.uem.supplyandapply.Job;
 import com.uem.supplyandapply.R;
 
 public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
@@ -39,7 +38,7 @@ public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
             v = inflater.inflate(R.layout.current_job_grid_item, null, false);
         }
         
-        ImageButton imageButton = (ImageButton) v.findViewById(R.id.appliance_imageButton);
+        ImageView imageButton = (ImageView) v.findViewById(R.id.appliance_imageButton);
         imageButton.setImageResource(currentContainer.getAppliance().getDrawableResource());
         TextView textView = (TextView) v.findViewById(R.id.appliance_name);
         textView.setText(currentContainer.getAppliance().getName());
@@ -47,13 +46,13 @@ public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            	intent.putExtra("ApplianceContainer", (ApplianceStateContainer) currentContainer);
+            	intent.putExtra("ApplianceContainer", currentContainer);
                 context.startActivity(intent);
             }
         });
         
         TextView ratio = (TextView) v.findViewById(R.id.ratio_textView);
-        String ratioText = Integer.toString(currentContainer.getNotFinished());
+        String ratioText = Integer.toString(currentContainer.getCount() - currentContainer.getNotFinished());
         ratioText += "/";
         ratioText += Integer.toString(currentContainer.getCount());
         ratio.setText(ratioText);

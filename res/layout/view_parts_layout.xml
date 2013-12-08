@@ -25,7 +25,7 @@
                 android:id="@+id/parts_number"
                 android:layout_height="fill_parent"
                 android:layout_width="wrap_content"
-                android:text="#Parts"
+                android:text="#Parts Needed"
                 android:textSize="20sp"
                 android:layout_alignParentRight="true"
                 android:gravity="center_vertical"

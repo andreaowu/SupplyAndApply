@@ -1,8 +1,5 @@
 package com.uem.supplyandapply;
 
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -22,6 +19,7 @@ public class Appliance implements Serializable {
     private int drawableResource;
     private ArrayList<SupplyPart> partsList;
     private Progress progress;
+    private String issues;
 
     public Appliance(String name, int drawableResource) {
         this.name = name;
@@ -29,12 +27,17 @@ public class Appliance implements Serializable {
         progress = Progress.NOT_STARTED;
     }
 
-    /**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+
+    public Appliance(String name, int drawableResource, ArrayList<SupplyPart> partsList) {
+    	this.name = name;
+    	this.drawableResource = drawableResource;
+    	this.partsList = partsList;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
 
 	/**
 	 * @param name the name to set
@@ -77,6 +80,13 @@ public class Appliance implements Serializable {
 	public void setProgress(Progress progress) {
 		this.progress = progress;
 	}
+	
+	/**
+	 * @param get the progress 
+	 */
+	public Progress getProgress() {
+		return progress;
+	}
 
 	private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.writeObject(name);
@@ -89,4 +99,9 @@ public class Appliance implements Serializable {
         drawableResource = stream.readInt();
         partsList = (ArrayList<SupplyPart>) stream.readObject();
     }
+
+
+	public CharSequence getIssues() {
+		return issues;
+	}
 }

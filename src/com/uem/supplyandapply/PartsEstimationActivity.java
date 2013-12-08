@@ -59,7 +59,7 @@ public class PartsEstimationActivity extends Activity {
     private ArrayList<SupplyPart> getPartsListFromAppliances(ArrayList<ApplianceStateContainer> applianceList) {
         ArrayList<SupplyPart> supplyPartsList = new ArrayList<SupplyPart>();
         for (ApplianceStateContainer stateContainer : applianceList) {
-            supplyPartsList.addAll(stateContainer.getPartsList());
+            supplyPartsList.addAll(stateContainer.getInitialPartsList());
         }
         return supplyPartsList;
     }

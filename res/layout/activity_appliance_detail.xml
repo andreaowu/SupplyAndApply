@@ -7,12 +7,22 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".ApplianceDetailActivity" >
+    
+    //image of appliance
+    <ImageView
+        android:id="@+id/image_of_appliance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/name_of_appliance"
+        android:layout_alignTop="@+id/name_of_appliance"
+         />
+    
     //name of the appliance
-
-    <TextView
+	<EditText
         android:id="@+id/name_of_appliance"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:ems="10" />
 	//select progress
 
     <Spinner
@@ -21,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name_of_appliance"
         android:entries="@array/progress_select"
-        android:prompt="@string/progress" />
+        />
     //this part is pulled from the parts estimation
 
     <RelativeLayout
@@ -100,5 +110,6 @@
             android:text="Apply" />
     </RelativeLayout>
 
+    
   
 </RelativeLayout>

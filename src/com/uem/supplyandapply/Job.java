@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 public class Job implements Serializable {
 
@@ -18,12 +16,16 @@ public class Job implements Serializable {
 	private Timeframe t;
 	// Display a string with name and address on the job page
 	private String display;
+    // Whether or not the Job has been started or not
+    private boolean jobStarted;
+
 
 	Job(Customer c, HashMap<String, ApplianceStateContainer> broken) {
 		this.customer = c;
 		this.broken = broken;
 		t = Timeframe.CURRENT;
 		this.display = c.getName() + ": " + c.getAddress();
+        this.jobStarted = false;
 	}
 
 	/**
@@ -54,11 +56,20 @@ public class Job implements Serializable {
 		return display;
 	}
 
-	private void writeObject(ObjectOutputStream stream) throws IOException {
+    public boolean isJobStarted() {
+        return jobStarted;
+    }
+
+    public void setJobStarted(boolean jobStarted) {
+        this.jobStarted = jobStarted;
+    }
+
+    private void writeObject(ObjectOutputStream stream) throws IOException {
 		stream.writeObject(customer);
 		stream.writeObject(broken);
 		stream.writeObject(t);
 		stream.writeObject(display);
+        stream.writeBoolean(jobStarted);
 	}
 
 	private void readObject(ObjectInputStream stream) throws IOException,
@@ -67,6 +78,7 @@ public class Job implements Serializable {
 		broken = (HashMap<String, ApplianceStateContainer>) stream.readObject();
 		t = (Timeframe) stream.readObject();
 		display = (String) stream.readObject();
+        jobStarted = stream.readBoolean();
 	}
 
 }
