@@ -47,7 +47,7 @@ public class CurrentJobActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
-                    intent.putExtra(Constants.JOB, (Job) job);
+                    intent.putExtra(Constants.JOB, job);
                     //Code of 2 is for Start Job
                     startActivityForResult(intent, 2);
                 }
