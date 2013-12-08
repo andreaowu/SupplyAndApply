@@ -16,6 +16,7 @@
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
+        android:text=""
         android:hint="Name of Appliance" />
     
     <EditText
@@ -28,6 +29,7 @@
         android:layout_marginRight="4dp"
         android:layout_marginBottom="4dp"
         android:layout_below="@id/appliance_name"
+        android:text=""
         android:hint="Number broken" />
     
     <TextView
@@ -76,22 +78,5 @@
         android:layout_below="@id/add_part_number"
         android:layout_centerHorizontal="true"
         android:text="Add Part" />
-    
-    <Button
-        android:id="@+id/addNewAppliance_ok_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/addParts_button"
-        android:text="Okay" />
-    
-    <Button
-        android:id="@+id/addNewAppliance_cancel_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		android:layout_toRightOf="@id/addNewAppliance_ok_button"
-		android:layout_below="@id/addParts_button"   
-        android:text="Cancel" />
     
 </RelativeLayout>

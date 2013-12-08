@@ -53,6 +53,10 @@ public class AddPartsAdapter extends ArrayAdapter<SupplyPart> {
 		this.number = number;
 	}
     
+	@Override
+	public void notifyDataSetChanged() {
+		
+	}
 }
 
 
