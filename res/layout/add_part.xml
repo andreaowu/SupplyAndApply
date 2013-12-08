@@ -9,8 +9,7 @@
                 android:background="@color/gray">
     
     <EditText
-        android:id="@+id/appliance_name"
-        android:inputType="textEmailAddress"
+        android:id="@+id/part_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -20,8 +19,8 @@
         android:hint="Name of Appliance" />
     
     <EditText
-        android:id="@+id/count_broken"
-        android:inputType="textEmailAddress"
+        android:id="@+id/part_number"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -30,44 +29,20 @@
         android:layout_marginBottom="4dp"
         android:hint="Number of appliances broken" />
     
-    <TextView
-        android:id="@+id/parts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/appliance_name"
-        android:text="Parts"
-		android:textColor="#000000"/>
-    
-    <ListView
-        android:id="@+id/parts_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_below="@id/parts"/>
-    
     <Button
-        android:id="@+id/addParts_button"
+        android:id="@+id/addPart_ok_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/parts_list"
-        android:layout_centerHorizontal="true"
-        android:text="Add Part" />
-    
-    <Button
-        android:id="@+id/addNewAppliance_ok_button"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/addParts_button"
+        android:layout_below="@id/part_number"
         android:text="Okay" />
     
     <Button
-        android:id="@+id/addNewAppliance_cancel_button"
+        android:id="@+id/addPart_cancel_button"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-		android:layout_toRightOf="@id/addNewAppliance_ok_button"        
+		android:layout_toRightOf="@id/addPart_ok_button"        
         android:text="Cancel" />
     
 </RelativeLayout>

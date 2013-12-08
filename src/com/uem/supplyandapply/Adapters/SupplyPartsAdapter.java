@@ -18,26 +18,26 @@ public class SupplyPartsAdapter extends ArrayAdapter<SupplyPart> {
 
     private List<SupplyPart> supplyParts;
 
-        public SupplyPartsAdapter(Context context, int resource, List<SupplyPart> supplyParts) {
-            super(context, resource, supplyParts);
-            this.supplyParts = supplyParts;
+    public SupplyPartsAdapter(Context context, int resource, List<SupplyPart> supplyParts) {
+        super(context, resource, supplyParts);
+        this.supplyParts = supplyParts;
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View v = convertView;
+        final SupplyPart currentContainer = supplyParts.get(position);
+        if (v == null) {
+            LayoutInflater inflater = LayoutInflater.from(getContext());
+            v = inflater.inflate(R.layout.parts_list_row, null, false);
         }
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View v = convertView;
-            final SupplyPart currentContainer = supplyParts.get(position);
-            if (v == null) {
-                LayoutInflater inflater = LayoutInflater.from(getContext());
-                v = inflater.inflate(R.layout.parts_list_row, null, false);
-            }
+        TextView partsName = (TextView) v.findViewById(R.id.parts_name);
+        TextView partsNumber = (TextView) v.findViewById(R.id.parts_number);
 
-            TextView partsName = (TextView) v.findViewById(R.id.parts_name);
-            TextView partsNumber = (TextView) v.findViewById(R.id.parts_number);
+        partsName.setText(currentContainer.getName());
+        partsNumber.setText(String.valueOf(currentContainer.getCount()));
 
-            partsName.setText(currentContainer.getName());
-            partsNumber.setText(String.valueOf(currentContainer.getCount()));
-
-            return v;
-        }
+        return v;
+    }
 }
