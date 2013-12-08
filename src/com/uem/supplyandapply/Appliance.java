@@ -82,6 +82,13 @@ public class Appliance implements Serializable {
 	public void setProgress(Progress progress) {
 		this.progress = progress;
 	}
+	
+	/**
+	 * @param get the progress 
+	 */
+	public Progress getProgress() {
+		return progress;
+	}
 
 	private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.writeObject(name);

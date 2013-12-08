@@ -99,8 +99,7 @@ public class CurrentJobActivity extends Activity {
 	private ArrayList<ApplianceStateContainer> getApplianceList() {
         ArrayList<ApplianceStateContainer> appliances = new ArrayList<ApplianceStateContainer>();
 		for (Map.Entry<String, ApplianceStateContainer> entry : broken.entrySet()) {
-			String key = entry.getKey();
-			appliances.add(new ApplianceStateContainer(new Appliance(key, broken.get(key).getAppliance().getDrawableResource()), broken.get(key).getCount()));
+			appliances.add(entry.getValue());
 		}
        
         return appliances;

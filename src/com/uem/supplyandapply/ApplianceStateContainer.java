@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -40,12 +41,14 @@ public class ApplianceStateContainer implements Serializable {
     }
 
     public int getNotFinished() {
-    	/*
+    	int notFinished = 0;
     	for (Appliance appliance : appliances) {
-    		//TODO-THIS
+    		if (appliance.getProgress() != Progress.COMPLETED) {
+    			notFinished++;
+    		}
     	}
-    	*/
-    	return count;
+    	
+    	return notFinished;
     }
     
     public ArrayList<SupplyPart> getInitialPartsList() {
@@ -57,8 +60,45 @@ public class ApplianceStateContainer implements Serializable {
     }
     
     public ArrayList<SupplyPart> getPartsList() {
-    	//TODO WRITE THIS
-    	return new ArrayList<SupplyPart>();
+    	HashMap<String, SupplyPart> parts = new HashMap<String, SupplyPart>();
+    	for (Appliance appliance : appliances) {
+    		for (SupplyPart supplyPart : appliance.getPartsList()) {
+    			if (parts.containsKey(supplyPart.getName())) {
+    				SupplyPart foundPart = parts.get(supplyPart.getName());
+    				int oldCount = foundPart.getCount();
+    				foundPart.setCount(oldCount + supplyPart.getCount());
+    			} else {
+    				parts.put(supplyPart.getName(), new SupplyPart(supplyPart.getCount(), supplyPart.getName()));
+    			}
+    		}
+    	}
+    	ArrayList<SupplyPart> result = new ArrayList<SupplyPart>();
+    	for (SupplyPart v : parts.values()) {
+    		result.add(v);
+    	}
+    	return result;
+    }
+    
+    public ArrayList<SupplyPart> getUnfinishedPartsList() {
+    	HashMap<String, SupplyPart> parts = new HashMap<String, SupplyPart>();
+    	for (Appliance appliance : appliances) {
+    		if (appliance.getProgress() != Progress.COMPLETED) {
+    			for (SupplyPart supplyPart : appliance.getPartsList()) {
+    				if (parts.containsKey(supplyPart.getName())) {
+    					SupplyPart foundPart = parts.get(supplyPart.getName());
+    					int oldCount = foundPart.getCount();
+    					foundPart.setCount(oldCount + supplyPart.getCount());
+    				} else {
+    					parts.put(supplyPart.getName(), new SupplyPart(supplyPart.getCount(), supplyPart.getName()));
+    				}
+    			}
+    		}
+    	}
+    	ArrayList<SupplyPart> result = new ArrayList<SupplyPart>();
+    	for (SupplyPart v : parts.values()) {
+    		result.add(v);
+    	}
+    	return result;
     }
 
     public void generateAppliances() {

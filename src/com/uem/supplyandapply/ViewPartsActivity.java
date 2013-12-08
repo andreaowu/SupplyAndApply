@@ -1,13 +1,19 @@
 package com.uem.supplyandapply;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+import com.uem.supplyandapply.Adapters.SupplyPartsAdapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
 public class ViewPartsActivity extends Activity {
+	private SupplyPartsAdapter adapter;
+	private ListView listView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +24,36 @@ public class ViewPartsActivity extends Activity {
 		
 		HashMap<String, ApplianceStateContainer> broken = job.getBroken();
 		
+		HashMap<String, SupplyPart> counts = new HashMap<String, SupplyPart>();
+		
+		for (ApplianceStateContainer applianceGroup : broken.values()) {
+			ArrayList<SupplyPart> groupParts = applianceGroup.getUnfinishedPartsList();
+			for (SupplyPart supplyPart : groupParts) {
+				if (counts.containsKey(supplyPart.getName())) {
+					SupplyPart foundPart = counts.get(supplyPart.getName());
+					int oldCount = foundPart.getCount();
+					foundPart.setCount(oldCount + supplyPart.getCount());
+				} else {
+					counts.put(supplyPart.getName(), new SupplyPart(supplyPart.getCount(), supplyPart.getName()));
+				}
+			}
+		}
+		
+		ArrayList<SupplyPart> result = new ArrayList<SupplyPart>();
+    	for (SupplyPart v : counts.values()) {
+    		result.add(v);
+    	}
+    	adapter = new SupplyPartsAdapter(getApplicationContext(), 0, result);
+    	listView = (ListView) findViewById(R.id.application_list);
+        listView.setAdapter(adapter);
+        Button okayButton = (Button) findViewById(R.id.okay);
+        okayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            	finish();
+            }
+        });
+		/*
         for (Map.Entry<String, ApplianceStateContainer> entry : broken.entrySet()) {
                 String key = entry.getKey();
                 TextView partsName = (TextView) findViewById(R.id.parts_name);
@@ -25,6 +61,7 @@ public class ViewPartsActivity extends Activity {
                 partsName.setText(key);
                 partsNumber.setText(entry.getValue().getPartsList().toString()); // change this
         }
+        */
         
 	}
 }
