@@ -7,12 +7,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.uem.supplyandapply.Adapters.AddPartsAdapter;
 import com.uem.supplyandapply.Adapters.ApplianceAdapter;
 
 /**
@@ -22,8 +26,10 @@ import com.uem.supplyandapply.Adapters.ApplianceAdapter;
  */
 public class AddJobActivity extends Activity {
 
-    private ApplianceAdapter adapter;
-    private ListView listView;
+    private ApplianceAdapter adapter_appliance;
+    private AddPartsAdapter adapter_parts;
+    private ListView listView_applist;
+    private ListView listView_partsList;
     private ArrayList<ApplianceStateContainer> applianceList;
     private EditText addressText;
     private EditText nameText;
@@ -31,12 +37,17 @@ public class AddJobActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_job_appliances_layout);
         applianceList = getDefaultApplianceList();
-        adapter = new ApplianceAdapter(getApplicationContext(), 0, applianceList);
+        doAll();
+    }
+    
+    protected void doAll() {
+    	setContentView(R.layout.add_job_appliances_layout);
+        adapter_appliance = new ApplianceAdapter(getApplicationContext(), 0, applianceList);
+        adapter_parts = new AddPartsAdapter(getApplicationContext(), 0);
 
-        listView = (ListView) findViewById(R.id.application_list);
-        listView.setAdapter(adapter);
+        listView_applist = (ListView) findViewById(R.id.application_list);
+        listView_applist.setAdapter(adapter_appliance);
 
         nameText = (EditText) findViewById(R.id.input_name);
         addressText = (EditText) findViewById(R.id.input_address);
@@ -64,10 +75,12 @@ public class AddJobActivity extends Activity {
             }
         });
         
+        
         Button addApplianceButton = (Button) findViewById(R.id.addAppliance_button);
         addApplianceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setContentView(R.layout.add_new_appliance_dialog);
             	AlertDialog.Builder builder = new AlertDialog.Builder(AddJobActivity.this);
                 // Get the layout inflater
                 LayoutInflater inflater = AddJobActivity.this.getLayoutInflater();
@@ -75,6 +88,112 @@ public class AddJobActivity extends Activity {
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
                 builder.setView(inflater.inflate(R.layout.add_new_appliance_dialog, null));
+                
+                final AlertDialog alertDialog = builder.create();
+                alertDialog.setContentView(R.layout.add_new_appliance_dialog);
+                
+                listView_partsList = (ListView) findViewById(R.id.parts_list);
+                listView_partsList.setAdapter(adapter_parts);
+                
+                Button addParts = (Button) alertDialog.findViewById(R.id.addParts_button);
+                addParts.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						final EditText partName = (EditText) findViewById(R.id.add_part_name);
+						partName.addTextChangedListener(new TextWatcher() {
+				            
+				        	@Override
+				            public void afterTextChanged(Editable editable) {
+				                String name = editable.toString();
+				                adapter_parts.setName(name);
+				            }
+
+							@Override
+							public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+							}
+
+							@Override
+							public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+							}
+				        });
+						
+						final EditText numberBroken = (EditText) findViewById(R.id.add_part_number);;
+		                numberBroken.addTextChangedListener(new TextWatcher() {
+				            
+				        	@Override
+				            public void afterTextChanged(Editable editable) {
+				                String number = editable.toString();
+				                adapter_parts.setName(number);
+				            }
+
+							@Override
+							public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+							}
+
+							@Override
+							public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+							}
+				        });
+						
+		                ((ApplianceAdapter) listView_partsList.getAdapter()).notifyDataSetChanged();
+					}
+                	
+                });
+                
+				builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						final EditText partName = (EditText) findViewById(R.id.appliance_name);
+						partName.addTextChangedListener(new TextWatcher() {
+				            
+				        	@Override
+				            public void afterTextChanged(Editable editable) {
+				                String name = editable.toString();
+				                final Appliance app = new Appliance(name, R.drawable.question);
+				                
+				                final EditText numberBroken = (EditText) findViewById(R.id.count_broken);
+				                numberBroken.addTextChangedListener(new TextWatcher() {
+						            
+						        	@Override
+						            public void afterTextChanged(Editable editable) {
+						                String number = editable.toString();
+						                ApplianceStateContainer appCont = new ApplianceStateContainer(app, Integer.parseInt(number));
+						                applianceList.add(appCont);
+						            }
+
+									@Override
+									public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+									}
+
+									@Override
+									public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+									}
+						        });
+				            }
+
+							@Override
+							public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+							}
+
+							@Override
+							public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+							}
+				        });
+						
+		                ((ApplianceAdapter) listView_applist.getAdapter()).notifyDataSetChanged();
+		                dialog.dismiss();
+		                doAll();
+					}
+				});
+				
+				builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+						doAll();
+					}
+				});
                 builder.show();
             }
         });
