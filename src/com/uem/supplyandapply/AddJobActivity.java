@@ -73,8 +73,8 @@ public class AddJobActivity extends Activity {
         addApplianceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            	listView_partsList = (ListView) findViewById(R.id.parts_list);
-                listView_partsList.setAdapter(adapter_parts);
+            	//listView_partsList = (ListView) findViewById(R.id.parts_list);
+                //listView_partsList.setAdapter(adapter_parts);
             	
                 setContentView(R.layout.add_new_appliance_dialog);
             	AlertDialog.Builder builder = new AlertDialog.Builder(AddJobActivity.this);
@@ -84,11 +84,6 @@ public class AddJobActivity extends Activity {
                 // Inflate and set the layout for the dialog
                 // Pass null as the parent view because its going in the dialog layout
                 builder.setView(inflater.inflate(R.layout.add_new_appliance_dialog, null));
-                
-                final EditText partName = (EditText) findViewById(R.id.appliance_name);
-                final EditText numberBroken = (EditText) findViewById(R.id.count_broken);
-                Appliance app = new Appliance(partName.toString(), R.drawable.question);
-                ApplianceStateContainer container = new ApplianceStateContainer(app, Integer.parseInt(numberBroken.toString()));
                 
                 final AlertDialog alertDialog = builder.create();
                 
@@ -142,6 +137,10 @@ public class AddJobActivity extends Activity {
 
 					@Override
 					public void onClick(View v) {
+						final EditText partName = (EditText) findViewById(R.id.appliance_name);
+		                final EditText numberBroken = (EditText) findViewById(R.id.count_broken);
+		                Appliance app = new Appliance(partName.toString(), R.drawable.question);
+		                
 						
 					}
 					
