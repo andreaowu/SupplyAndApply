@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,9 +75,12 @@ public class AddJobActivity extends Activity {
                 startActivityForResult(i, 1);
             }
         });
-        
-        
-        Button addApplianceButton = (Button) findViewById(R.id.addAppliance_button);
+
+
+        View footerView = ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+                .inflate(R.layout.add_application_layout, null, false);
+
+        Button addApplianceButton = (Button) footerView.findViewById(R.id.addAppliance_button);
         addApplianceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,15 +192,17 @@ public class AddJobActivity extends Activity {
 				});
 				
 				builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-						doAll();
-					}
-				});
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        doAll();
+                    }
+                });
                 builder.show();
             }
         });
+
+        listView_applist.addFooterView(footerView);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.uem.supplyandapply;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import com.uem.supplyandapply.Adapters.SupplyPartsAdapter;
 
@@ -38,11 +39,18 @@ public class ViewPartsActivity extends Activity {
 			}
 		}
 		
-		ArrayList<SupplyPart> result = new ArrayList<SupplyPart>();
+		ArrayList<SupplyPartComparable> result = new ArrayList<SupplyPartComparable>();
+		ArrayList<SupplyPart> resultList = new ArrayList<SupplyPart>();
     	for (SupplyPart v : counts.values()) {
-    		result.add(v);
+    		result.add(new SupplyPartComparable(v.getCount(), v.getName()));
     	}
-    	adapter = new SupplyPartsAdapter(getApplicationContext(), 0, result);
+    	Collections.sort(result);
+    	for (SupplyPartComparable spc : result) {
+    		resultList.add(new SupplyPart(spc.getCount(), spc.getName()));
+    	}
+    	
+    	
+    	adapter = new SupplyPartsAdapter(getApplicationContext(), 0, resultList);
     	listView = (ListView) findViewById(R.id.application_list);
         listView.setAdapter(adapter);
         Button okayButton = (Button) findViewById(R.id.okay);
