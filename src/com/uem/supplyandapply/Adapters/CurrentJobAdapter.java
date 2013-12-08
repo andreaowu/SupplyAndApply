@@ -53,7 +53,7 @@ public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
         });
         
         TextView ratio = (TextView) v.findViewById(R.id.ratio_textView);
-        String ratioText = Integer.toString(currentContainer.getNotFinished());
+        String ratioText = Integer.toString(currentContainer.getCount() - currentContainer.getNotFinished());
         ratioText += "/";
         ratioText += Integer.toString(currentContainer.getCount());
         ratio.setText(ratioText);

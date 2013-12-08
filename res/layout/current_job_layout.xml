@@ -66,4 +66,17 @@
         android:numColumns="3" >
     </GridView>
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/progress_textview"
+        android:layout_marginLeft="100dp"
+        android:maxHeight="10dip"
+        android:minHeight="10dip"
+        android:maxWidth="200dp"
+        android:minWidth="200dp"
+        android:progressDrawable="@drawable/greenprogress" />
+
 </RelativeLayout>
