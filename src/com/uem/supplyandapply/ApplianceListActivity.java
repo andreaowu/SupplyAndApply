@@ -14,6 +14,7 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
+import android.widget.ListView;
 import android.widget.Toast;
  
 public class ApplianceListActivity extends Activity {
@@ -81,6 +82,7 @@ public class ApplianceListActivity extends Activity {
         });
  
         // Listview on child click listener
+        //This is where it starts a new intent
         expListView.setOnChildClickListener(new OnChildClickListener() {
  
             @Override
@@ -95,6 +97,20 @@ public class ApplianceListActivity extends Activity {
                                         listDataHeader.get(groupPosition)).get(
                                         childPosition), Toast.LENGTH_SHORT)
                         .show();
+                
+                Intent intent = new Intent(getApplicationContext(), ApplianceDetailActivity.class);
+                ApplianceStateContainer app_con = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
+            	ArrayList <Appliance> app = app_con.getAppliances();
+            	
+            	for (Appliance a: app){
+                	
+                	if (a.getName().equals(listDataChild.get(
+                            listDataHeader.get(groupPosition)).get(
+                            childPosition))){
+                		intent.putExtra(Constants.APPLIANCE, ((Appliance)a));
+                	}
+                }
+                startActivityForResult(intent, 1);
                 return false;
             }
         });
@@ -102,7 +118,8 @@ public class ApplianceListActivity extends Activity {
        
         
     }
- 
+    
+
     /*
      * Preparing the list data
      */
@@ -144,26 +161,7 @@ public class ApplianceListActivity extends Activity {
     	}
       
         
-    	//clicking list items takes them to the ApplianceDetailActivity
-    	
-//        ListView current_lv = (ListView) findViewById(R.id.current);
-//        current_lv.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//				Intent intent = new Intent(getApplicationContext(), CurrentJobActivity.class);
-//				String displayed = (String) arg0.getItemAtPosition(arg2);
-//				String name = displayed.substring(0, displayed.indexOf(":"));
-//				String address = displayed.substring(displayed.indexOf(":") + 2);
-//				for (int i = 0; i < app_con_list.size(); i++) {
-//					if (app_con_list.get(i).getAppliance().getName().equals(name) && app_con_list.get(i).getC().getAddress().equals(address)) {
-//						intent.putExtra(Constants.APPLIANCE, ((ApplianceStateContainer) app_con_list).getAppliance());
-//						break;
-//					}
-//				}
-//                startActivityForResult(intent, 1);
-//			}
-//        });
+
         listDataChild.put(listDataHeader.get(0), notStarted); 
         listDataChild.put(listDataHeader.get(1), inProgress);
         listDataChild.put(listDataHeader.get(2), finished);
