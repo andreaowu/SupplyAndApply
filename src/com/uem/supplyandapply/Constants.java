@@ -16,4 +16,5 @@ public class Constants {
     public static final String ADDRESS="address";
     public static final String NAME="name";
 	public static final String APPLIANCE = "appliance";
+    public static final String SEENJOBSPAGE = "seenjobspage";
 }
