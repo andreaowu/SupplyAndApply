@@ -13,7 +13,8 @@
         android:id="@+id/customer_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Customer" />
+        android:text="Customer" 
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/address_textview"
@@ -21,17 +22,39 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/customer_textView"
         android:layout_below="@+id/customer_textView"
-        android:layout_marginTop="10dp"
-        android:text="Address" />
+        android:layout_marginTop="5dp"
+        android:text="Address" 
+        android:textSize="15sp"/>
+    <RelativeLayout
+            android:id="@+id/progress_container"
+            android:layout_height="30dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/address_textview"
+            android:background="#CCCCCC">
 
-    <TextView
+    	<TextView
         android:id="@+id/progress_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/address_textview"
-        android:layout_below="@+id/address_textview"
-        android:layout_marginTop="10dp"
-        android:text="Progress" />
+        
+        android:layout_marginTop="5dp"
+        android:text="Progress" 
+        android:textSize="15sp"/>
+    	<ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/progress_textview"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="100dp"
+        android:maxHeight="10dip"
+        android:minHeight="10dip"
+        android:maxWidth="170dp"
+        android:minWidth="170dp"
+        android:progressDrawable="@drawable/greenprogress" />
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/removeJob"
@@ -45,6 +68,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
         android:textSize="8dp"
+        android:background = "@color/orange"
         android:text="x" />
 
     <Button
@@ -52,9 +76,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/progress_textview"
+        android:layout_below="@+id/progress_container"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
+        android:background = "@color/orange"
         android:text="View Parts" />
 
     <Button
@@ -62,32 +87,25 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/progress_textview"
+            android:layout_below="@+id/progress_container"
             android:layout_toRightOf="@id/viewParts_button"
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:text="Start Job!"
+            android:background = "@color/orange"
             android:visibility="gone"/>
 
     <GridView
         android:id="@+id/appliances_gridView"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_alignLeft="@+id/progress_textview"
+        android:layout_marginTop="10dp"
+        android:layout_alignLeft="@+id/address_textview"
         android:layout_below="@+id/viewParts_button"
+        android:background="#666666"
         android:numColumns="3" >
     </GridView>
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/progress_textview"
-        android:layout_marginLeft="100dp"
-        android:maxHeight="10dip"
-        android:minHeight="10dip"
-        android:maxWidth="200dp"
-        android:minWidth="200dp"
-        android:progressDrawable="@drawable/greenprogress" />
+    
 
 </RelativeLayout>

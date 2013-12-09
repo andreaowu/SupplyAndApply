@@ -27,10 +27,10 @@ import com.uem.supplyandapply.Adapters.ApplianceAdapter;
  */
 public class AddJobActivity extends Activity {
 
-    private ApplianceAdapter adapter_appliance;
-    private AddPartsAdapter adapter_parts;
-    private ListView listView_applist;
-    private ListView listView_partsList;
+    private ApplianceAdapter applianceAdapter;
+    private AddPartsAdapter partsAdapter;
+    private ListView appList;
+    private ListView partsList;
     private ArrayList<ApplianceStateContainer> applianceList;
     private EditText addressText;
     private EditText nameText;
@@ -39,16 +39,18 @@ public class AddJobActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         applianceList = getDefaultApplianceList();
+        System.out.println("appliance list count on create: " + applianceList.size());
         doAll();
     }
     
     protected void doAll() {
+    	System.out.println("appliance list count doAll(): " + applianceList.size());
     	setContentView(R.layout.add_job_appliances_layout);
-        adapter_appliance = new ApplianceAdapter(getApplicationContext(), 0, applianceList);
-        adapter_parts = new AddPartsAdapter(getApplicationContext(), 0);
+        applianceAdapter = new ApplianceAdapter(getApplicationContext(), 0, applianceList);
+        partsAdapter = new AddPartsAdapter(getApplicationContext(), 0);
 
-        listView_applist = (ListView) findViewById(R.id.application_list);
-        listView_applist.setAdapter(adapter_appliance);
+        appList = (ListView) findViewById(R.id.application_list);
+        appList.setAdapter(applianceAdapter);
 
         nameText = (EditText) findViewById(R.id.input_name);
         addressText = (EditText) findViewById(R.id.input_address);
@@ -96,8 +98,8 @@ public class AddJobActivity extends Activity {
                 final AlertDialog alertDialog = builder.create();
                 alertDialog.setContentView(R.layout.add_new_appliance_dialog);
                 
-                listView_partsList = (ListView) findViewById(R.id.parts_list);
-                listView_partsList.setAdapter(adapter_parts);
+                partsList = (ListView) findViewById(R.id.parts_list);
+                partsList.setAdapter(partsAdapter);
                 
                 Button addParts = (Button) alertDialog.findViewById(R.id.addParts_button);
                 addParts.setOnClickListener(new OnClickListener() {
@@ -110,7 +112,7 @@ public class AddJobActivity extends Activity {
 				        	@Override
 				            public void afterTextChanged(Editable editable) {
 				                String name = editable.toString();
-				                adapter_parts.setName(name);
+				                partsAdapter.setName(name);
 				            }
 
 							@Override
@@ -128,7 +130,7 @@ public class AddJobActivity extends Activity {
 				        	@Override
 				            public void afterTextChanged(Editable editable) {
 				                String number = editable.toString();
-				                adapter_parts.setName(number);
+				                partsAdapter.setName(number);
 				            }
 
 							@Override
@@ -140,7 +142,7 @@ public class AddJobActivity extends Activity {
 							}
 				        });
 						
-		                ((ApplianceAdapter) listView_partsList.getAdapter()).notifyDataSetChanged();
+		                ((ApplianceAdapter) partsList.getAdapter()).notifyDataSetChanged();
 					}
                 	
                 });
@@ -163,7 +165,9 @@ public class AddJobActivity extends Activity {
 						            public void afterTextChanged(Editable editable) {
 						                String number = editable.toString();
 						                ApplianceStateContainer appCont = new ApplianceStateContainer(app, Integer.parseInt(number));
+						                System.out.println("appliance list count before: " + applianceList.size());
 						                applianceList.add(appCont);
+						                System.out.println("appliance list count after: " + applianceList.size());
 						            }
 
 									@Override
@@ -185,7 +189,7 @@ public class AddJobActivity extends Activity {
 							}
 				        });
 						
-		                ((ApplianceAdapter) listView_applist.getAdapter()).notifyDataSetChanged();
+		                ((ApplianceAdapter) appList.getAdapter()).notifyDataSetChanged();
 		                dialog.dismiss();
 		                doAll();
 					}
@@ -202,7 +206,7 @@ public class AddJobActivity extends Activity {
             }
         });
 
-        listView_applist.addFooterView(footerView);
+        appList.addFooterView(footerView);
     }
 
     @Override
