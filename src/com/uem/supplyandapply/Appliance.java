@@ -33,6 +33,7 @@ public class Appliance implements Serializable {
     	this.name = name;
     	this.drawableResource = drawableResource;
     	this.partsList = partsList;
+        progress = Progress.NOT_STARTED;
     }
     
     public String getName() {
@@ -96,12 +97,14 @@ public class Appliance implements Serializable {
         stream.writeObject(name);
         stream.writeInt(drawableResource);
         stream.writeObject(partsList);
+        stream.writeObject(progress);
     }
 
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
         name = (String) stream.readObject();
         drawableResource = stream.readInt();
         partsList = (ArrayList<SupplyPart>) stream.readObject();
+        progress = (Progress) stream.readObject();
     }
 
 

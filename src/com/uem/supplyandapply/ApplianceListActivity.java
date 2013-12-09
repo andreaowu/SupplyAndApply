@@ -149,10 +149,10 @@ public class ApplianceListActivity extends Activity {
     	ArrayList <Appliance> app = app_con.getAppliances();
     	
     	for (Appliance a : app){
-    		if (a.getProgress().equals("NOT_STARTED")){
+    		if (a.getProgress().equals(Progress.NOT_STARTED)){
     			notStarted.add(a.getName());
     		}
-    		if (a.getProgress().equals("IN_PROGRESS")){
+    		else if (a.getProgress().equals(Progress.IN_PROGRESS)){
     			inProgress.add(a.getName());
     		}
     		else{
