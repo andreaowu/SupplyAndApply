@@ -2,6 +2,7 @@ package com.uem.supplyandapply;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -24,21 +25,42 @@ public class ApplianceDetailActivity extends Activity {
 		        R.array.progress_select, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
-		spinner.setPrompt(appliance.getProgress().toString());
-		
+		if (appliance.getProgress() != null){
+			spinner.setPrompt(appliance.getProgress().toString());
+		}
+		else{
+			spinner.setPrompt("Not Started");
+		}
 		//image of appliance
-		ImageView image = (ImageView)findViewById(R.id.image_of_appliance);
-		image.setImageResource(appliance.getDrawableResource());
+//		ImageView image = (ImageView)findViewById(R.id.image_of_appliance);
+//		
+//		Boolean fileFound = true;
+//		int d = 0;
+//		d = appliance.getDrawableResource();
+//		
+//		if(d!=0){
+//			image.setImageResource(appliance.getDrawableResource());
+//		}
+//
+//		
+//		if (appliance.getDrawableResource() != 0){
+//			
+//		}
 		
 		//the name of appliance
 		TextView name = (TextView) findViewById(R.id.name_of_appliance); 
-		name.setText(appliance.getName());
+		if (appliance.getName()!= null){
+			name.setText(appliance.getName());
+		}
+		
 		
 		//putting in the parts estimation
 		
 		//issue
 		TextView issues = (TextView) findViewById(R.id.issues_textbox); 
-		name.setText(appliance.getIssues());
+		if (appliance.getIssues() != null){
+			name.setText(appliance.getIssues());
+		}
 		
 	}
 
