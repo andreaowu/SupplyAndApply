@@ -14,7 +14,6 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.ListView;
 import android.widget.Toast;
  
 public class ApplianceListActivity extends Activity {
@@ -107,7 +106,7 @@ public class ApplianceListActivity extends Activity {
                 	if (a.getName().equals(listDataChild.get(
                             listDataHeader.get(groupPosition)).get(
                             childPosition))){
-                		intent.putExtra(Constants.APPLIANCE, ((Appliance)a));
+                		intent.putExtra(Constants.APPLIANCE, (a));
                 	}
                 }
                 startActivityForResult(intent, 1);

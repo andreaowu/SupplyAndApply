@@ -2,7 +2,6 @@ package com.uem.supplyandapply;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -33,17 +32,17 @@ public class ApplianceDetailActivity extends Activity {
 			spinner.setPrompt("Not Started");
 		}
 		//image of appliance
-//		ImageView image = (ImageView)findViewById(R.id.image_of_appliance);
-//		
-//		Boolean fileFound = true;
-//		int d = 0;
-//		d = appliance.getDrawableResource();
-//		
-//		if(d!=0){
-//			image.setImageResource(appliance.getDrawableResource());
-//		}
-//
-//		
+		ImageView image = (ImageView)findViewById(R.id.image_of_appliance);
+		
+		Boolean fileFound = true;
+		int d = 0;
+		d = appliance.getDrawableResource();
+		
+		if(d!=0){
+			image.setImageResource(appliance.getDrawableResource());
+		}
+
+		
 //		if (appliance.getDrawableResource() != 0){
 //			
 //		}
