@@ -111,4 +111,8 @@ public class Appliance implements Serializable {
 	public CharSequence getIssues() {
 		return issues;
 	}
+	
+	public void setIssues(CharSequence issues){
+		this.issues = (String) issues;
+	}
 }
