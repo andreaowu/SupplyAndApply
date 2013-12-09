@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 public class ApplianceDetailActivity extends Activity {
-	Spinner spinner = (Spinner) findViewById(R.id.progress_spinner);
+	Spinner spinner;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +24,8 @@ public class ApplianceDetailActivity extends Activity {
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
 		        R.array.progress_select, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
+        spinner = (Spinner) findViewById(R.id.progress_spinner);
+        spinner.setAdapter(adapter);
 		if (appliance.getProgress() != null){
 			spinner.setPrompt(appliance.getProgress().toString());
 		}
