@@ -183,9 +183,7 @@ public class AddJobActivity extends Activity {
 						            public void afterTextChanged(Editable editable) {
 						                String number = editable.toString();
 						                ApplianceStateContainer appCont = new ApplianceStateContainer(app, Integer.parseInt(number));
-						                System.out.println("appliance list count before: " + applianceList.size());
 						                applianceList.add(appCont);
-						                System.out.println("appliance list count after: " + applianceList.size());
 						            }
 
 									@Override
@@ -250,8 +248,15 @@ public class AddJobActivity extends Activity {
             Appliance appliance = applianceStateContainer.getAppliance();
             String applianceName = appliance.getName();
             ArrayList<SupplyPart> supplyParts = new ArrayList<SupplyPart>();
-            supplyParts.add(new SupplyPart(1, applianceName + " Part1"));
-            supplyParts.add(new SupplyPart(2, applianceName + " Part2"));
+            if (applianceName.equals("Toilet")) {
+            	supplyParts.add(new SupplyPart(6, "washers"));
+            	supplyParts.add(new SupplyPart(3, "5-cm pipes"));
+            } else if (applianceName.equals("Sink")) {
+            	supplyParts.add(new SupplyPart(8, "2-cm screws"));
+            } else if (applianceName.equals("Shower")) {
+            	supplyParts.add(new SupplyPart(1, "showerhead"));
+            	supplyParts.add(new SupplyPart(2, "4-inch tubes"));
+            }
             appliance.setPartsList(supplyParts);
             applianceStateContainer.setAppliance(appliance);
         }
