@@ -34,7 +34,7 @@
          android:background = "@color/orange"
          android:layout_margin="10dp"
          android:layout_alignParentBottom="true"
-         android:text="Next"/>
+         android:text="Parts Estimation"/>
 
     <ListView
         android:id="@+id/application_list"

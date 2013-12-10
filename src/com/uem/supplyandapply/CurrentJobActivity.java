@@ -8,7 +8,9 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -113,6 +115,25 @@ public class CurrentJobActivity extends Activity {
 			}
         	
         });
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        if (!seenJobsPage) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("This is the Job Screen. If you haven't started working on " +
+            		"the job, press 'Start Job' to customize the details of appliances. The icons " +
+            		"indicates the an appliance group in this job. Pressing on ths icon takes you to a detailed " +
+            		"view of the appliances in that group. Pressing 'View Part' to view how many parts " +
+            		"are left to complete the job. You can delete this job by pressing the 'X' on the " +
+            		"top right when you are done with it.")
+                    .setCancelable(false)
+                    .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 	}
 
 	@Override
