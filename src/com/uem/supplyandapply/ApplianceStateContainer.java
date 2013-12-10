@@ -61,8 +61,10 @@ public class ApplianceStateContainer implements Serializable {
     
     public ArrayList<SupplyPart> getInitialPartsList() {
         ArrayList<SupplyPart> partsList = appliance.getPartsList();
-        for (SupplyPart supplyPart : partsList) {
-            supplyPart.setCount(supplyPart.getCount() * count);
+        if (!partsList.isEmpty()) {
+            for (SupplyPart supplyPart : partsList) {
+                supplyPart.setCount(supplyPart.getCount() * count);
+            }
         }
         return partsList;
     }
