@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -40,10 +44,6 @@ public class JobsListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.jobs_list_layout);
 		
-		//===================Just to test out CurrentJobActivity==========================================
-		//Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
-        //startActivity(i);
-        //=============================================================================
 		
         Button addJobButton = (Button) findViewById(R.id.addJobButton);
         addJobButton.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +104,23 @@ public class JobsListActivity extends Activity {
 				}
 			}
 		}
-	}
+
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        if (!seenJobsPage) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Welcome to Supply and Apply! This is the main screen where you will see all your current and past jobs. " +
+            		"Clicking on a job will take you to a more detailed view of that job.")
+                    .setCancelable(false)
+                    .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

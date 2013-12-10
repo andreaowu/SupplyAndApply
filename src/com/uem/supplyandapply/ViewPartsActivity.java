@@ -6,7 +6,11 @@ import java.util.HashMap;
 import com.uem.supplyandapply.Adapters.SupplyPartsAdapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -60,15 +64,21 @@ public class ViewPartsActivity extends Activity {
             	finish();
             }
         });
-		/*
-        for (Map.Entry<String, ApplianceStateContainer> entry : broken.entrySet()) {
-                String key = entry.getKey();
-                TextView partsName = (TextView) findViewById(R.id.parts_name);
-                TextView partsNumber = (TextView) findViewById(R.id.parts_number);
-                partsName.setText(key);
-                partsNumber.setText(entry.getValue().getPartsList().toString()); // change this
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        if (!seenJobsPage) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Here are the parts left. You can gauge your supply with these.")
+                    .setCancelable(false)
+                    .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
-        */
+		
         
 	}
 }

@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
@@ -81,6 +85,7 @@ public class ApplianceListActivity extends Activity {
         });
  
         // Listview on child click listener
+        //This is where it starts a new intent
         expListView.setOnChildClickListener(new OnChildClickListener() {
  
             @Override
@@ -95,14 +100,46 @@ public class ApplianceListActivity extends Activity {
                                         listDataHeader.get(groupPosition)).get(
                                         childPosition), Toast.LENGTH_SHORT)
                         .show();
+                
+                Intent intent = new Intent(getApplicationContext(), ApplianceDetailActivity.class);
+                ApplianceStateContainer app_con = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
+            	ArrayList <Appliance> app = app_con.getAppliances();
+            	
+            	for (Appliance a: app){
+                	
+                	if (a.getName().equals(listDataChild.get(
+                            listDataHeader.get(groupPosition)).get(
+                            childPosition))){
+                		intent.putExtra(Constants.APPLIANCE, (a));
+                	}
+                }
+                startActivityForResult(intent, 1);
                 return false;
             }
         });
         
+        
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        if (!seenJobsPage) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Here are all the appliances of this type. You can customize " +
+            		"an individual appliance by clicking on it.")
+                    .setCancelable(false)
+                    .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
+        
        
         
     }
- 
+    
+
     /*
      * Preparing the list data
      */
@@ -132,10 +169,10 @@ public class ApplianceListActivity extends Activity {
     	ArrayList <Appliance> app = app_con.getAppliances();
     	
     	for (Appliance a : app){
-    		if (a.getProgress().equals("NOT_STARTED")){
+    		if (a.getProgress().equals(Progress.NOT_STARTED)){
     			notStarted.add(a.getName());
     		}
-    		if (a.getProgress().equals("IN_PROGRESS")){
+    		else if (a.getProgress().equals(Progress.IN_PROGRESS)){
     			inProgress.add(a.getName());
     		}
     		else{
@@ -144,26 +181,7 @@ public class ApplianceListActivity extends Activity {
     	}
       
         
-    	//clicking list items takes them to the ApplianceDetailActivity
-    	
-//        ListView current_lv = (ListView) findViewById(R.id.current);
-//        current_lv.setOnItemClickListener(new OnItemClickListener() {
-//
-//			@Override
-//			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-//				Intent intent = new Intent(getApplicationContext(), CurrentJobActivity.class);
-//				String displayed = (String) arg0.getItemAtPosition(arg2);
-//				String name = displayed.substring(0, displayed.indexOf(":"));
-//				String address = displayed.substring(displayed.indexOf(":") + 2);
-//				for (int i = 0; i < app_con_list.size(); i++) {
-//					if (app_con_list.get(i).getAppliance().getName().equals(name) && app_con_list.get(i).getC().getAddress().equals(address)) {
-//						intent.putExtra(Constants.APPLIANCE, ((ApplianceStateContainer) app_con_list).getAppliance());
-//						break;
-//					}
-//				}
-//                startActivityForResult(intent, 1);
-//			}
-//        });
+
         listDataChild.put(listDataHeader.get(0), notStarted); 
         listDataChild.put(listDataHeader.get(1), inProgress);
         listDataChild.put(listDataHeader.get(2), finished);
