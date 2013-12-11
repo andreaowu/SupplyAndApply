@@ -92,6 +92,8 @@ public class JobsListActivity extends Activity {
             sink.generateAppliances();
 	        hash.put("Sink", sink);
 	        Job j2 = new Job(c2, hash);
+            j2.calculatePartsNeeded();
+            j2.initializePartsBrought();
 	        current.add(j2);
 		}
 		

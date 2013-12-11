@@ -25,8 +25,8 @@
                 android:id="@+id/parts_number"
                 android:layout_height="fill_parent"
                 android:layout_width="wrap_content"
-                android:text="#Parts Left"
-                android:textSize="20sp"
+                android:text="# Left / # Needed"
+                android:textSize="18sp"
                 android:layout_alignParentRight="true"
                 android:gravity="center_vertical"
                 android:layout_marginRight="10dp"/>
@@ -36,7 +36,7 @@
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
                 android:text="Part Name"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:layout_toLeftOf="@id/parts_number"
                 android:gravity="center_vertical"
                 android:layout_marginLeft="10dp"/>
@@ -60,7 +60,7 @@
     </RelativeLayout>
 
     <ListView
-            android:id="@+id/application_list"
+            android:id="@+id/parts_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#666666"

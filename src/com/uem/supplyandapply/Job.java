@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Job implements Serializable {
@@ -19,6 +20,10 @@ public class Job implements Serializable {
     // Whether or not the Job has been started or not
     private boolean jobStarted;
 
+    private HashMap<String, SupplyPart> supplyPartsBrought;
+
+    private HashMap<String, SupplyPart> supplyPartsNeeded;
+
 
 	Job(Customer c, HashMap<String, ApplianceStateContainer> broken) {
 		this.customer = c;
@@ -26,6 +31,8 @@ public class Job implements Serializable {
 		t = Timeframe.CURRENT;
 		this.display = c.getName() + ": " + c.getAddress();
         this.jobStarted = false;
+        this.supplyPartsBrought = new HashMap<String, SupplyPart>();
+        this.supplyPartsNeeded = new HashMap<String, SupplyPart>();
 	}
 
 	/**
@@ -68,12 +75,52 @@ public class Job implements Serializable {
         this.jobStarted = jobStarted;
     }
 
+    public HashMap<String, SupplyPart> getSupplyPartsBrought() {
+        return supplyPartsBrought;
+    }
+
+    public void setSupplyPartsBrought(HashMap<String, SupplyPart> supplyPartsBrought) {
+        this.supplyPartsBrought = supplyPartsBrought;
+    }
+
+    public HashMap<String, SupplyPart> getSupplyPartsNeeded() {
+        return supplyPartsNeeded;
+    }
+
+    public void setSupplyPartsNeeded(HashMap<String, SupplyPart> supplyPartsNeeded) {
+        this.supplyPartsNeeded = supplyPartsNeeded;
+    }
+
+    public void calculatePartsNeeded() {
+        supplyPartsNeeded = new HashMap<String, SupplyPart>();
+        for (ApplianceStateContainer applianceStateContainer : broken.values()) {
+            for (Appliance appliance : applianceStateContainer.getAppliances()) {
+                for (SupplyPart supplyPart : appliance.getPartsList()) {
+                    supplyPartsNeeded.put(supplyPart.getName(), supplyPart);
+                }
+            }
+        }
+    }
+
+    public void initializePartsBrought() {
+        supplyPartsBrought = new HashMap<String, SupplyPart>();
+        for (ApplianceStateContainer applianceStateContainer : broken.values()) {
+            for (Appliance appliance : applianceStateContainer.getAppliances()) {
+                for (SupplyPart supplyPart : appliance.getPartsList()) {
+                    supplyPartsBrought.put(supplyPart.getName(), supplyPart);
+                }
+            }
+        }
+    }
+
     private void writeObject(ObjectOutputStream stream) throws IOException {
 		stream.writeObject(customer);
 		stream.writeObject(broken);
 		stream.writeObject(t);
 		stream.writeObject(display);
         stream.writeBoolean(jobStarted);
+        stream.writeObject(supplyPartsBrought);
+        stream.writeObject(supplyPartsNeeded);
 	}
 
 	private void readObject(ObjectInputStream stream) throws IOException,
@@ -83,6 +130,8 @@ public class Job implements Serializable {
 		t = (Timeframe) stream.readObject();
 		display = (String) stream.readObject();
         jobStarted = stream.readBoolean();
+        supplyPartsBrought = (HashMap<String, SupplyPart>) stream.readObject();
+        supplyPartsNeeded = (HashMap<String, SupplyPart>) stream.readObject();
 	}
 
 }
