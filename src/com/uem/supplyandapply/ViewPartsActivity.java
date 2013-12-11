@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-import android.content.Context;
+import android.content.*;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.widget.AdapterView;
@@ -14,8 +14,6 @@ import com.uem.supplyandapply.Adapters.SupplyPartsAdapter;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -201,6 +199,29 @@ public class ViewPartsActivity extends Activity {
 
         listView.addFooterView(footerView);
 
+        Button doneButton = (Button) findViewById(R.id.done_button);
+        doneButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HashMap<String, SupplyPart> broughtMap = new HashMap<String, SupplyPart>();
+                HashMap<String, SupplyPart> neededMap = new HashMap<String, SupplyPart>();
+
+                for (TrackedPart trackedPart : trackedParts) {
+                    String name = trackedPart.getName();
+                    SupplyPart broughtPart = new SupplyPart(trackedPart.getBrought(), name);
+                    broughtMap.put(name, broughtPart);
+                    SupplyPart neededPart = new SupplyPart(trackedPart.getNeeded(), name);
+                    neededMap.put(name, neededPart);
+                }
+
+                job.setSupplyPartsBrought(broughtMap);
+                job.setSupplyPartsNeeded(neededMap);
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra(Constants.JOB, job);
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        });
 
         final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
                 Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
@@ -219,7 +240,5 @@ public class ViewPartsActivity extends Activity {
             AlertDialog alert = builder.create();
             alert.show();
         }
-		
-        
 	}
 }

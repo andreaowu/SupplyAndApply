@@ -107,7 +107,7 @@ public class CurrentJobActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(getApplicationContext(), ViewPartsActivity.class);
                 intent.putExtra(Constants.JOB, job);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 5);
 			}
         	
         });
@@ -185,6 +185,18 @@ public class CurrentJobActivity extends Activity {
                 }
                 broken = map;
                 job.setBroken(map);
+
+                //update needed map
+                job.calculatePartsNeeded();
+
+                applianceList = getApplianceList();
+                updateGridView();
+            }
+        } else if (requestCode == 5) {
+            if (resultCode == RESULT_OK) {
+                Job newJob = (Job) data.getExtras().get(Constants.JOB);
+                job = newJob;
+                broken = job.getBroken();
                 applianceList = getApplianceList();
                 updateGridView();
             }

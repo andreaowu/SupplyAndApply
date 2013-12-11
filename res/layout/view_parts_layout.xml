@@ -51,11 +51,12 @@
             android:background="#ababab">
 
         <Button
-                android:id="@+id/okay"
+                android:id="@+id/done_button"
                 android:layout_height="fill_parent"
                 android:layout_width="fill_parent"
                 android:background = "@color/orange"
-                android:text="Okay"/>
+                android:layout_margin="10dp"
+                android:text="Done"/>
 
     </RelativeLayout>
 

@@ -152,6 +152,62 @@ public class ApplianceDetailActivity extends Activity {
         listView = (ListView) findViewById(R.id.parts_list);
         listView.setAdapter(supplyPartsAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ApplianceDetailActivity.this);
+                // Get the layout inflater
+                LayoutInflater inflater = ApplianceDetailActivity.this.getLayoutInflater();
+
+                // Inflate and set the layout for the dialog
+                // Pass null as the parent view because its going in the dialog layout
+
+                View popup = inflater.inflate(R.layout.add_new_part_dialog, null);
+                builder.setView(popup);
+
+                final EditText editNum = (EditText) popup.findViewById(R.id.count_needed);
+                final EditText editPartName = (EditText) popup.findViewById(R.id.edit_part_name);
+
+                final SupplyPart supplyPart = parts.get(i);
+
+                final AlertDialog alertDialog = builder.create();
+                alertDialog.setContentView(R.layout.add_new_tracked_part);
+
+                editNum.setText(String.valueOf(supplyPart.getCount()));
+                editPartName.setText(supplyPart.getName());
+
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String partName = editPartName.getText().toString();
+                        Editable editableNeeded = editNum.getText();
+                        int numNeeded = 0;
+                        String appNumStr = "";
+                        if (editableNeeded != null) {
+                            appNumStr = editableNeeded.toString();
+                        }
+                        if (!appNumStr.equals("")) {
+                            numNeeded = Integer.parseInt(appNumStr);
+                        }
+
+                        supplyPart.setName(partName);
+                        supplyPart.setCount(numNeeded);
+
+                        supplyPartsAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
+
         View footerView = ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                 .inflate(R.layout.add_part_layout, null, false);
 

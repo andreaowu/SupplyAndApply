@@ -96,7 +96,13 @@ public class Job implements Serializable {
         for (ApplianceStateContainer applianceStateContainer : broken.values()) {
             for (Appliance appliance : applianceStateContainer.getAppliances()) {
                 for (SupplyPart supplyPart : appliance.getPartsList()) {
-                    supplyPartsNeeded.put(supplyPart.getName(), supplyPart);
+                    SupplyPart existingPart = supplyPartsNeeded.get(supplyPart.getName());
+                    if (existingPart != null) {
+                        existingPart.setCount(supplyPart.getCount() + existingPart.getCount());
+                    } else {
+                        existingPart = new SupplyPart(supplyPart.getCount(), supplyPart.getName());
+                    }
+                    supplyPartsNeeded.put(supplyPart.getName(), existingPart);
                 }
             }
         }
@@ -107,7 +113,13 @@ public class Job implements Serializable {
         for (ApplianceStateContainer applianceStateContainer : broken.values()) {
             for (Appliance appliance : applianceStateContainer.getAppliances()) {
                 for (SupplyPart supplyPart : appliance.getPartsList()) {
-                    supplyPartsBrought.put(supplyPart.getName(), supplyPart);
+                    SupplyPart existingPart = supplyPartsBrought.get(supplyPart.getName());
+                    if (existingPart != null) {
+                        existingPart.setCount(supplyPart.getCount() + existingPart.getCount());
+                    } else {
+                        existingPart = new SupplyPart(supplyPart.getCount(), supplyPart.getName());
+                    }
+                    supplyPartsBrought.put(supplyPart.getName(), existingPart);
                 }
             }
         }
