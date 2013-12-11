@@ -139,7 +139,9 @@ public class ApplianceListActivity extends Activity {
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENAPPLIST, true);
+                        	SharedPreferences.Editor editor= sharedPreferences.edit();
+                            editor.putBoolean(Constants.SEENAPPLIST, true);
+                            editor.commit();
                         }
                     });
             AlertDialog alert = builder.create();

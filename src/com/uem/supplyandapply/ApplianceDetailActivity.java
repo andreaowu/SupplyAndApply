@@ -220,7 +220,9 @@ public class ApplianceDetailActivity extends Activity {
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENAPPDETAIL, true);
+                        	SharedPreferences.Editor editor= sharedPreferences.edit();
+                            editor.putBoolean(Constants.SEENAPPDETAIL, true);
+                            editor.commit();
                         }
                     });
             AlertDialog alert = builder.create();

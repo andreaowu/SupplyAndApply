@@ -6,6 +6,7 @@ import java.util.Map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -110,8 +111,9 @@ public class CurrentJobActivity extends Activity {
 			}
         	
         });
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENCURRENTJOB, false);
         if (!seenJobsPage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("This is the Job Screen. If you haven't started working on " +
@@ -123,7 +125,9 @@ public class CurrentJobActivity extends Activity {
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        	SharedPreferences.Editor editor= sharedPreferences.edit();
+                            editor.putBoolean(Constants.SEENCURRENTJOB, true);
+                            editor.commit();
                         }
                     });
             AlertDialog alert = builder.create();

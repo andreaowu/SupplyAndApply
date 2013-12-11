@@ -7,6 +7,7 @@ import com.uem.supplyandapply.Adapters.SupplyPartsAdapter;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -64,15 +65,18 @@ public class ViewPartsActivity extends Activity {
             	finish();
             }
         });
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENVIEWPART, false);
         if (!seenJobsPage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Here are the parts left. You can gauge your supply with these.")
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        	SharedPreferences.Editor editor= sharedPreferences.edit();
+                            editor.putBoolean(Constants.SEENVIEWPART, true);
+                            editor.commit();
                         }
                     });
             AlertDialog alert = builder.create();
