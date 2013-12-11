@@ -42,8 +42,8 @@ public class AddJobActivity extends Activity {
         boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
         if (!seenJobsPage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("You can edit the numbers of appliances needed to be fixed in " +
-            		"this job. If any types appliances are not included, regard them as " +
+            builder.setMessage("You can edit the number of appliances needed to be fixed in " +
+            		"this job. If any types of appliances are not included, regard them as " +
             		"Custom Appliances. You can change the details of each appliance later.")
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
