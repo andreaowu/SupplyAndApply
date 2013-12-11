@@ -1,5 +1,6 @@
 package com.uem.supplyandapply;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.Activity;
@@ -7,16 +8,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.*;
 
 public class ApplianceDetailActivity extends Activity {
-	Spinner spinner;
+	private Spinner spinner;
+    private Appliance appliance;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,26 +24,11 @@ public class ApplianceDetailActivity extends Activity {
 		setContentView(R.layout.activity_appliance_detail);
 		
 	
-		final Appliance appliance = (Appliance) getIntent().getSerializableExtra(Constants.APPLIANCE);
-		
-		//progress dropdown
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		        R.array.progress_select, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner = (Spinner) findViewById(R.id.progress_spinner);
-        spinner.setAdapter(adapter);
-		if (appliance.getProgress() != null){
-			spinner.setPrompt(appliance.getProgress().toString());
-			//appliance.setProgress()
-		}
-		else{
-			spinner.setPrompt("Not Started");
-		}
+		appliance = (Appliance) getIntent().getSerializableExtra(Constants.APPLIANCE);
 		
 		//image of appliance
 		ImageView image = (ImageView)findViewById(R.id.image_of_appliance);
 		
-		Boolean fileFound = true;
 		int d = 0;
 		d = appliance.getDrawableResource();
 		
@@ -52,49 +37,125 @@ public class ApplianceDetailActivity extends Activity {
 		}
 
 		Button apply = (Button) findViewById(R.id.next_button);
-        
+        final EditText applianceName = (EditText) findViewById(R.id.appliance_name);
+        final EditText applianceLocation = (EditText) findViewById(R.id.appliance_location);
+        final EditText applianceIssues = (EditText) findViewById(R.id.issues_textbox);
+
+        //progress dropdown
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.progress_select, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner = (Spinner) findViewById(R.id.progress_spinner);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (i == 2) {
+                    appliance.setProgress(Progress.COMPLETED);
+                } else if (i == 1) {
+                    appliance.setProgress(Progress.IN_PROGRESS);
+                } else {
+                    appliance.setProgress(Progress.NOT_STARTED);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        });
+        if (appliance.getProgress() != null){
+            Progress appProgress = appliance.getProgress();
+            if (appProgress.equals(Progress.COMPLETED)) {
+                spinner.setPrompt("Completed");
+            } else if (appProgress.equals(Progress.IN_PROGRESS)) {
+                spinner.setPrompt("In Progress");
+            } else {
+                spinner.setPrompt("Not Started");
+            }
+        }
+        else{
+            spinner.setPrompt("Not Started");
+        }
+
         //Apply Button
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),CurrentJobActivity.class);
-                startActivity(i);
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra(Constants.APPLIANCE, appliance);
+                setResult(RESULT_OK, returnIntent);
+                finish();
             }
         });
         
 		//the name of appliance
-		TextView name = (TextView) findViewById(R.id.name_of_appliance); 
-		if (appliance.getName()!= null){
-			name.setText(appliance.getName());
-			appliance.setName(name.getText().toString());
+		if (appliance.getName() != null){
+			applianceName.setText(appliance.getName());
 		}
-	
-		
+        applianceName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String appName = applianceName.getText().toString();
+                appliance.setName(appName);
+            }
+        });
+		if (appliance.getLocation() != null || !appliance.getLocation().equals("")) {
+            applianceLocation.setText(appliance.getLocation());
+        }
+        applianceLocation.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String appLoc = applianceLocation.getText().toString();
+                appliance.setLocation(appLoc);
+            }
+        });
+        if (appliance.getIssues() != null || !appliance.getIssues().equals("")) {
+            applianceIssues.setText(appliance.getIssues());
+        }
+        applianceIssues.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i2, int i3) {
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+                String appIssues = applianceIssues.getText().toString();
+                appliance.setIssues(appIssues);
+            }
+        });
 		//putting in the parts estimation
-		
-		//issue
-		TextView issues = (TextView) findViewById(R.id.issues_textbox); 
-		if (appliance.getIssues() != null){
-			name.setText(appliance.getIssues());
-			appliance.setIssues(issues.getText());
-			
-		}
-		final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
-        if (!seenJobsPage) {
+		//TODO
+
+		final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
+        boolean seenAppDetail = sharedPreferences.getBoolean(Constants.SEENAPPDETAIL, false);
+        if (!seenAppDetail) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Here you can customize the type, status, and parts of this appliance. " +
             		"You can also leave a notes to describe any issues about this appliance.")
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                            sharedPreferences.edit().putBoolean(Constants.SEENAPPDETAIL, true);
                         }
                     });
             AlertDialog alert = builder.create();
             alert.show();
         }
-		
 	}
 
 	@Override

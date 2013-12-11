@@ -55,14 +55,14 @@ public class StartJobActivity extends Activity {
             }
         });
         final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
-        if (!seenJobsPage) {
+        boolean seenStartJob = sharedPreferences.getBoolean(Constants.SEENSTARTJOB, false);
+        if (!seenStartJob) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Click on an appliance to customize it.")
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                            sharedPreferences.edit().putBoolean(Constants.SEENSTARTJOB, true);
                         }
                     });
             AlertDialog alert = builder.create();

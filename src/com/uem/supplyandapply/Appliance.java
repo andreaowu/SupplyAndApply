@@ -20,13 +20,16 @@ public class Appliance implements Serializable {
     private ArrayList<SupplyPart> partsList;
     private Progress progress;
     private String issues;
-    private ArrayList<String> ApplianceList;
+    private String location;
+    private String hiddenId;
   
     public Appliance(String name, int drawableResource) {
         this.name = name;
         this.drawableResource = drawableResource;
         this.partsList = new ArrayList<SupplyPart>();
-        progress = Progress.NOT_STARTED;
+        this.progress = Progress.NOT_STARTED;
+        this.issues = "";
+        this.location = "";
     }
 
 
@@ -34,15 +37,13 @@ public class Appliance implements Serializable {
     	this.name = name;
     	this.drawableResource = drawableResource;
     	this.partsList = partsList;
-        progress = Progress.NOT_STARTED;
+        this.progress = Progress.NOT_STARTED;
+        this.issues = "";
+        this.location = "";
     }
     
     public String getName() {
         return name;
-    }
-
-    public ArrayList<String> getAppList(){
-    	return ApplianceList;
     }
 
 	/**
@@ -87,18 +88,46 @@ public class Appliance implements Serializable {
 		this.progress = progress;
 	}
 	
-	/**
-	 * @param get the progress 
-	 */
 	public Progress getProgress() {
 		return progress;
 	}
 
-	private void writeObject(ObjectOutputStream stream) throws IOException {
+    public void setIssues(String issues) {
+        this.issues = issues;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getHiddenId() {
+        return hiddenId;
+    }
+
+    public void setHiddenId(String hiddenId) {
+        this.hiddenId = hiddenId;
+    }
+
+    private void writeObject(ObjectOutputStream stream) throws IOException {
         stream.writeObject(name);
         stream.writeInt(drawableResource);
         stream.writeObject(partsList);
         stream.writeObject(progress);
+        stream.writeObject(issues);
+        stream.writeObject(location);
+        stream.writeObject(hiddenId);
+    }
+
+    public CharSequence getIssues() {
+        return issues;
+    }
+
+    public void setIssues(CharSequence issues){
+        this.issues = (String) issues;
     }
 
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
@@ -106,14 +135,8 @@ public class Appliance implements Serializable {
         drawableResource = stream.readInt();
         partsList = (ArrayList<SupplyPart>) stream.readObject();
         progress = (Progress) stream.readObject();
+        issues = (String) stream.readObject();
+        location = (String) stream.readObject();
+        hiddenId = (String) stream.readObject();
     }
-
-
-	public CharSequence getIssues() {
-		return issues;
-	}
-	
-	public void setIssues(CharSequence issues){
-		this.issues = (String) issues;
-	}
 }

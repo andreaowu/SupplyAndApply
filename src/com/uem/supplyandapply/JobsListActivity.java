@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -105,7 +106,8 @@ public class JobsListActivity extends Activity {
 			}
 		}
 
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
         boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
         if (!seenJobsPage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);

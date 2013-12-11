@@ -114,8 +114,11 @@ public class ApplianceStateContainer implements Serializable {
     public void generateAppliances() {
     	this.appliances = new ArrayList<Appliance>(count);
     	for (int i = 0; i < count; i++) {
-    		appliances.add(new Appliance(appliance.getName(),
-    				appliance.getDrawableResource(), appliance.getPartsList()));
+            String appName = appliance.getName();
+            Appliance tempAppliance = new Appliance(appName,
+                    appliance.getDrawableResource(), appliance.getPartsList());
+            tempAppliance.setHiddenId(appName + i);
+    		appliances.add(tempAppliance);
     	}
     }
     

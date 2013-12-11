@@ -13,25 +13,31 @@
         android:id="@+id/image_of_appliance"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        
          />
-    //name of the appliance
+
+    <!--name of the appliance-->
  	<EditText
-        android:id="@+id/name_of_appliance"
+        android:id="@+id/appliance_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/image_of_appliance"
+        android:hint="Appliance Name"
         android:ems="10" />
-    
-	//select progress
+
+    <EditText
+        android:id="@+id/appliance_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/image_of_appliance"
+        android:layout_below="@id/appliance_name"
+        android:hint="Appliance Location"/>
 
     <Spinner
         android:id="@+id/progress_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/name_of_appliance"
+        android:layout_below="@id/appliance_location"
         android:entries="@array/progress_select" />
-    //this part is pulled from the parts estimation
 
     <RelativeLayout
         android:id="@+id/text_container"
@@ -47,7 +53,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
             android:gravity="center_vertical"
-            android:text="#Parts"
+            android:text="#Parts Needed"
             android:textSize="20sp" />
 
         <TextView
@@ -61,51 +67,47 @@
             android:textSize="20sp" />
     </RelativeLayout>
 
-    <ListView
-        android:id="@+id/application_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/text_container"
-        android:layout_below="@id/progress_spinner"
-        android:background="#666666" />
-    //Issues
-
-    <TextView
-        android:id="@+id/issues"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/text_container"
-        android:text="@string/issues" />
-     //Input Textbox
-
-    <EditText
-        android:id="@+id/issues_textbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/issues"
-        android:ems="10"
-        android:inputType="textMultiLine" >
-
-        <requestFocus />
-    </EditText>
-     //next button
-
     <RelativeLayout
         android:id="@+id/buttons_container"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/gray" >
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/next_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@color/orange"
+            android:layout_margin="10dp"
             android:text="Apply" />
     </RelativeLayout>
 
-  
+    <EditText
+            android:id="@+id/issues_textbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_above="@+id/buttons_container"
+            android:ems="10"
+            android:inputType="textMultiLine" >
+
+        <requestFocus />
+    </EditText>
+
+
+    <TextView
+            android:id="@+id/issues"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/issues_textbox"
+            android:text="@string/issues" />
+
+    <ListView
+            android:id="@+id/application_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/issues"
+            android:layout_below="@id/text_container"
+            android:background="#666666" />
 
 </RelativeLayout>
