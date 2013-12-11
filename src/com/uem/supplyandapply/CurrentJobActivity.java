@@ -14,11 +14,8 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.GridView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.webkit.HttpAuthHandler;
+import android.widget.*;
 
 import com.uem.supplyandapply.Adapters.CurrentJobAdapter;
 
@@ -30,6 +27,7 @@ public class CurrentJobActivity extends Activity {
 	private HashMap<String, ApplianceStateContainer> broken;
 	private ProgressBar progress;
 	private int totalProgress, progressStatus;
+    private Job job;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +38,7 @@ public class CurrentJobActivity extends Activity {
 		progress = (ProgressBar) findViewById(R.id.progress_bar);
 		
 		// Get job from the saved intent
-		final Job job = (Job) getIntent().getSerializableExtra(Constants.JOB);
+		job = (Job) getIntent().getSerializableExtra(Constants.JOB);
 
         Button startJob = (Button) findViewById(R.id.startJob_button);
         if (!job.isJobStarted()) {
@@ -72,11 +70,8 @@ public class CurrentJobActivity extends Activity {
 		progress.setMax(totalProgress);
 		progress.setProgress(totalProgress - progressStatus);
 		
-		adapter = new CurrentJobAdapter(getApplicationContext(), 0, applianceList, new Intent(getApplicationContext(), ApplianceListActivity.class));
-		
-		gridView = (GridView) findViewById(R.id.appliances_gridView);
-        gridView.setAdapter(adapter);
-        
+        updateGridView();
+
         TextView removeJob = (TextView) findViewById(R.id.removeJob);
         removeJob.setOnClickListener(new OnClickListener() {
 
@@ -136,7 +131,26 @@ public class CurrentJobActivity extends Activity {
         }
 	}
 
-	@Override
+    private void updateGridView() {
+        adapter = new CurrentJobAdapter(getApplicationContext(), 0, applianceList, new Intent(
+                getApplicationContext(), ApplianceListActivity.class));
+
+        gridView = (GridView) findViewById(R.id.appliances_gridView);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ApplianceStateContainer applianceStateContainer =
+                        (ApplianceStateContainer) adapterView.getItemAtPosition(i);
+                Intent intent = new Intent(getApplicationContext(), ApplianceListActivity.class);
+                intent.putExtra(Constants.APPCONTAINER, applianceStateContainer);
+                startActivityForResult(intent, 4);
+            }
+        });
+    }
+
+    @Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.current_job, menu);
@@ -154,9 +168,25 @@ public class CurrentJobActivity extends Activity {
         		progress.setMax(totalProgress);
         		progress.setProgress(totalProgress - progressStatus);
             }
-		}
+		} else if (requestCode == 4) {
+            if (resultCode == RESULT_OK) {
+                ApplianceStateContainer applianceStateContainer =
+                        (ApplianceStateContainer) data.getExtras().get(Constants.APPCONTAINER);
+                HashMap<String, ApplianceStateContainer> map = job.getBroken();
+                String appStatName = applianceStateContainer.getAppliance().getName();
+                ApplianceStateContainer oldStateContainer = map.get(appStatName);
+                if (oldStateContainer != null) {
+                    map.remove(appStatName);
+                    map.put(appStatName, applianceStateContainer);
+                }
+                broken = map;
+                job.setBroken(map);
+                applianceList = getApplianceList();
+                updateGridView();
+            }
+        }
 	}
-	
+
 	private ArrayList<ApplianceStateContainer> getApplianceList() {
         ArrayList<ApplianceStateContainer> appliances = new ArrayList<ApplianceStateContainer>();
 		for (Map.Entry<String, ApplianceStateContainer> entry : broken.entrySet()) {

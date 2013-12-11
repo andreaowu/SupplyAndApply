@@ -21,7 +21,6 @@
         <item>In Progress</item>
         <item>Finished</item>
     </string-array>
-
     <string name="title_activity_add_part">AddPart</string>
     <string name="add_appliance">Add Appliance</string>
 

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.uem.supplyandapply.ApplianceStateContainer;
+import com.uem.supplyandapply.Constants;
 import com.uem.supplyandapply.R;
 
 public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
@@ -42,15 +43,7 @@ public class CurrentJobAdapter extends ArrayAdapter<ApplianceStateContainer> {
         imageButton.setImageResource(currentContainer.getAppliance().getDrawableResource());
         TextView textView = (TextView) v.findViewById(R.id.appliance_name);
         textView.setText(currentContainer.getAppliance().getName());
-        
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            	intent.putExtra("ApplianceContainer", currentContainer);
-                context.startActivity(intent);
-            }
-        });
-        
+
         TextView ratio = (TextView) v.findViewById(R.id.ratio_textView);
         String ratioText = Integer.toString(currentContainer.getCount() - currentContainer.getNotFinished());
         ratioText += "/";

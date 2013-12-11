@@ -21,4 +21,5 @@ public class Constants {
     public static final String SEENAPPDETAIL = "seenappdetail";
     public static final String SEENAPPLIST = "seenapplist";
     public static final String SUPANDAPPREFS = "supandappprefs";
+    public static final String APPCONTAINER = "appcontainer";
 }

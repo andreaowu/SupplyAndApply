@@ -35,21 +35,26 @@ public class ApplianceListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appliance_list);
 
-        applianceContainer = (ApplianceStateContainer) getIntent().getSerializableExtra("ApplianceContainer");
+        applianceContainer = (ApplianceStateContainer) getIntent().getSerializableExtra(Constants.APPCONTAINER);
         applianceHashMap = new HashMap<String, Appliance>();
         ArrayList<Appliance> appliances = applianceContainer.getAppliances();
         for (Appliance appliance : appliances) {
             applianceHashMap.put(appliance.getHiddenId(), appliance);
         }
 
-        Button addPartButton = (Button) findViewById(R.id.add_part_btn);
+        Button doneButton = (Button) findViewById(R.id.done_button);
         
-        //Apply Button
-        addPartButton.setOnClickListener(new View.OnClickListener() {
+        //Done Button
+        doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(),AddPart.class);
-                startActivityForResult(i, 1);
+                Intent returnIntent = new Intent();
+                ArrayList<Appliance> toReturnAppliances = new ArrayList<Appliance>();
+                toReturnAppliances.addAll(applianceHashMap.values());
+                applianceContainer.setAppliances(toReturnAppliances);
+                returnIntent.putExtra(Constants.APPCONTAINER, applianceContainer);
+                setResult(RESULT_OK, returnIntent);
+                finish();
             }
         });
         
@@ -148,9 +153,11 @@ public class ApplianceListActivity extends Activity {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 Appliance returnedAppliance = (Appliance) data.getExtras().get(Constants.APPLIANCE);
-                Appliance oldAppliance = applianceHashMap.get(returnedAppliance.getHiddenId());
+                String hiddenId = returnedAppliance.getHiddenId();
+                Appliance oldAppliance = applianceHashMap.get(hiddenId);
                 if (oldAppliance != null) {
-                    applianceHashMap.put(returnedAppliance.getHiddenId(), returnedAppliance);
+                    applianceHashMap.remove(hiddenId);
+                    applianceHashMap.put(hiddenId, returnedAppliance);
                 }
 
                 prepareListData();
@@ -267,4 +274,6 @@ public class ApplianceListActivity extends Activity {
             }
         });
     }
+
+
 }

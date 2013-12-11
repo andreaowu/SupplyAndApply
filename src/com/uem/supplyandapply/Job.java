@@ -42,7 +42,11 @@ public class Job implements Serializable {
 		return broken;
 	}
 
-	/**
+    public void setBroken(HashMap<String, ApplianceStateContainer> broken) {
+        this.broken = broken;
+    }
+
+    /**
 	 * @return the timeframe for this job
 	 */
 	public Timeframe getT() {

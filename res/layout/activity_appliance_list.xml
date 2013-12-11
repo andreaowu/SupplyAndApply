@@ -4,20 +4,22 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:background="#f4f4f4" >
- 
+
+
+        <Button
+            android:id="@+id/done_button"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:text="Done"
+            android:background = "@color/orange"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            />
+
             <ExpandableListView
                 android:id="@+id/lvExp"
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"/>   
-                
-           <Button
-            android:id="@+id/add_part_btn"
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent"
-            android:text="Add Part"
-            android:background = "@color/orange"
-            android:layout_alignParentBottom="true"
-            />
-            
- 
+                android:layout_width="match_parent"
+                android:layout_above="@id/done_button"/>
+
 </RelativeLayout>

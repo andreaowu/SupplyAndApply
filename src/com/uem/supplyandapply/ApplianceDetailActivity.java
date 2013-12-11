@@ -32,7 +32,7 @@ public class ApplianceDetailActivity extends Activity {
 		int d = 0;
 		d = appliance.getDrawableResource();
 		
-		if(d!=0){
+		if(d != 0){
 			image.setImageResource(appliance.getDrawableResource());
 		}
 
@@ -47,6 +47,20 @@ public class ApplianceDetailActivity extends Activity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner = (Spinner) findViewById(R.id.progress_spinner);
         spinner.setAdapter(adapter);
+
+        if (appliance.getProgress() != null){
+            Progress appProgress = appliance.getProgress();
+            if (appProgress.equals(Progress.COMPLETED)) {
+                spinner.setSelection(2);
+            } else if (appProgress.equals(Progress.IN_PROGRESS)) {
+                spinner.setSelection(1);
+            } else {
+                spinner.setSelection(0);
+            }
+        } else{
+            spinner.setSelection(0);
+        }
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -63,19 +77,6 @@ public class ApplianceDetailActivity extends Activity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        if (appliance.getProgress() != null){
-            Progress appProgress = appliance.getProgress();
-            if (appProgress.equals(Progress.COMPLETED)) {
-                spinner.setPrompt("Completed");
-            } else if (appProgress.equals(Progress.IN_PROGRESS)) {
-                spinner.setPrompt("In Progress");
-            } else {
-                spinner.setPrompt("Not Started");
-            }
-        }
-        else{
-            spinner.setPrompt("Not Started");
-        }
 
         //Apply Button
         apply.setOnClickListener(new View.OnClickListener() {

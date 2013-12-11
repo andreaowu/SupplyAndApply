@@ -122,14 +122,6 @@ public class Appliance implements Serializable {
         stream.writeObject(hiddenId);
     }
 
-    public CharSequence getIssues() {
-        return issues;
-    }
-
-    public void setIssues(CharSequence issues){
-        this.issues = (String) issues;
-    }
-
     private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
         name = (String) stream.readObject();
         drawableResource = stream.readInt();
@@ -139,4 +131,13 @@ public class Appliance implements Serializable {
         location = (String) stream.readObject();
         hiddenId = (String) stream.readObject();
     }
+
+
+	public CharSequence getIssues() {
+		return issues;
+	}
+
+	public void setIssues(CharSequence issues){
+		this.issues = (String) issues;
+	}
 }
