@@ -27,4 +27,8 @@ public class Constants {
     public static final String SEENAPPLIST = "seenapplist";
     public static final String SUPANDAPPREFS = "supandappprefs";
     public static final String APPCONTAINER = "appcontainer";
+    public static final int JOB_TO_DELETE = 666;
+    public static final int COMPLETE_JOB = 1337;
+    public static final String ACTION = "action";
+    public static final int NOTHING = 160;
 }

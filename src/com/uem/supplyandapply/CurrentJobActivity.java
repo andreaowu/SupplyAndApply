@@ -41,20 +41,6 @@ public class CurrentJobActivity extends Activity {
 		// Get job from the saved intent
 		job = (Job) getIntent().getSerializableExtra(Constants.JOB);
 
-        Button startJob = (Button) findViewById(R.id.startJob_button);
-        if (!job.isJobStarted()) {
-            startJob.setVisibility(View.VISIBLE);
-            startJob.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), StartJobActivity.class);
-                    intent.putExtra(Constants.JOB, job);
-                    //Code of 2 is for Start Job
-                    startActivityForResult(intent, 2);
-                }
-            });
-        }
-
 		// Display correct customer information
 		Customer c = job.getC();
 		TextView name = (TextView) findViewById(R.id.customer_textView); 
@@ -73,6 +59,18 @@ public class CurrentJobActivity extends Activity {
 		
         updateGridView();
 
+        TextView okayButton = (TextView) findViewById(R.id.okay_button);
+        okayButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    Intent returnIntent = new Intent();
+                returnIntent.putExtra(Constants.JOB, job);
+                returnIntent.putExtra(Constants.ACTION, Constants.NOTHING);
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        });
+
         TextView removeJob = (TextView) findViewById(R.id.removeJob);
         removeJob.setOnClickListener(new OnClickListener() {
 
@@ -84,9 +82,11 @@ public class CurrentJobActivity extends Activity {
 				   
 				   @Override
 				   public void onClick(DialogInterface dialog, int which) {
-					   	Intent intent = new Intent(getApplicationContext(), JobsListActivity.class);
-		                intent.putExtra(Constants.DELETE_JOB, cName);
-		                startActivityForResult(intent, 1);
+					   Intent returnIntent = new Intent();
+		               returnIntent.putExtra(Constants.JOB, job);
+                       returnIntent.putExtra(Constants.ACTION, Constants.JOB_TO_DELETE);
+                       setResult(RESULT_OK, returnIntent);
+                       finish();
 				   }
 				  });
 				alert_box.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -247,8 +247,37 @@ public class CurrentJobActivity extends Activity {
             }
         }
 
+        if (completed >= total) {
+            checkIfFinished();
+        }
+
         progress.setMax(total);
         progress.setProgress(completed);
     }
+
+    private void checkIfFinished() {
+        AlertDialog.Builder alert_box = new AlertDialog.Builder(CurrentJobActivity.this);
+        alert_box.setMessage("Would you like to finish this Job?");
+        alert_box.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra(Constants.JOB, job);
+                returnIntent.putExtra(Constants.ACTION, Constants.COMPLETE_JOB);
+                setResult(RESULT_OK, returnIntent);
+                finish();
+            }
+        });
+        alert_box.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getApplicationContext(), "Job Not Finished", Toast.LENGTH_LONG).show();
+            }
+        });
+        alert_box.show();
+    }
+
 
 }

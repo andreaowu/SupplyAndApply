@@ -30,8 +30,7 @@
             android:layout_height="30dp"
             android:layout_width="match_parent"
             android:layout_marginTop="5dp"
-            android:layout_below="@id/address_textview"
-            android:background="#CCCCCC">
+            android:layout_below="@id/address_textview">
 
     	<TextView
         android:id="@+id/progress_textview"
@@ -78,30 +77,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/progress_container"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         android:background = "@color/orange"
         android:text="View Parts" />
 
     <Button
-            android:id="@+id/startJob_button"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
+            android:id="@+id/okay_button"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/progress_container"
-            android:layout_toRightOf="@id/viewParts_button"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
-            android:text="Start Job!"
+            android:layout_width="fill_parent"
             android:background = "@color/orange"
-            android:visibility="gone"/>
+            android:layout_margin="10dp"
+            android:text="Done"
+            android:layout_alignParentBottom="true"/>
 
     <GridView
         android:id="@+id/appliances_gridView"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="10dp"
+        android:layout_margin="10dp"
         android:layout_alignLeft="@+id/address_textview"
         android:layout_below="@+id/viewParts_button"
+        android:layout_above="@id/okay_button"
         android:background="#666666"
         android:numColumns="3" >
     </GridView>

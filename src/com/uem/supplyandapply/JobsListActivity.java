@@ -13,12 +13,8 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
 import android.widget.TabHost.TabSpec;
 
@@ -154,6 +150,41 @@ public class JobsListActivity extends Activity {
                 tabHost.setCurrentTab(1);
                 tabHost.setCurrentTab(0);
             }
+        } else if (requestCode == 4) {
+            if (resultCode == RESULT_OK) {
+                Job newJob = (Job) data.getExtras().get(Constants.JOB);
+
+                int found = -160;
+                for (int i = 0; i < current.size(); i++) {
+                    if (current.get(i).getC().getName().equals(newJob.getC().getName())
+                            && current.get(i).getC().getAddress().equals(newJob.getC().getAddress())) {
+                        found = i;
+                    }
+                }
+
+                int action = data.getIntExtra(Constants.ACTION, Constants.NOTHING);
+                if (action == Constants.JOB_TO_DELETE) {
+                    current.remove(found);
+                    updateTabs();
+                    tabHost.setCurrentTab(1);
+                    tabHost.setCurrentTab(0);
+                }  else if (action == Constants.COMPLETE_JOB) {
+                    current.remove(found);
+                    past.add(newJob);
+                    updateTabs();
+                    tabHost.setCurrentTab(0);
+                    tabHost.setCurrentTab(1);
+                    Toast.makeText(getApplicationContext(), "Congratulations! Job moved to Past Jobs",
+                            Toast.LENGTH_LONG).show();
+
+                } else { //Do Nothing
+                    current.remove(found);
+                    current.add(newJob);
+                    updateTabs();
+                    tabHost.setCurrentTab(1);
+                    tabHost.setCurrentTab(0);
+                }
+            }
         }
     }
 
@@ -189,7 +220,7 @@ public class JobsListActivity extends Activity {
 						break;
 					}
 				}
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 4);
 			}
         });
         tab1.setContent(R.id.current);
@@ -217,7 +248,7 @@ public class JobsListActivity extends Activity {
 						break;
 					}
 				}
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 4);
 			}
         });
         tab2.setContent(R.id.past);
@@ -258,7 +289,7 @@ public class JobsListActivity extends Activity {
 						break;
 					}
 				}
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 4);
 			}
         });
         tab1.setContent(R.id.current);
@@ -286,7 +317,7 @@ public class JobsListActivity extends Activity {
 						break;
 					}
 				}
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 4);
 			}
         });
         tab2.setContent(R.id.past);

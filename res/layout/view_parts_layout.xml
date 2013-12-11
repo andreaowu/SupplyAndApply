@@ -45,14 +45,14 @@
 
     <RelativeLayout
             android:id="@+id/buttons_container"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:layout_alignParentBottom="true"
             android:background="#ababab">
 
         <Button
                 android:id="@+id/done_button"
-                android:layout_height="fill_parent"
+                android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
                 android:background = "@color/orange"
                 android:layout_margin="10dp"
