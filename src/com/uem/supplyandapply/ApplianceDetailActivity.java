@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.widget.*;
@@ -20,6 +21,9 @@ import java.util.ArrayList;
 public class ApplianceDetailActivity extends Activity {
 	private Spinner spinner;
     private Appliance appliance;
+    private ArrayList<SupplyPart> parts;
+    private ListView listView;
+    private SupplyPartsAdapter supplyPartsAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +49,11 @@ public class ApplianceDetailActivity extends Activity {
         final EditText applianceIssues = (EditText) findViewById(R.id.issues_textbox);
 
         //progress dropdown
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this,
                 R.array.progress_select, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner = (Spinner) findViewById(R.id.progress_spinner);
-        spinner.setAdapter(adapter);
+        spinner.setAdapter(spinnerAdapter);
 
         if (appliance.getProgress() != null){
             Progress appProgress = appliance.getProgress();
@@ -141,11 +145,70 @@ public class ApplianceDetailActivity extends Activity {
                 appliance.setIssues(appIssues);
             }
         });
+
 		//putting in the parts estimation
-        ArrayList<SupplyPart> parts = appliance.getPartsList();
-        SupplyPartsAdapter supplyPartsAdapter = new SupplyPartsAdapter(getApplicationContext(), 0, parts);
-        ListView partsList = (ListView) findViewById(R.id.parts_list);
-        partsList.setAdapter(supplyPartsAdapter);
+        parts = appliance.getPartsList();
+        supplyPartsAdapter = new SupplyPartsAdapter(getApplicationContext(), 0, parts);
+        listView = (ListView) findViewById(R.id.parts_list);
+        listView.setAdapter(supplyPartsAdapter);
+
+        View footerView = ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE))
+                .inflate(R.layout.add_part_layout, null, false);
+
+        Button addPartButton = (Button) footerView.findViewById(R.id.add_part_button);
+        addPartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //setContentView(R.layout.add_new_appliance_dialog);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ApplianceDetailActivity.this);
+                // Get the layout inflater
+                LayoutInflater inflater = ApplianceDetailActivity.this.getLayoutInflater();
+
+                // Inflate and set the layout for the dialog
+                // Pass null as the parent view because its going in the dialog layout
+
+                View popup = inflater.inflate(R.layout.add_new_part_dialog, null);
+                builder.setView(popup);
+
+                final EditText editPartNum = (EditText) popup.findViewById(R.id.count_needed);
+                final EditText editPartName = (EditText) popup.findViewById(R.id.edit_part_name);
+
+                final AlertDialog alertDialog = builder.create();
+                alertDialog.setContentView(R.layout.add_new_part_dialog);
+
+                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String partName = editPartName.getText().toString();
+                        Editable editable = editPartNum.getText();
+                        int partNum = 0;
+                        String appNumStr = "";
+                        if (editable != null) {
+                            appNumStr = editable.toString();
+                        }
+                        if (!appNumStr.equals("")) {
+                            partNum = Integer.parseInt(appNumStr);
+                        }
+
+                        SupplyPart newPart = new SupplyPart(partNum, partName);
+                        parts.add(newPart);
+                        appliance.setPartsList(parts);
+                        supplyPartsAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        listView.addFooterView(footerView);
 
 		final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
                 Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);

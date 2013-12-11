@@ -23,5 +23,6 @@
     </string-array>
     <string name="title_activity_add_part">AddPart</string>
     <string name="add_appliance">Add Appliance</string>
+    <string name="add_part">Add Part</string>
 
 </resources>

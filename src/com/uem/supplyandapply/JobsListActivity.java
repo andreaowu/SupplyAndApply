@@ -66,13 +66,29 @@ public class JobsListActivity extends Activity {
 	        Customer c2 = new Customer("EUM", "310 Soda Hall");
 	        HashMap<String, ApplianceStateContainer> hash = new HashMap<String, ApplianceStateContainer>();
 
-            ApplianceStateContainer shower = new ApplianceStateContainer(new Appliance("Shower", R.drawable.showerhead), 3);
+            Appliance showerApp = new Appliance("Shower", R.drawable.showerhead);
+            ArrayList<SupplyPart> showerList = new ArrayList<SupplyPart>();
+            showerList.add(new SupplyPart(1, "showerhead"));
+            showerList.add(new SupplyPart(2, "4-inch tubes"));
+            showerApp.setPartsList(showerList);
+            ApplianceStateContainer shower = new ApplianceStateContainer(showerApp, 3);
             shower.generateAppliances();
 	        hash.put("Shower", shower);
-            ApplianceStateContainer toilet = new ApplianceStateContainer(new Appliance("Toilet", R.drawable.toilet), 5);
+
+            Appliance toiletApp = new Appliance("Toilet", R.drawable.toilet);
+            ArrayList<SupplyPart> toiletList = new ArrayList<SupplyPart>();
+            toiletList.add(new SupplyPart(6, "washers"));
+            toiletList.add(new SupplyPart(3, "5-cm pipes"));
+            toiletApp.setPartsList(toiletList);
+            ApplianceStateContainer toilet = new ApplianceStateContainer(toiletApp, 5);
             toilet.generateAppliances();
 	        hash.put("Toilet", toilet);
-            ApplianceStateContainer sink = new ApplianceStateContainer(new Appliance("Sink", R.drawable.sink), 1);
+
+            Appliance sinkApp = new Appliance("Sink", R.drawable.sink);
+            ArrayList<SupplyPart> sinkList = new ArrayList<SupplyPart>();
+            sinkList.add(new SupplyPart(8, "2-cm screws"));
+            sinkApp.setPartsList(sinkList);
+            ApplianceStateContainer sink = new ApplianceStateContainer(sinkApp, 1);
             sink.generateAppliances();
 	        hash.put("Sink", sink);
 	        Job j2 = new Job(c2, hash);
