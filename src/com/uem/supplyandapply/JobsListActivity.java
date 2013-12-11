@@ -126,7 +126,7 @@ public class JobsListActivity extends Activity {
 
         final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
                 Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
-        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBLIST, false);
         if (!seenJobsPage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Welcome to Supply and Apply! This is the main screen where you will see all your current and past jobs. " +
@@ -134,7 +134,9 @@ public class JobsListActivity extends Activity {
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        	SharedPreferences.Editor editor= sharedPreferences.edit();
+                            editor.putBoolean(Constants.SEENJOBLIST, true);
+                            editor.commit();
                         }
                     });
             AlertDialog alert = builder.create();

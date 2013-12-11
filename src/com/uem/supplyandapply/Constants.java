@@ -17,6 +17,11 @@ public class Constants {
     public static final String NAME="name";
 	public static final String APPLIANCE = "appliance";
     public static final String SEENJOBSPAGE = "seenjobspage";
+    public static final String SEENADDJOB = "seenaddjob";
+    public static final String SEENVIEWPART = "seenviewpart";
+    public static final String SEENJOBLIST = "seenjoblist";
+    public static final String SEENCURRENTJOB = "seencurrentjob";
+    public static final String SEENPARTSESTIMATION = "seenpartsestimation";
     public static final String SEENSTARTJOB = "seenstartjob";
     public static final String SEENAPPDETAIL = "seenappdetail";
     public static final String SEENAPPLIST = "seenapplist";

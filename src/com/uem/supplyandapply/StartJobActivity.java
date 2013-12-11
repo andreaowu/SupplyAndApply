@@ -2,6 +2,7 @@ package com.uem.supplyandapply;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -54,7 +55,8 @@ public class StartJobActivity extends Activity {
                 startActivityForResult(intent, 1);
             }
         });
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
         boolean seenStartJob = sharedPreferences.getBoolean(Constants.SEENSTARTJOB, false);
         if (!seenStartJob) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -62,7 +64,9 @@ public class StartJobActivity extends Activity {
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENSTARTJOB, true);
+                        	SharedPreferences.Editor editor= sharedPreferences.edit();
+                            editor.putBoolean(Constants.SEENSTARTJOB, true);
+                            editor.commit();
                         }
                     });
             AlertDialog alert = builder.create();

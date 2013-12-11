@@ -40,7 +40,7 @@ public class AddJobActivity extends Activity {
         doAll();
         final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
                 Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
-        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENADDJOB, false);
         if (!seenJobsPage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("You can edit the number of appliances needed to be fixed in " +
@@ -50,7 +50,7 @@ public class AddJobActivity extends Activity {
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             SharedPreferences.Editor editor= sharedPreferences.edit();
-                            editor.putBoolean(Constants.SEENJOBSPAGE, true);
+                            editor.putBoolean(Constants.SEENADDJOB, true);
                             editor.commit();
                         }
                     });
