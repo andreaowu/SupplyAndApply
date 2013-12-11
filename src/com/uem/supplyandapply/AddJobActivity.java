@@ -148,7 +148,6 @@ public class AddJobActivity extends Activity {
         appliances.add(new ApplianceStateContainer(new Appliance("Shower", R.drawable.showerhead), 0));
         appliances.add(new ApplianceStateContainer(new Appliance("Toilet", R.drawable.toilet), 0));
         appliances.add(new ApplianceStateContainer(new Appliance("Sink", R.drawable.sink), 0));
-        appliances.add(new ApplianceStateContainer(new Appliance("Custom", R.drawable.question), 0));
         for (ApplianceStateContainer applianceStateContainer : appliances) {
             Appliance appliance = applianceStateContainer.getAppliance();
             String applianceName = appliance.getName();
