@@ -1,8 +1,12 @@
 package com.uem.supplyandapply;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -75,6 +79,21 @@ public class ApplianceDetailActivity extends Activity {
 			appliance.setIssues(issues.getText());
 			
 		}
+		final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        if (!seenJobsPage) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Here you can customize the type, status, and parts of this appliance. " +
+            		"You can also leave a notes to describe any issues about this appliance.")
+                    .setCancelable(false)
+                    .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
 		
 	}
 

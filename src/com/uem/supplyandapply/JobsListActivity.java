@@ -44,10 +44,6 @@ public class JobsListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.jobs_list_layout);
 		
-		//===================Just to test out CurrentJobActivity==========================================
-		//Intent i = new Intent(getApplicationContext(), CurrentJobActivity.class);
-        //startActivity(i);
-        //=============================================================================
 		
         Button addJobButton = (Button) findViewById(R.id.addJobButton);
         addJobButton.setOnClickListener(new View.OnClickListener() {
@@ -113,9 +109,10 @@ public class JobsListActivity extends Activity {
         boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
         if (!seenJobsPage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("Welcome to Supply and Apply! This is the main screen where you will see all your current and past jobs.")
+            builder.setMessage("Welcome to Supply and Apply! This is the main screen where you will see all your current and past jobs. " +
+            		"Clicking on a job will take you to a more detailed view of that job.")
                     .setCancelable(false)
-                    .setPositiveButton("Dismiss", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
                         }

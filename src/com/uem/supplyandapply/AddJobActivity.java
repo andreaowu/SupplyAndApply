@@ -7,7 +7,9 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,10 +36,28 @@ public class AddJobActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         applianceList = getDefaultApplianceList();
+        System.out.println("appliance list count on create: " + applianceList.size());
         doAll();
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        if (!seenJobsPage) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("You can edit the numbers of appliances needed to be fixed in " +
+            		"this job. If any types appliances are not included, regard them as " +
+            		"Custom Appliances. You can change the details of each appliance later.")
+                    .setCancelable(false)
+                    .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
     
     protected void doAll() {
+    	System.out.println("appliance list count doAll(): " + applianceList.size());
     	setContentView(R.layout.add_job_appliances_layout);
         applianceAdapter = new ApplianceAdapter(getApplicationContext(), 0, applianceList);
 
@@ -152,8 +172,15 @@ public class AddJobActivity extends Activity {
             Appliance appliance = applianceStateContainer.getAppliance();
             String applianceName = appliance.getName();
             ArrayList<SupplyPart> supplyParts = new ArrayList<SupplyPart>();
-            supplyParts.add(new SupplyPart(1, applianceName + " Part1"));
-            supplyParts.add(new SupplyPart(2, applianceName + " Part2"));
+            if (applianceName.equals("Toilet")) {
+            	supplyParts.add(new SupplyPart(6, "washers"));
+            	supplyParts.add(new SupplyPart(3, "5-cm pipes"));
+            } else if (applianceName.equals("Sink")) {
+            	supplyParts.add(new SupplyPart(8, "2-cm screws"));
+            } else if (applianceName.equals("Shower")) {
+            	supplyParts.add(new SupplyPart(1, "showerhead"));
+            	supplyParts.add(new SupplyPart(2, "4-inch tubes"));
+            }
             appliance.setPartsList(supplyParts);
             applianceStateContainer.setAppliance(appliance);
         }

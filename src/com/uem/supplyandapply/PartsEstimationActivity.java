@@ -1,8 +1,12 @@
 package com.uem.supplyandapply;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -54,6 +58,21 @@ public class PartsEstimationActivity extends Activity {
                 finish();
             }
         });
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
+        if (!seenJobsPage) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("These are the estimated number of parts to bring according to " +
+            		"the appliances you chose.")
+                    .setCancelable(false)
+                    .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
 
     private ArrayList<SupplyPart> getPartsListFromAppliances(ArrayList<ApplianceStateContainer> applianceList) {
