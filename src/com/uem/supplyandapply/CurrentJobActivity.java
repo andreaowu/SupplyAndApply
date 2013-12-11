@@ -116,7 +116,7 @@ public class CurrentJobActivity extends Activity {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("This is the Job Screen. If you haven't started working on " +
             		"the job, press 'Start Job' to customize the details of appliances. The icons " +
-            		"indicates the an appliance group in this job. Pressing on ths icon takes you to a detailed " +
+            		"indicate the appliance groups in this job. Pressing on an icon takes you to a detailed " +
             		"view of the appliances in that group. Pressing 'View Part' to view how many parts " +
             		"are left to complete the job. You can delete this job by pressing the 'X' on the " +
             		"top right when you are done with it.")
