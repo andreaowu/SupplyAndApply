@@ -103,7 +103,7 @@
             android:text="@string/issues" />
 
     <ListView
-            android:id="@+id/application_list"
+            android:id="@+id/parts_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@id/issues"

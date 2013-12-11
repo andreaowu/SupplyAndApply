@@ -13,6 +13,9 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
 import android.widget.*;
+import com.uem.supplyandapply.Adapters.SupplyPartsAdapter;
+
+import java.util.ArrayList;
 
 public class ApplianceDetailActivity extends Activity {
 	private Spinner spinner;
@@ -139,7 +142,10 @@ public class ApplianceDetailActivity extends Activity {
             }
         });
 		//putting in the parts estimation
-		//TODO
+        ArrayList<SupplyPart> parts = appliance.getPartsList();
+        SupplyPartsAdapter supplyPartsAdapter = new SupplyPartsAdapter(getApplicationContext(), 0, parts);
+        ListView partsList = (ListView) findViewById(R.id.parts_list);
+        partsList.setAdapter(supplyPartsAdapter);
 
 		final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
                 Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
