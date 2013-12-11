@@ -38,7 +38,8 @@ public class AddJobActivity extends Activity {
         applianceList = getDefaultApplianceList();
         System.out.println("appliance list count on create: " + applianceList.size());
         doAll();
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        final SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                Constants.SUPANDAPPREFS, Context.MODE_PRIVATE);
         boolean seenJobsPage = sharedPreferences.getBoolean(Constants.SEENJOBSPAGE, false);
         if (!seenJobsPage) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -48,7 +49,9 @@ public class AddJobActivity extends Activity {
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            sharedPreferences.edit().putBoolean(Constants.SEENJOBSPAGE, true);
+                            SharedPreferences.Editor editor= sharedPreferences.edit();
+                            editor.putBoolean(Constants.SEENJOBSPAGE, true);
+                            editor.commit();
                         }
                     });
             AlertDialog alert = builder.create();
