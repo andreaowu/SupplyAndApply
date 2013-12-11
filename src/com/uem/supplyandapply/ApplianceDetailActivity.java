@@ -216,7 +216,7 @@ public class ApplianceDetailActivity extends Activity {
         if (!seenAppDetail) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Here you can customize the type, status, and parts of this appliance. " +
-            		"You can also leave a notes to describe any issues about this appliance.")
+            		"You can also leave notes to describe any issues about this appliance.")
                     .setCancelable(false)
                     .setPositiveButton("Got It!", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
