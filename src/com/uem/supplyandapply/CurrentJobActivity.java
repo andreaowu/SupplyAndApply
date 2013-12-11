@@ -133,6 +133,8 @@ public class CurrentJobActivity extends Activity {
             AlertDialog alert = builder.create();
             alert.show();
         }
+
+        updateProgressBar();
 	}
 
     private void updateGridView() {
@@ -189,6 +191,9 @@ public class CurrentJobActivity extends Activity {
                 //update needed map
                 job.calculatePartsNeeded();
 
+                //update progress bar and count
+                updateProgressBar();
+
                 applianceList = getApplianceList();
                 updateGridView();
             }
@@ -225,5 +230,25 @@ public class CurrentJobActivity extends Activity {
 		}
 		return result;
 	}
+
+    private void updateProgressBar() {
+        ArrayList<ApplianceStateContainer> applianceStateContainers = new ArrayList<ApplianceStateContainer>();
+        applianceStateContainers.addAll(job.getBroken().values());
+
+        int completed = 0;
+        int total = 0;
+
+        for (ApplianceStateContainer applianceContainer : applianceStateContainers) {
+            for (Appliance appliance : applianceContainer.getAppliances()) {
+                total += 1;
+                if (appliance.getProgress().equals(Progress.COMPLETED)) {
+                    completed += 1;
+                }
+            }
+        }
+
+        progress.setMax(total);
+        progress.setProgress(completed);
+    }
 
 }
